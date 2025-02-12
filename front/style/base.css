@@ -1,0 +1,102 @@
+
+/*
+COLORS
+DARK BLUE: #555B6E
+MEDIUM BLUE: #89B0AE
+LIGHT BLUE: #BEE3DB
+WHITISH BLUE (BASE): #FAF9F9
+PINK: #FFD6BA
+*/
+
+body{
+    margin: 0px;
+}
+
+a{
+    text-decoration: none;
+}
+
+#container{
+    width: 100%;
+    height: 100%;
+    background-color: #BEE3DB;
+
+}
+
+#container>header{
+    height: 20%;
+    background-image: linear-gradient(0deg, #BEE3DB 31%, #89B0AE 100%);
+    border-bottom: 2px solid #8f98b9;
+}
+
+#container>header>h1{
+    margin: 0 auto;
+    padding-top: 26px;
+    text-align: center;
+    color:#555B6E;
+}
+#container>header>nav{
+    margin-top: 20px;
+}
+#container>header>nav>ul{
+    list-style: none;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+#container>header>nav>ul>a>li{
+    font-size: 20px;
+    color:#555B6E;
+
+}
+
+#container>header>nav>ul>a{
+    padding: 20px 100px;
+}
+
+#container>header>nav>ul>a:hover{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #cdefed;
+}
+
+main{
+    margin: 30px 15%;
+    min-height: 550px;
+}
+
+footer{
+    width: 100%;
+    height: 50px;
+    background-color: #555B6E;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
