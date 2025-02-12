@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MainPage</title>
+    <link rel="stylesheet" href="../style/base.css">
+    <link rel="stylesheet" href="../style/createCategories.css">
+    <script src="../js/createCategories.js"></script>
+</head>
+<body>
+    <div id="container">
+            <header>
+                    <h1>Create categories</h1>
+                <nav>
+                    <ul>
+                        <a href=""><li>See songs</li></a>
+                        <a href="ListaCategorias.html"><li>See categories</li></a>
+                    </ul>
+                </nav>
+            </header>
+            <main>
+                <div class="option">
+                    <div class="input-container">
+                        <label class="input-name">Name</label><input class="dataAPI" name="name" type="text" placeholder="Write the name here">
+                    </div>
+
+                    <button type="submit" class="submit" onclick="sendData()">
+                        Submit
+                    </button>
+                </div>
+
+            </main>
+            <footer>
+            </footer>
+    </div>
+</body>
+</html>
