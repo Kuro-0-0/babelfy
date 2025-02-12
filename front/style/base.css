@@ -8,9 +8,15 @@ WHITISH BLUE (BASE): #FAF9F9
 PINK: #FFD6BA
 */
 
+@font-face {
+    font-family: Coolvetica;
+    src: url(../resources/fonts/Coolvetica\ Rg.otf);
+}
+
 body{
     margin: 0px;
     background-color: #BEE3DB;
+    font-family: 'Coolvetica';
 }
 
 a{

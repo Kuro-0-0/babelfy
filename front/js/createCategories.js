@@ -29,3 +29,11 @@ function sendData() { // NO SIRVE, SON MIS COSAS
             console.error('There was a problem with the fetch operation:', error);
         });
 }
+
+function alternar() {
+    if (document.getElementById("createCategories").style.display == "block") {
+        document.getElementById("createCategories").style.display = "none"
+    } else {
+        document.getElementById("createCategories").style.display = "block"
+    }
+}
