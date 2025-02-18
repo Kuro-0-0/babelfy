@@ -44,13 +44,18 @@ function createCategory() {
 }
 
 function alternar() {
-    if (document.getElementById("createCategories").style.display == "block") {
-        document.getElementById("createCategories").style.display = "none"
-        document.getElementById("createBtn").disabled = false;
+    const createCategories = document.getElementById("createCategories");
+    const createBtn = document.getElementById("createBtn");
+
+    if (createCategories.style.display === "block") {
+        createCategories.style.display = "none";
+        createBtn.disabled = false; 
     } else {
-        document.getElementById("createCategories").style.display = "block"
+        createCategories.style.display = "block";
+        createBtn.disabled = true; 
     }
 }
+
 
 async function processNewData(respuesta) {
 
