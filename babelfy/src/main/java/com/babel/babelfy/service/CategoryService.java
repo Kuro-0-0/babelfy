@@ -5,36 +5,39 @@ import java.util.List;
 import java.util.Optional;
 
 import com.babel.babelfy.dto.category.CategoryDTORequestCreate;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.babel.babelfy.dto.category.CategoryDtoResponseList;
+import com.babel.babelfy.dto.category.CategoryDtoResponseDetails;
 import com.babel.babelfy.model.Category;
 import com.babel.babelfy.repository.CategoryRepository;
 
 @Service
+@RequiredArgsConstructor
 public class CategoryService {
 
-@Autowired
- private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
-
-public List<CategoryDtoResponseList> listAll (){
-    List<CategoryDtoResponseList> list = new ArrayList<>();
-    for(Category c : categoryRepository.findAll()){
-        list.add(
-            CategoryDtoResponseList.categoryToCategoryDTO(c)
-        );
+    public List<CategoryDtoResponseList> listAll() {
+        List<CategoryDtoResponseList> list = new ArrayList<>();
+        for (Category c : categoryRepository.findAll()) {
+            list.add(
+                    CategoryDtoResponseList.categoryToCategoryDTO(c)
+            );
+        }
+        return list;
     }
-    return list;
-}
 
+    public CategoryDtoResponseDetails showDetails(long id) {
+        Category c = categoryRepository.findById(id).orElseThrow(null);
+        return CategoryDtoResponseDetails.categoryToCategoryDTO(c);
+    }
 
     public ResponseEntity<String> add(CategoryDTORequestCreate cDTO) {
         ResponseEntity<String> response;
         Category newCategory;
-        boolean encontrado = false;
         try {
             Optional<List<Category>> c = categoryRepository.findByName(cDTO.getName());
             if (c.isEmpty()) {

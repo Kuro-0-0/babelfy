@@ -6,15 +6,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class CategoryDtoResponseList {
+@AllArgsConstructor
+public class CategoryDtoResponseDetails {
 
-    private long id;
     private String name;
 
-    public static CategoryDtoResponseList categoryToCategoryDTO(Category c) {
-        return new CategoryDtoResponseList(c.getId(), c.getName());
+    public static CategoryDtoResponseDetails categoryToCategoryDTO(Category c) {
+        return new CategoryDtoResponseDetails(c.getName());
     }
 
 }

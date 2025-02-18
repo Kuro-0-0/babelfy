@@ -1,0 +1,63 @@
+
+main{
+    text-align: center;
+}
+
+header>h1{
+    text-transform: uppercase;
+}
+main>table>tbody>tr>th{
+    text-transform: uppercase;
+    padding: 15px;
+    background-color: #555B6E;
+    color:#BEE3DB;
+}
+
+main>table>tbody>tr:hover{
+    background-color: #cdefed;
+}
+
+main>table>tbody>tr>td{
+    padding: 12px;
+}
+
+main>table{
+    margin: 50px auto 0px;
+    border: 1px solid #555B6E;
+    border-collapse: collapse;
+    max-width: 80%;
+}
+main>table>tbody>tr:first-child{
+    border-bottom: 2px solid #555B6E;
+}
+main>table>tbody>tr>th:first-child,main>table>tbody>tr>td:first-child{
+    padding-right: 80px;
+    padding-left: 15px;
+}
+
+main>table>tbody>tr>td:first-child{
+    width: 25%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
