@@ -1,33 +1,24 @@
 package com.babel.babelfy.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Category {
 
     private String name;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
-    public String getName() {
-        return name;
-    }
-    public void setNombre(String name) {
-        this.name = name;
-    }
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }
-    public Category(String name, long id) {
-        this.name = name;
-        this.id = id;
-    }
-    public Category() {
-    }
-
     
 }

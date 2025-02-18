@@ -1,4 +1,4 @@
-package com.babel.babelfy.dto;
+package com.babel.babelfy.dto.category;
 
 import com.babel.babelfy.model.Category;
 

@@ -2,37 +2,32 @@ package com.babel.babelfy.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.babel.babelfy.dto.category.CategoryDTORequestCreate;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
-import com.babel.babelfy.dto.CategoryDTO;
-import com.babel.babelfy.dto.CategoryDtoResponseList;
-import com.babel.babelfy.model.Category;
+import com.babel.babelfy.dto.category.CategoryDtoResponseList;
 import com.babel.babelfy.service.CategoryService;
 
-@RequestMapping("/app")
+@RequestMapping("/categories")
 @RestController
+@RequiredArgsConstructor
 public class CategoryController {
-    @Autowired
-    private CategoryService service;
+    private final CategoryService categoryService;
 
+    @PostMapping("")
+    public ResponseEntity<String> create(@RequestBody CategoryDTORequestCreate cDTO) {
+        return categoryService.add(cDTO);
+    }
 
-//EXAMPLE TO TRY THE LIST METHOD
-@PostMapping("")
-public String annadir(){
-    Category c=new Category("das", 3);
-    service.addCategory(c);
-    return "Funcionando";
-}
-//Para crear siempre es con el request body
-//con un id el pathvariable
-//requestparam para filtros
-@GetMapping("")
-    public List<CategoryDtoResponseList> listAll (){
-        return service.listAll();
+    //Para crear siempre es con el request body
+    //con un id el pathvariable
+    //requestparam para filtros
+    @GetMapping("")
+    public List<CategoryDtoResponseList> listAll() {
+        return categoryService.listAll();
     }
 
 }
