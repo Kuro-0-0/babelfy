@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.babel.babelfy.dto.CategoryDtoResponseDetails;
 import com.babel.babelfy.dto.CategoryDtoResponseList;
 import com.babel.babelfy.model.Category;
 import com.babel.babelfy.repository.CategoryRepository;
@@ -25,6 +26,11 @@ public List<CategoryDtoResponseList> listAll (){
         );
     }
     return list;
+}
+
+public CategoryDtoResponseDetails showDetails(long id){
+    Category c=repositorio.findById(id).orElseThrow(null);
+    return CategoryDtoResponseDetails.categoryToCategoryDTO(c);
 }
 
 public void addCategory (Category c){

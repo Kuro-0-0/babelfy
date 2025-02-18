@@ -18,10 +18,10 @@ document.addEventListener('DOMContentLoaded', function() {
      * Descripción: Llama a la API para obtener la lista de canciones.
      *              Luego, procesa la respuesta y llama a la función renderSongs.
      */
-    function getAllCategories() {
+    function showCategoryDetails() {
       // URL del endpoint de la API que devuelve la lista de canciones.
       // Cambia la URL a la de tu API real si es necesario.
-      const apiUrl = 'http://localhost:9000/app';
+      const apiUrl = 'http://localhost:9000/categories/'+localStorage.getItem('idCategory');
   
       // Se realiza la petición a la API utilizando fetch.
       fetch(apiUrl)
@@ -34,17 +34,17 @@ document.addEventListener('DOMContentLoaded', function() {
           // Paso 3: Convertir la respuesta a formato JSON para poder trabajar con ella.
           return response.json();
         })
-        .then(function(categories) {
+        .then(function(category) {
           // 'songs' es un array de objetos, donde cada objeto representa una canción.
           // Se llama a la función que se encarga de pintar (renderizar) los datos en el HTML.
-          renderCategories(categories);
+          renderCategoryDetails(category);
         })
         .catch(function(error) {
           // Paso 4: Manejo de errores.
           // Si ocurre algún error durante la petición o la conversión, se muestra en la consola.
-          console.error('Error al cargar las categorias:', error);
+          console.error('Error al cargar la categoria', error);
           // También se muestra un mensaje de error en el contenedor HTML.
-          document.getElementById('main').innerHTML = '<p>Error al cargar las categorias.</p>';
+          document.getElementById('main').innerHTML = '<p>Error al cargar la categoria.</p>';
         });
     }
   
@@ -57,19 +57,27 @@ document.addEventListener('DOMContentLoaded', function() {
      * Parámetro:
      *    songs - Array de objetos, donde cada objeto contiene datos de una canción.
      */
-    function renderCategories(categories) {
+    function renderCategoryDetails(category) {
       // Paso 5: Seleccionar el contenedor donde se mostrarán las tarjetas de canciones.
-      var container = document.getElementById('main');
+      var title = document.getElementById('name');
       // Limpiar el contenedor por si ya tenía contenido previo.
-      container.innerHTML = '';
+      title.innerHTML = category.name;
   
+    }
       // Paso 6: Recorrer el array de canciones.
-      categories.forEach(function(category) {
+
+      /*categories.forEach(function(category) {
+
         // Crear un nuevo elemento <div> para la tarjeta de la canción.
+
         var card = document.createElement('a');
+
         // Agregar la clase "song-card" para aplicar los estilos CSS definidos.
-        card.href='CategoryDetails.html';
+
+        /*card.href='CategoryDetails.html';
+
         var content = document.createElement('div');
+
         // Paso 7: Asignar el contenido HTML de la tarjeta.
         // Se muestran los datos: título, artista, año y categoría.
         content.innerHTML = 
@@ -80,10 +88,10 @@ document.addEventListener('DOMContentLoaded', function() {
         container.appendChild(card);
         card.appendChild(content);
       });
-    }
+    }*/
   
     // Paso 9: Llamar a la función getSongs para iniciar el proceso cuando se carga la página.
-  getAllCategories();
+    showCategoryDetails();
   });
   
 

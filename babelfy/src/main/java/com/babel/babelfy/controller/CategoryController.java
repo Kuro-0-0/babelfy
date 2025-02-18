@@ -4,16 +4,17 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.babel.babelfy.dto.CategoryDTO;
+import com.babel.babelfy.dto.CategoryDtoResponseDetails;
 import com.babel.babelfy.dto.CategoryDtoResponseList;
 import com.babel.babelfy.model.Category;
 import com.babel.babelfy.service.CategoryService;
 
-@RequestMapping("/app")
+@RequestMapping("/categories")
 @RestController
 public class CategoryController {
     @Autowired
@@ -33,6 +34,11 @@ public String annadir(){
 @GetMapping("")
     public List<CategoryDtoResponseList> listAll (){
         return service.listAll();
+    }
+
+@GetMapping("/{id}")
+    public CategoryDtoResponseDetails show(@PathVariable long id){
+        return service.showDetails(id);
     }
 
 }
