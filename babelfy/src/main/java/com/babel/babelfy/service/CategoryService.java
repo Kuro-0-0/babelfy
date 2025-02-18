@@ -2,15 +2,14 @@ package com.babel.babelfy.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import com.babel.babelfy.dto.category.CategoryDTORequestCreate;
+import com.babel.babelfy.dto.category.CategoryDtoResponseDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.babel.babelfy.dto.category.CategoryDtoResponseList;
-import com.babel.babelfy.dto.category.CategoryDtoResponseDetails;
 import com.babel.babelfy.model.Category;
 import com.babel.babelfy.repository.CategoryRepository;
 
@@ -39,7 +38,7 @@ public class CategoryService {
         ResponseEntity<String> response;
         Category newCategory;
         try {
-            Optional<List<Category>> c = categoryRepository.findByName(cDTO.getName());
+            List<Category> c = categoryRepository.findByName(cDTO.getName());
             if (c.isEmpty()) {
                 newCategory = CategoryDTORequestCreate.categoryDTOToCategory(cDTO);
                 categoryRepository.save(newCategory);
@@ -48,7 +47,6 @@ public class CategoryService {
                 response = ResponseEntity.badRequest().body("You cant create this category because there is another one created with that name.");
             }
         } catch (Exception e) {
-            System.out.println(e);
             response = ResponseEntity.internalServerError().body("Something went wrong while creating the category");
         }
         return response;
