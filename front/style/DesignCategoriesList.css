@@ -1,0 +1,86 @@
+/*
+COLORS
+DARK BLUE: #555B6E
+MEDIUM BLUE: #89B0AE
+LIGHT BLUE: #BEE3DB
+WHITISH BLUE (BASE): #FAF9F9
+PINK: #FFD6BA
+*/
+
+main{
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+}
+
+main>a{
+    border: 4px double #555B6E;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    margin: 15px 10px 5px;
+    width: 200px;
+    height: 200px;
+}
+main>a>div>.imagen{
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    background-color: #849cae83;
+    width: 100%;
+    height: 150px
+}
+
+main>a>div>p{
+    color:#555B6E;
+}
+
+main>a:hover{
+    box-shadow: 1px 2px 32px 7px rgb(253, 255, 255);
+}
+
+main {
+    button.crCategory-btn {
+        width: 5vw;
+        height: 5vh;
+        position: absolute;
+        left: 0;
+        margin: 10px;
+        font-family: Coolvetica;
+        background-color: #89B0AE;
+        color: #555B6E;
+        border: 4px double #89B0AE;
+        border-radius: 9px;
+        font-size: 25px;
+        color: #89B0AE;
+        background-color: #555B6E;
+    }
+    a {
+        position: relative;
+        i.remove {
+            position: absolute;
+            margin: 10px;
+            right: 0;
+        }
+    }
+
+    button.crCategory-btn:hover {
+        background-color: #89B0AE;
+        color: #555B6E;
+        border: 4px double #555B6E;
+        box-shadow: 1px 2px 32px 7px rgb(253, 255, 255);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

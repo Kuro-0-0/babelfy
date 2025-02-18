@@ -3,43 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <title>MainPage</title>
+    
     <link rel="stylesheet" href="../style/base.css">
+    <link rel="stylesheet" href="../style/DesignCategoriesList.css">
     <link rel="stylesheet" href="../style/createCategories.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <script src="../js/createCategories.js"></script>
+
 </head>
 <body>
-    <div id="container">
             <header>
-                    <h1>Create categories</h1>
+                    <h1>LISTA DE CATEGORIAS</h1>
                 <nav>
                     <ul>
-                        <a href=""><li>See songs</li></a>
-                        <a href="ListaCategorias.html"><li>See categories</li></a>
+                        <a href=""><li>Songs</li></a>
+                        <a href="CategoriesList.html"><li>Categories</li></a>
                     </ul>
                 </nav>
             </header>
             <main>
+                <button onclick="alternar()" class="crCategory-btn">
+                    Create
+                </button>
+                <a href="CategoryDetails.html">
+                    <div>
+                        <div class="imagen"></div>
+                        <p>Nombre Categoria X</p>
+                    </div>
+                </a>
                 <div id="createCategories" class="form">
                     <i onclick="alternar()" class="bi bi-x-circle-fill"></i>
                     <div class="option">
                         <div class="input-container">
-                            <label class="input-name">Name</label>
+                            <label class="input-name">New name</label>
                             <input class="dataAPI" name="name" type="text" placeholder="Write the name here">
                         </div>
                         
                         <div class="button-ctn">
-                            <button type="submit" class="options" onclick="sendData()">
+                            <button type="submit" class="options" onclick="createCategory()">
                                 Submit
                             </button>
                         </div>
                     </div>
                 </div>
             </main>
-            <button style="top: 10px; position: absolute;" onclick="alternar()">CLICK PARA MOSTRAR</button>
             <footer>
             </footer>
             <script src="../js/createCategories.js"></script>
-    </div>
-</body>
+        </body>
 </html>

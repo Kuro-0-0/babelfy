@@ -1,29 +1,26 @@
-let inputs
-
-function sendData() { // NO SIRVE, SON MIS COSAS
+function sendData() {
     inputs = document.getElementsByClassName("dataAPI")
     let paramName;
     let paramValue;
-    let params = new URLSearchParams();
+    let params = {};
     let options;
 
     for (let index = 0; index < inputs.length; index++) {
         let element = inputs[index];
         paramName = element.name;
         paramValue = element.value;
-        params.append(paramName, paramValue);
+        params[paramName] = paramValue
     }
     options = {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',  // Definir el tipo de contenido adecuado
+            'Content-Type': 'application/JSON', 
         },
-        mode: 'no-cors',
-        body: params.toString(),  // Convertir los parámetros a cadena de URL codificada
+        body: JSON.stringify(params), 
     };
-    fetch('http://localhost:9000/API/categoria/new/submit', options)
+    fetch('http://localhost:9002/categories', options)
         .then(response => {
-            console.log(response);  // Procesa la respuesta aquí
+            console.log(response); 
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
