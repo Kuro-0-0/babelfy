@@ -5,10 +5,21 @@ function createCategory() {
     let params = {};
     let options;
 
+    
     for (let index = 0; index < inputs.length; index++) {
         let element = inputs[index];
         paramName = element.name;
         paramValue = element.value;
+
+        switch (paramName) {
+            case "name":
+                paramValue = checkText(paramValue);
+                break;
+        
+            default:
+                break;
+        }
+        
         params[paramName] = paramValue
         element.value = ''
     }
@@ -27,7 +38,7 @@ function createCategory() {
             return response
         })
         .then (respuesta => {
-            alternar()
+            showActionBTN()
             if (respuesta.status == 200) {
                 estado = 'Success'
             } else {
@@ -43,7 +54,7 @@ function createCategory() {
         });
 }
 
-function alternar() {
+function showActionBTN() {
     const createCategories = document.getElementById("createCategories");
     const createBtn = document.getElementById("createBtn");
 
@@ -56,7 +67,18 @@ function alternar() {
     }
 }
 
-
-async function processNewData(respuesta) {
-
+function checkText(textContent) {
+    const maxLength = 27;
+    const regEx = /^[A-Za-z](?:[A-Za-z,\. ][A-Za-z])?$/;
+    try {
+        if (textContent.length > maxLength) {
+            throw new Error("The text cant have more than 27 characters");
+        }
+        if (regEx.test(textContent)) {
+            throw new Error("The text contains things that are not text characters");
+        }
+    } catch (error) {
+        console.log(error);
+    }
+    return textContent
 }
