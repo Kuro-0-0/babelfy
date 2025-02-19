@@ -40,4 +40,6 @@ public class CategoryController {
         return categoryService.showDetails(id);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable long id){return categoryService.delete(id);}
 }

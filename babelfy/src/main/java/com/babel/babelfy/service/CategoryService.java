@@ -30,7 +30,7 @@ public class CategoryService {
     }
 
     public CategoryDtoResponseDetails showDetails(long id) {
-        Category c = categoryRepository.findById(id).orElseThrow(null);
+        Category c = categoryRepository.findById(id).orElse(null);
         return CategoryDtoResponseDetails.categoryToCategoryDTO(c);
     }
 
@@ -48,6 +48,24 @@ public class CategoryService {
             }
         } catch (Exception e) {
             response = ResponseEntity.internalServerError().body("Something went wrong while creating the category");
+        }
+        return response;
+    }
+
+    public ResponseEntity<String> delete(long id) {
+        ResponseEntity<String> response;
+        Category c;
+        try {
+            c = categoryRepository.findById(id).orElse(null);
+            if (c != null) {
+                categoryRepository.delete(c);
+                response = ResponseEntity.ok("Category " + c.getName() + " deleted");
+            } else {
+                response = ResponseEntity.badRequest().body("The category you are trying to delete don't exist");
+            }
+        }
+        catch (Exception e) {
+            response = ResponseEntity.internalServerError().body("Something went wrong while deleting the category");
         }
         return response;
     }
