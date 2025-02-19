@@ -11,6 +11,7 @@
  * Paso 1: Esperar a que el documento HTML se cargue completamente.
  * Esto asegura que todos los elementos (como el contenedor) estén disponibles.
  */
+var categoryName;
 document.addEventListener('DOMContentLoaded', function() {
 
     /*
@@ -61,44 +62,79 @@ document.addEventListener('DOMContentLoaded', function() {
       // Paso 5: Seleccionar el contenedor donde se mostrarán las tarjetas de canciones.
       var title = document.getElementById('name');
       // Limpiar el contenedor por si ya tenía contenido previo.
-      title.innerHTML = category.name;
-  
+      categoryName=category.name;
+      title.innerHTML = categoryName;
+      var link = document.createElement('button');
+      var pen = document.createElement('i');
+      pen.classList='bi bi-pencil-fill';
+      link.id='clickForShowing';
+      link.onclick = showChanger;
+      title.appendChild(link);
+      link.appendChild(pen);
+
     }
-      // Paso 6: Recorrer el array de canciones.
-
-      /*categories.forEach(function(category) {
-
-        // Crear un nuevo elemento <div> para la tarjeta de la canción.
-
-        var card = document.createElement('a');
-
-        // Agregar la clase "song-card" para aplicar los estilos CSS definidos.
-
-        /*card.href='CategoryDetails.html';
-
-        var content = document.createElement('div');
-
-        // Paso 7: Asignar el contenido HTML de la tarjeta.
-        // Se muestran los datos: título, artista, año y categoría.
-        content.innerHTML = 
-        '<div class="imagen">'+'</div>'+
-        '<p>' + category.name + '</p>';
-  
-        // Paso 8: Añadir la tarjeta al contenedor.
-        container.appendChild(card);
-        card.appendChild(content);
-      });
-    }*/
   
     // Paso 9: Llamar a la función getSongs para iniciar el proceso cuando se carga la página.
     showCategoryDetails();
   });
   
+  function showChanger(){
+    var container = document.getElementById('updateCategory');
 
+    if(container.style.display=='block'){
+      container.style.display='none';
+      document.getElementById('clickForShowing').disabled = false;
+    }else{
+      document.getElementById('clickForShowing').disabled = true;
+      container.style.display='block';
+      var name = document.getElementById('newName');
+      name.value = categoryName;
 
+    }
 
+  }
+  function changeName(){
+    var submitter = document.getElementById('newName');
+    var categoryId = localStorage.getItem('idCategory');
+    const apiUrlChange ='http://localhost:9000/categories';
 
+    options={
+      method: "put",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify ({
+        'id': localStorage.getItem('idCategory'),
+        'name': submitter.value
+      })
+    }
+    fetch(apiUrlChange,options)
+    .then(function(response) {
+      return response.text();
 
+      // Paso 2: Verificar que la respuesta sea exitosa.
+      if (!response.ok) {
+        // Si no es exitosa, se lanza un error para que se capture en el catch.
+        throw new Error('Error en la respuesta de la API: ' + response.statusText);
+      }
+      // Paso 3: Convertir la respuesta a formato JSON para poder trabajar con ella.
+      return response.json();
+    })
+    .then(function(response){
+      location.reload();
+    })
+    .catch(function(error) {
+      // Paso 4: Manejo de errores.
+      // Si ocurre algún error durante la petición o la conversión, se muestra en la consola.
+      console.error('Error al cargar la categoria', error);
+      // También se muestra un mensaje de error en el contenedor HTML.
+      document.getElementById('main').innerHTML = '<p>Error al cargar la categoria.</p>';
+    });
+
+  }
+//add new function when clic on submit button n send 'put' send back
+
+//request -> id, n new name
 
 
 

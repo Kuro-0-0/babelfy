@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.babel.babelfy.dto.category.CategoryDtoResponseList;
+import com.babel.babelfy.dto.category.CategoryDtoRequestChange;
 import com.babel.babelfy.model.Category;
 import com.babel.babelfy.repository.CategoryRepository;
 
@@ -51,6 +52,26 @@ public class CategoryService {
         }
         return response;
     }
+
+    public String change(CategoryDtoRequestChange request){
+        String response;
+        Category c=CategoryDtoRequestChange.categoryDTOToCategory(request);
+        Category old=categoryRepository.findById(c.getId()).orElse(null);
+        List<Category> list= categoryRepository.findByName(c.getName());
+        System.out.println(request);
+        if(list.isEmpty()){
+            if(old!=null){
+                categoryRepository.save(c);
+                response="Changes made successfully.";
+            }else{
+                response="You can´t make this change because this category does not exist.";
+            }
+        } else{
+            response="You can´t make this change because this name is already in use.";
+        }
+        return response;
+    }
+
 
     public ResponseEntity<String> delete(long id) {
         ResponseEntity<String> response;

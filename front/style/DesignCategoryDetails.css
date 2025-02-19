@@ -20,6 +20,15 @@ main>table>tbody>tr:hover{
 main>table>tbody>tr>td{
     padding: 12px;
 }
+h1>button>i{
+    color:#555B6E;
+    cursor: pointer;
+}
+h1>button{
+    background-color: transparent;
+    border-width: 0px;
+    transform: scale(1.7);
+}
 
 main>table{
     margin: 50px auto 0px;
@@ -39,16 +48,51 @@ main>table>tbody>tr>td:first-child{
     width: 25%;
 }
 
+.updater{
+    border: 2px solid #555B6E;
+    background-color: #89b0aee7;
+    position: absolute;
+    right:120px;
+    display:none;
+}
+.updater>h3{
+    color: #555B6E;
+}
+.updater>form{
+    padding: 0 25px 20px;
+    flex-direction: column;
+    display: flex;
+    text-align: center;
+}
+.updater>form>input{
+    width: 150px;
+    background-color: #cdefed;
+    color:#555B6E;
+}
+.updater>form>button{
+    width: 105px;
+    height: 33px;
+    margin: 20px auto 10px;
+    background-color: #cdefed;
+    border: 2px solid #555B6E;
+    color:#555B6E;
+    cursor: pointer;
+}
 
+.updater>form>button:hover{
+    background-color: #555B6E;
+    color:#cdefed;
+    border-color: #cdefed;
+}
 
-
-
-
-
-
-
-
-
+.updater>.quit{
+    color:#555B6E;
+    position: absolute;
+    right: 0;
+    margin-right: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
 
 
 
