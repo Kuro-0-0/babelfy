@@ -14,7 +14,5 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    @Column(name = "hex_color")
-    private String hexColor;
 
 }

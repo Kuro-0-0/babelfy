@@ -63,10 +63,7 @@ function createCategory() {
 
 function showActionBTN() {
     const createCategories = document.getElementById("createCategories");
-    const createBtn = document.getElementById("createBtn");
-
-    console.log('aqui');
-    
+    const createBtn = document.getElementById("createBtn");    
 
     if (createCategories.style.display === "block") {
         createCategories.style.display = "none";
