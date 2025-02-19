@@ -7,11 +7,15 @@
  * Cada paso se explica en detalle mediante comentarios.
  */
 
-/* 
+/*
  * Paso 1: Esperar a que el documento HTML se cargue completamente.
  * Esto asegura que todos los elementos (como el contenedor) estén disponibles.
  */
 document.addEventListener('DOMContentLoaded', function() {
+    // Paso 9: Llamar a la función getSongs para iniciar el proceso cuando se carga la página.
+  getAllCategories();
+ });
+
 
     /*
      * Función: getSongs
@@ -22,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // URL del endpoint de la API que devuelve la lista de canciones.
       // Cambia la URL a la de tu API real si es necesario.
       const apiUrl = 'http://localhost:9000/categories';
-  
+
       // Se realiza la petición a la API utilizando fetch.
       fetch(apiUrl)
         .then(function(response) {
@@ -47,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
           document.getElementById('main').innerHTML = '<p>Error al cargar las categorias.</p>';
         });
     }
-  
+
     /*
      * Función: renderSongs
      * Descripción: Recorre el array de canciones recibido de la API y crea
@@ -59,10 +63,10 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     function renderCategories(categories) {
       // Paso 5: Seleccionar el contenedor donde se mostrarán las tarjetas de canciones.
-      var container = document.getElementById('main');
+      var container = document.getElementById('ListSection');
       // Limpiar el contenedor por si ya tenía contenido previo.
       container.innerHTML = '';
-  
+
       // Paso 6: Recorrer el array de canciones.
       categories.forEach(function(category) {
         // Crear un nuevo elemento <div> para la tarjeta de la canción.
@@ -76,20 +80,17 @@ document.addEventListener('DOMContentLoaded', function() {
         var content = document.createElement('div');
         // Paso 7: Asignar el contenido HTML de la tarjeta.
         // Se muestran los datos: título, artista, año y categoría.
-        content.innerHTML = 
+        content.innerHTML =
         '<div class="imagen">'+'</div>'+
         '<p>' + category.name + '</p>';
-  
+
         // Paso 8: Añadir la tarjeta al contenedor.
         container.appendChild(card);
         card.appendChild(content);
       });
     }
-  
-    // Paso 9: Llamar a la función getSongs para iniciar el proceso cuando se carga la página.
-  getAllCategories();
-  });
-  
+
+
 
 
 

@@ -6,10 +6,13 @@
     
     <link rel="stylesheet" href="../style/base.css">
     <link rel="stylesheet" href="../style/DesignCategoriesList.css">
+    <link rel="stylesheet" href="../style/createCategories.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
 </head>
 <body>
             <header>
-                    <h1>LISTA DE CATEGORIAS</h1>
+                    <h1>Category List</h1>
                 <nav>
                     <ul>
                         <a href=""><li>Songs</li></a>
@@ -17,12 +20,38 @@
                     </ul>
                 </nav>
             </header>
-            <main id="main">
-                
-                
+            <main>
+                <div id="PopUp" class="PopUp">
+                    <h1 id="TitlePopUp">SUCCESS</h1>
+                    <p id="textPopUp">lorem dhsauighas dsaghjkh sdaujfgh</p>
+                    <button onclick="hidePopUp()">OK</button>
+                </div>
+                <section class="createSection">
+                    <button id="createBtn" onclick="alternar()" class="crCategory-btn">
+                        Create
+                    </button>
+                    <div id="createCategories" class="form">
+                        <i onclick="alternar()" class="bi bi-x-circle-fill"></i>
+                        <div class="option">
+                            <div class="input-container">
+                                <label class="input-name" for="inputName">New name</label>
+                                <input class="dataAPI" id="inputName" name="name" type="text" placeholder="Write the name here">
+                            </div>
+
+                            <div class="button-ctn">
+                                <button type="submit" class="options" onclick="createCategory()">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="ListSection" id="ListSection"></section>
             </main>
             <footer>
             </footer>
             <script src="../js/categoriesList.js"></script>
+            <script src="../js/createCategories.js"></script>
+            <script src="../js/script.js"></script>
 </body>
 </html>

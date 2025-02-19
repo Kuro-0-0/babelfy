@@ -1,0 +1,80 @@
+
+/*
+COLORS
+DARK BLUE: #555B6E
+MEDIUM BLUE: #89B0AE
+LIGHT BLUE: #BEE3DB
+WHITISH BLUE (BASE): #FAF9F9
+PINK: #FFD6BA
+*/
+
+div.form {
+    display: none;
+    position: relative;
+    width: fit-content;
+    border: 3px #555B6E solid;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #89B0AE;
+    margin: 10vh auto 0;
+    height: fit-content;
+    i {
+        color: #555B6E;
+        position: absolute;
+        right: 10px;
+        cursor: pointer;
+    }
+    div.option {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        div.input-container {
+            padding: 1vh 0px;
+            display: flex;
+            flex-direction: column;
+            width: fit-content;
+            margin: 0 auto;
+            label.input-name {
+                padding-right: 1vh;
+                text-align: left;
+                color: #555B6E;
+                font-size: 2.5vh;
+                font-weight: bold;
+                letter-spacing: 0.8px;
+            }
+            input {
+                color: #FAF9F9;
+                background-color: #555B6E;
+                border-radius: 0.4vh;
+                padding: 0.5vh;
+                width: 20vh;
+            }
+            input::placeholder{
+                font-size: 1.5vh;
+                color: #faf9f9a0;
+                
+            }
+        }
+    }
+}
+
+
+button.options {
+    width: fit-content;
+    height: fit-content;
+    font-size: 100%;
+    font-weight: bold;
+    color: #BEE3DB;
+    background-color: #6A7C7A;
+    border: 2px solid #8f98b9;
+    border-radius: 0.5vh;
+    margin: 0 auto;
+    margin-top: 1vh;
+    padding: 0.5vh 1.2vh;
+}
+
+button.options:hover {
+    color: #BEE3DB;
+    background-color: #555B6E;
+    cursor: pointer;
+}
