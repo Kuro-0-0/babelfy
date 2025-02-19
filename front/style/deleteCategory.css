@@ -1,0 +1,34 @@
+div.PopUpDelete {
+    display: none;
+    background-color: #555B6E;
+    border: 5px double #89B0AE;
+    color: #BEE3DB;
+    position: absolute;
+    z-index: 10;
+    font-size: 14px;
+    width: 200px;
+    padding: 20px;
+    button {
+        background-color: #BEE3DB;
+        font-family: 'Coolvetica';
+        color: #555B6E;
+        border: 2px solid #89B0AE;
+    }
+    #TitlePopUp {
+        /* red */
+        color: red; 
+        font-size: 25px;
+        padding: 0px;
+        margin: 0px;    
+    }
+    button:hover {
+        color: #BEE3DB;
+        background-color: #555B6E;
+    }
+    #noDelete {
+        color: red
+    }
+    #yesDelete {
+        color: greenyellow;
+    }
+}

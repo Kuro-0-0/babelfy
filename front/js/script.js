@@ -11,11 +11,19 @@ function showPopUp(status='Error',text='Error on PopUp loading') {
         popUpTitle.style.color = 'red'
     }
     document.getElementById("textPopUp").textContent = text;
-    document.getElementById("createBtn").disabled = true;
+
+    actionBTN = document.getElementsByClassName('action-btn')
+    for (let i = 0; i < actionBTN.length; i++) {
+        const element = actionBTN[i];
+        element.disabled = true;
+    }
 }
 
 function hidePopUp() {
     document.getElementById("PopUp").style.display = 'none'
-    document.getElementById("createBtn").disabled = false;
-
+    actionBTN = document.getElementsByClassName('action-btn')
+    for (let i = 0; i < actionBTN.length; i++) {
+        const element = actionBTN[i];
+        element.disabled = false;
+    }
 }

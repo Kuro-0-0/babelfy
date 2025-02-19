@@ -27,7 +27,7 @@ function createCategory() {
             return response
         })
         .then (respuesta => {
-            alternar()
+            showActionBTN()
             if (respuesta.status == 200) {
                 estado = 'Success'
             } else {
@@ -43,7 +43,7 @@ function createCategory() {
         });
 }
 
-function alternar() {
+function showActionBTN() {
     const createCategories = document.getElementById("createCategories");
     const createBtn = document.getElementById("createBtn");
 
@@ -54,9 +54,4 @@ function alternar() {
         createCategories.style.display = "block";
         createBtn.disabled = true; 
     }
-}
-
-
-async function processNewData(respuesta) {
-
 }

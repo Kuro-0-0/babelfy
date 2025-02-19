@@ -68,35 +68,37 @@ document.addEventListener('DOMContentLoaded', function() {
       container.innerHTML = '';
 
       // Paso 6: Recorrer el array de canciones.
-      categories.forEach(function(category) {
-        // Crear un nuevo elemento <div> para la tarjeta de la canción.
-        var card = document.createElement('a');
-        // Agregar la clase "song-card" para aplicar los estilos CSS definidos.
-        card.onclick = function (){
-          localStorage.setItem('idCategory',category.id);
-          window.location.href='CategoryDetails.html';
-        }
-
-        var content = document.createElement('div');
-        // Paso 7: Asignar el contenido HTML de la tarjeta.
-        // Se muestran los datos: título, artista, año y categoría.
-        content.innerHTML =
-        '<div class="imagen">'+'</div>'+
-        '<p>' + category.name + '</p>';
-
-        // Paso 8: Añadir la tarjeta al contenedor.
-        container.appendChild(card);
-        card.appendChild(content);
-      });
+      console.log(categories);
+      console.log(categories.length);
+      
+      if (categories.length > 0 && categories) {
+        categories.forEach(function(category) {
+          // Crear un nuevo elemento <div> para la tarjeta de la canción.
+          var card = document.createElement('a');
+          // Agregar la clase "song-card" para aplicar los estilos CSS definidos.
+          card.onclick = function (){
+            localStorage.setItem('idCategory',category.id);
+            window.location.href='CategoryDetails.html';
+          }
+  
+          var content = document.createElement('div');
+          // Paso 7: Asignar el contenido HTML de la tarjeta.
+          // Se muestran los datos: título, artista, año y categoría.
+          content.innerHTML =
+          '<div class="imagen">'+'</div>'+
+          '<p>' + category.name + '</p>';
+  
+          // Paso 8: Añadir la tarjeta al contenedor.
+          container.appendChild(card);
+          card.appendChild(content);
+        });
+      } else {
+        showPopUp('Error','There are no categories, please create a new one.')
+        list = document.getElementById('ListSection')
+        div = document.createElement("div")
+        div.innerHTML = 
+        "<h1 class='error'>ERROR</h1>" +
+        "<p>There are no categories, please create a new one.</p>"
+        list.appendChild(div)
+      }
     }
-
-
-
-
-
-
-
-
-
-
-

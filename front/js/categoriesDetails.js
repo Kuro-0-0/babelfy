@@ -135,7 +135,3 @@ document.addEventListener('DOMContentLoaded', function() {
 //add new function when clic on submit button n send 'put' send back
 
 //request -> id, n new name
-
-
-
-
