@@ -5,7 +5,6 @@ import java.util.List;
 import com.babel.babelfy.dto.category.CategoryDTORequestCreate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,10 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.babel.babelfy.dto.CategoryDtoRequestChange;
-import com.babel.babelfy.dto.CategoryDtoResponseDetails;
-import com.babel.babelfy.dto.CategoryDtoResponseList;
-import com.babel.babelfy.model.Category;
+import com.babel.babelfy.dto.category.CategoryDtoRequestChange;
+import com.babel.babelfy.dto.category.CategoryDtoResponseDetails;
+import com.babel.babelfy.dto.category.CategoryDtoResponseList;
 import com.babel.babelfy.service.CategoryService;
 
 @RequestMapping("/categories")
@@ -46,6 +44,6 @@ public class CategoryController {
 
 @PutMapping("")
     public String change(@RequestBody CategoryDtoRequestChange request){
-        return service.change(request);
+        return categoryService.change(request);
     }
 }

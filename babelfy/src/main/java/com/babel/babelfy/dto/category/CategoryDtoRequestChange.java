@@ -1,4 +1,4 @@
-package com.babel.babelfy.dto;
+package com.babel.babelfy.dto.category;
 
 import com.babel.babelfy.model.Category;
 
@@ -26,7 +26,7 @@ public class CategoryDtoRequestChange {
     }
 
     public static Category categoryDTOToCategory(CategoryDtoRequestChange c){
-        return new Category(c.getName(), c.getId());
+        return new Category(c.getId(), c.getName());
     }
     @Override
     public String toString() {

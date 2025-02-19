@@ -10,9 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.babel.babelfy.dto.category.CategoryDtoResponseList;
-import com.babel.babelfy.dto.CategoryDtoRequestChange;
-import com.babel.babelfy.dto.CategoryDtoResponseDetails;
-import com.babel.babelfy.dto.CategoryDtoResponseList;
+import com.babel.babelfy.dto.category.CategoryDtoRequestChange;
 import com.babel.babelfy.model.Category;
 import com.babel.babelfy.repository.CategoryRepository;
 
@@ -33,7 +31,7 @@ public class CategoryService {
     }
 
     public CategoryDtoResponseDetails showDetails(long id) {
-        Category c = categoryRepository.findById(id).orElseThrow(null);
+        Category c = categoryRepository.findById(id).orElse(null);
         return CategoryDtoResponseDetails.categoryToCategoryDTO(c);
     }
 
@@ -54,27 +52,24 @@ public class CategoryService {
         }
         return response;
     }
-}
-public void addCategory (Category c){
-    repositorio.save(c);
-}
 
-public String change(CategoryDtoRequestChange request){
-    String response;
-    Category c=CategoryDtoRequestChange.categoryDTOToCategory(request);
-    Category old=repositorio.findById(c.getId()).orElse(null);
-    List<Category> list= repositorio.findByName(c.getName());
-    System.out.println(request);
-    if(list.isEmpty()&&old!=null){
-        repositorio.save(c);
-        response="Changes made successfully.";
-    }else{
-        response="Chansrhsrhsrhsrhrhlly.";
-
-    } 
-    return response;
+    public String change(CategoryDtoRequestChange request){
+        String response;
+        Category c=CategoryDtoRequestChange.categoryDTOToCategory(request);
+        Category old=categoryRepository.findById(c.getId()).orElse(null);
+        List<Category> list= categoryRepository.findByName(c.getName());
+        System.out.println(request);
+        if(list.isEmpty()){
+            if(old!=null){
+                categoryRepository.save(c);
+                response="Changes made successfully.";
+            }else{
+                response="You can´t make this change because this category does not exist.";
+            }
+        } else{
+            response="You can´t make this change because this name is already in use.";
+        }
+        return response;
     }
-    
+
 }
-
-
