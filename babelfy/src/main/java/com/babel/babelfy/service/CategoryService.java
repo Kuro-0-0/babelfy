@@ -2,6 +2,7 @@ package com.babel.babelfy.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import com.babel.babelfy.dto.category.CategoryDTORequestCreate;
 import com.babel.babelfy.dto.category.CategoryDtoResponseDetails;
@@ -42,6 +43,7 @@ public class CategoryService {
             List<Category> c = categoryRepository.findByName(cDTO.getName());
             if (c.isEmpty()) {
                 newCategory = CategoryDTORequestCreate.categoryDTOToCategory(cDTO);
+                newCategory.setHexColor(generateRandomHex());
                 categoryRepository.save(newCategory);
                 response = ResponseEntity.ok("Category " + cDTO.getName() + " created.");
             } else {
@@ -90,4 +92,20 @@ public class CategoryService {
         }
         return response;
     }
+
+    public String generateRandomHex() {
+        Random random = new Random();
+        StringBuilder hexString = new StringBuilder(6);
+
+        for (int i = 0; i < 6; i++) {
+            // Genera un valor aleatorio entre 0 y 15 (hexadecimal)
+            int randomValue = random.nextInt(16);
+            // Convierte el valor aleatorio a su representación en carácter hexadecimal
+            hexString.append(Integer.toHexString(randomValue));
+        }
+
+        // Asegúrate de que el string tiene 6 caracteres
+        return hexString.toString().toUpperCase();
+    }
+
 }
