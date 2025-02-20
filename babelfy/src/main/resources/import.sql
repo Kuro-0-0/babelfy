@@ -1,0 +1,1 @@
+insert into category (id, name) values (7, 'Rock');

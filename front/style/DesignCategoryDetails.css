@@ -80,7 +80,7 @@ main>table>tbody>tr>td:first-child{
 }
 
 .updater>form>button:hover{
-    background-color: #555B6E;
+    background-color: #555b6e;
     color:#cdefed;
     border-color: #cdefed;
 }
@@ -94,8 +94,11 @@ main>table>tbody>tr>td:first-child{
     cursor: pointer;
 }
 
-
-
+div.PopUp{
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%,-50%);
+}
 
 
 
