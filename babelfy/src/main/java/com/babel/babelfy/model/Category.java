@@ -1,5 +1,7 @@
 package com.babel.babelfy.model;
 
+import jakarta.persistence.*;
+import lombok.*;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,9 +16,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
-@Table(name = "category")
+@RequiredArgsConstructor
 public class Category {
 
     @Id

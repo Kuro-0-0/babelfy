@@ -1,1 +1,3 @@
-insert into category (id, name) values (7, 'Rock');
+INSERT IGNORE INTO category(id, name) VALUES (1, 'Rock');
+INSERT IGNORE INTO category(id, name) VALUES(2, 'Pop');
+INSERT IGNORE INTO category(id, name) VALUES (3, 'Reggae');

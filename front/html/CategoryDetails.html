@@ -1,106 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>MainPage</title>
+    <title>Category details</title>
     <link rel="stylesheet" href="../style/base.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../style/DesignCategoryDetails.css">
+    <link rel="stylesheet" href="../style/deleteCategory.css">
 </head>
+
 <body>
-            <header>
-                    <h1 id="name"></h1>
-                <nav>
-                    <ul>
-                        <a href=""><li>Songs</li></a>
-                        <a href="CategoriesList.html"><li>Categories</li></a>
-                    </ul>
-                </nav>
-            </header>
-            <main>
-                <div id="PopUp" class="PopUp">
-                    <h1 id="TitlePopUp">NAME CHANGED SUCCESSFULLY</h1>
-                    <p id="textPopUp">lorem dhsauighas dsaghjkh sdaujfgh</p>
-                    <button onclick="hidePopUp()">OK</button>
-                </div>
+    <header>
+        <h1 id="name"></h1>
+        <nav>
+            <ul>
+                <a href="">
+                    <li>Songs</li>
+                </a>
+                <a href="CategoriesList.html">
+                    <li>Categories</li>
+                </a>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div id="PopUp" class="PopUp">
+            <h1 id="TitlePopUp">SUCCESS</h1>
+            <p id="textPopUp">lorem dhsauighas dsaghjkh sdaujfgh</p>
+            <button onclick="hidePopUp()">OK</button>
+        </div>
+        <div id="PopUpDelete" class="PopUpDelete">
+            <h1 id="TitlePopUp">DELETE</h1>
+            <p id="textPopUp">Are you sure you want to delete this category?</p>
+            <button id="noDelete" onclick="showActionBTN()">NO</button>
+            <button id="yesDelete" onclick="deleteCategory()">YES</button>
+        </div>
+        <section class="deleteSection">
+            <button id="deleteBtn" onclick="showActionBTN()" class="dlCategory-btn action-btn">
+                Delete
+            </button>
+        </section>
+        <section>
             <div class="updater" id="updateCategory">
-                
+    
                 <i class="bi bi-x-circle-fill quit" onclick="showChanger()"></i>
                 <h3>CHANGE NAME</h3>
                 
                 <form id="createForm">
                     <input type="text" placeholder="Write here" id="newName">
-                    <button  onclick="changeName()">Update</button>
+                    <button onclick="changeName()">Update</button>
                 </form>
-                
-                
+    
+    
             </div>
-                
-            
-                <table>
-                    
-                    <tr>
-                        <th>Name</th>
-                        <th>Duration</th>
-                        <th>Artist</th>
-                        <th>Album</th>
-                        <th>Release Date</th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <td>Cancion X</td>
-                        <td>sgseg</td>
-                        <td>sgseg</td>
-                        <td>sgseg</td>
-                        <td>sgseg</td>
-                        <td><a href="" title="Delete from category"><i class="bi bi-x-square-fill"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>Cancion X</td>
-                        <td>sgseg</td>
-                        <td>sgseg</td>
-                        <td>sgseg</td>
-                        <td>sgseg</td>
-                        <td><a href="" title="Delete from category"><i class="bi bi-x-square-fill"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>Cancion X</td>
-                        <td>sgseg</td>
-                        <td>sgseg</td>
-                        <td>sgseg</td>
-                        <td>sgseg</td>
-                        <td><a href="" title="Delete from category"><i class="bi bi-x-square-fill"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>Cancion X</td>
-                        <td>sgseg</td>
-                        <td>sgseg</td>
-                        <td>sgseg</td>
-                        <td>sgseg</td>
-                        <td><a href="" title="Delete from category"><i class="bi bi-x-square-fill"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>Cancion X</td>
-                        <td>sgseg</td>
-                        <td>sgseg</td>
-                        <td>sgseg</td>
-                        <td>sgseg</td>
-                        <td><a href="" title="Delete from category"><i class="bi bi-x-square-fill"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>Cancion X</td>
-                        <td>sgseg</td>
-                        <td>sgseg</td>
-                        <td>sgseg</td>
-                        <td>sgseg</td>
-                        <td><a href="" title="Delete from category"><i class="bi bi-x-square-fill"></i></a></td>
-                    </tr>
-                </table>
-            </main>
-            <footer>
+    
+    
+            <table>
+    
+                <tr>
+                    <th>Name</th>
+                    <th>Duration</th>
+                    <th>Artist</th>
+                    <th>Album</th>
+                    <th>Release Date</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>Cancion X</td>
+                    <td>sgseg</td>
+                    <td>sgseg</td>
+                    <td>sgseg</td>
+                    <td>sgseg</td>
+                    <td><a href="" title="Delete from category"><i class="bi bi-x-square-fill"></i></a></td>
+                </tr>
+                <tr>
+                    <td>Cancion X</td>
+                    <td>sgseg</td>
+                    <td>sgseg</td>
+                    <td>sgseg</td>
+                    <td>sgseg</td>
+                    <td><a href="" title="Delete from category"><i class="bi bi-x-square-fill"></i></a></td>
+                </tr>
+                <tr>
+                    <td>Cancion X</td>
+                    <td>sgseg</td>
+                    <td>sgseg</td>
+                    <td>sgseg</td>
+                    <td>sgseg</td>
+                    <td><a href="" title="Delete from category"><i class="bi bi-x-square-fill"></i></a></td>
+                </tr>
+                <tr>
+                    <td>Cancion X</td>
+                    <td>sgseg</td>
+                    <td>sgseg</td>
+                    <td>sgseg</td>
+                    <td>sgseg</td>
+                    <td><a href="" title="Delete from category"><i class="bi bi-x-square-fill"></i></a></td>
+                </tr>
+                <tr>
+                    <td>Cancion X</td>
+                    <td>sgseg</td>
+                    <td>sgseg</td>
+                    <td>sgseg</td>
+                    <td>sgseg</td>
+                    <td><a href="" title="Delete from category"><i class="bi bi-x-square-fill"></i></a></td>
+                </tr>
+                <tr>
+                    <td>Cancion X</td>
+                    <td>sgseg</td>
+                    <td>sgseg</td>
+                    <td>sgseg</td>
+                    <td>sgseg</td>
+                    <td><a href="" title="Delete from category"><i class="bi bi-x-square-fill"></i></a></td>
+                </tr>
+            </table>
+        </section>
+    </main>
+    <footer>
                 <p>Copyright <i class="bi bi-c-circle"></i> 2025 Babelfy Inc. Todos los derechos reservados.</p>
-            </footer>
-            <script src="../js/categoriesDetails.js"></script>
+    </footer>
+    <script src="../js/categoriesDetails.js"></script>
+    <script src="../js/deleteCategories.js"></script>
+    <script src="../js/script.js"></script>
             <script src="../js/script.js"></script>
 </body>
+
 </html>
