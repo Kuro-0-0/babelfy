@@ -93,9 +93,10 @@ div.PopUp {
     position: absolute;
     z-index: 10;
     font-size: 14px;
-    min-width: 200px;
+    /* min-width: 200px;
+    max-width: 500px; */
+    width: 200px;
     padding: 20px;
-    max-width: 500px;
     padding: 20px;
     button {
         background-color: #BEE3DB;

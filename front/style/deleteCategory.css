@@ -32,3 +32,18 @@ div.PopUpDelete {
         color: greenyellow;
     }
 }
+
+.removeBTN::before  {
+    z-index: 2;
+    position: absolute;
+    right: 10px;
+    margin-right: 5px;
+    margin-top: 18px;
+    color: #555B6E;
+    height: 16px;
+}
+
+.removeBTN:hover::before {
+    box-shadow: 1px 2px 32px 7px rgb(253, 255, 255);
+
+}

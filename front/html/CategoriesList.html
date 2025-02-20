@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../style/base.css">
     <link rel="stylesheet" href="../style/DesignCategoriesList.css">
     <link rel="stylesheet" href="../style/createCategories.css">
+    <link rel="stylesheet" href="../style/deleteCategory.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 </head>
@@ -26,12 +27,18 @@
                     <p id="textPopUp">lorem dhsauighas dsaghjkh sdaujfgh</p>
                     <button onclick="hidePopUp()">OK</button>
                 </div>
+                <div id="PopUpDelete" class="PopUpDelete">
+                    <h1 id="TitlePopUp">DELETE</h1>
+                    <p id="textPopUp">Are you sure you want to delete this category?</p>
+                    <button id="noDelete" onclick="showActionBTN()">NO</button>
+                    <button id="yesDelete" onclick="deleteCategory()">YES</button>
+                </div>
                 <section class="createSection">
-                    <button id="createBtn" onclick="showActionBTN()" class="crCategory-btn">
+                    <button id="createBtn" onclick="showActionBTNcr()" class="crCategory-btn">
                         Create
                     </button>
                     <div id="createCategories" class="form">
-                        <i onclick="showActionBTN()" class="bi bi-x-circle-fill"></i>
+                        <i onclick="showActionBTNcr()" class="bi bi-x-circle-fill"></i>
                         <div class="option">
                             <div class="input-container">
                                 <label class="input-name" for="inputName">New name</label>
@@ -52,6 +59,7 @@
             </footer>
             <script src="../js/categoriesList.js"></script>
             <script src="../js/createCategories.js"></script>
+            <script src="../js/deleteCategories.js"></script>
             <script src="../js/script.js"></script>
 </body>
 </html>
