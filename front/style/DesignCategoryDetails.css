@@ -80,7 +80,7 @@ main>section>table>tbody>tr>td:first-child{
 }
 
 .updater>form>button:hover{
-    background-color: #555B6E;
+    background-color: #555b6e;
     color:#cdefed;
     border-color: #cdefed;
 }
@@ -145,8 +145,62 @@ main {
     }
 }
 
+main {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    height: fit-content !important;
 
+    section.ListSection {
+        display: flex;
+        flex-wrap: wrap;
+        text-align: center;
+        justify-content: center;
+    }
 
+    section.deleteSection {
+        width: 20%;
+        margin: 0 auto;
+        position: absolute;
+        left: 0;
+    }
+
+    button.dlCategory-btn {
+        margin: 30px 10px 5px;
+        width: 5vw;
+        height: 5vh;
+        left: 0;
+        font-family: Coolvetica;
+        background-color: #89B0AE;
+        color: #555B6E;
+        border: 4px double #89B0AE;
+        border-radius: 9px;
+        font-size: 2.5vh;
+        color: #89B0AE;
+        background-color: #555B6E;
+    }
+    a {
+        position: relative;
+        i.remove {
+            position: absolute;
+            margin: 10px;
+            right: 0;
+        }
+    }
+
+    button.dlCategory-btn:hover {
+        background-color: #89B0AE;
+        color: #555B6E;
+        border: 4px double #555B6E;
+        box-shadow: 1px 2px 32px 7px rgb(253, 255, 255);
+    }
+}
+
+div.PopUp{
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%,-50%);
+}
 
 
 
