@@ -30,6 +30,7 @@ header>h1{
     text-align: center;
     color:#555B6E;
     font-size: 4vh;
+    cursor: pointer;
 }
 header>nav{
     margin-top: 20px;

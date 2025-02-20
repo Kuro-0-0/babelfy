@@ -60,15 +60,12 @@ document.addEventListener('DOMContentLoaded', function() {
     var title = document.getElementById('name');
     // Limpiar el contenedor por si ya tenía contenido previo.
     categoryName=category.name;
-    title.innerHTML = categoryName;
-    var link = document.createElement('button');
+    title.innerHTML = categoryName + "  ";
     var pen = document.createElement('i');
     pen.classList='bi bi-pencil-fill';
-    link.id='clickForShowing';
-    link.onclick = showChanger;
-    title.appendChild(link);
-    link.appendChild(pen);
-
+    pen.id='clickForShowing';
+    pen.onclick = showChanger;
+    title.appendChild(pen);
   }
   function showChanger(){
     var container = document.getElementById('updateCategory');
