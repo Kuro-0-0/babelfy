@@ -1,0 +1,52 @@
+header {
+    h1 {
+        cursor: default;
+        padding-top: 5vh;
+        font-size: 5vh;
+    }
+    height: 15%;
+}
+
+main {
+    h2 {
+        text-align: center;
+        cursor: default;
+    }
+    .containersContainer {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        text-align: center;
+        justify-content: space-around;
+        .listContainer { 
+            color: black;
+            border: 4px double #555B6E;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            margin: 15px 10px 5px;
+            width: 50%;
+            height: 100%;
+            h3 {
+                font-size: 25px;
+            }
+            .rndColor {
+                border-top-left-radius: 20px;
+                border-top-right-radius: 20px;
+                width: 90%;
+                height: 80%;
+                margin: 20px auto;
+                
+            }
+            #rndColorCategories {
+                background-color: #5EBE8B;
+            }
+            #rndColorSong {
+                background-color: #AAAEED;
+    
+            }
+        }
+    }
+    .listContainer:hover {
+        box-shadow: 1px 2px 32px 7px rgb(253, 255, 255);
+    }
+}
