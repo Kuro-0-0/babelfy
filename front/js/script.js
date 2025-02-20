@@ -27,29 +27,38 @@ function hidePopUp() {
         element.disabled = false;
     }
 }
-
 function checkText(textContent) {
     const maxLength = 27;
     const minLength = 1;
     const regEx = /^([a-zA-Z\. ,]){0,27}$/;
     const startsWith = /^[\ \,\.].*$/;
     const endsWith = /^.{1,26}[\ \,]$/;
+    const consecutivePunctuation = /(\.{2,}|,{2,})/;
+    const multipleSpaces = /  +/;
+
     try {
         if (textContent.length > maxLength) {
-            throw new Error("The text cant have more than 27 characters");
+            throw new Error("The name can't have more than 27 characters");
         }
         if (textContent.length < minLength) {
-            throw new Error("The text cant have less than 1 character");
+            throw new Error("The name must contain at least one character");
         }
         if (startsWith.test(textContent)) {
-            throw new Error("The text cant start with space, dot or comma");
+            throw new Error("The name can't start with a space, dot or comma");
         }
         if (endsWith.test(textContent)) {
-            throw new Error("The text cant ends with space or comma");
+            throw new Error("The name can't end with a space or comma");
+        }
+        if (consecutivePunctuation.test(textContent)) {
+            throw new Error("The name can't contain consecutive punctuation marks");
         }
         if (!regEx.test(textContent)) {
-            throw new Error("The text contains things that are not text characters");
+            throw new Error("The name contains characters that are not allowed to use");
         }
+        if (multipleSpaces.test(textContent)) {
+            throw new Error("The name can't contain consecutive spaces");
+        }
+
         return textContent
     } catch (error) {
         return error
