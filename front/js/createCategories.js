@@ -42,7 +42,7 @@ function createCategory() {
             return response
         })
         .then (respuesta => {
-            showActionBTN()
+            showActionBTNcr()
             if (respuesta.status == 200) {
                 estado = 'Success'
             } else {
@@ -61,7 +61,7 @@ function createCategory() {
     }
 }
 
-function showActionBTN() {
+function showActionBTNcr() {
     const createCategories = document.getElementById("createCategories");
     const createBtn = document.getElementById("createBtn");    
 

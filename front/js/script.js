@@ -1,4 +1,3 @@
-var createButton =document.getElementById("createBtn");
 function showPopUp(status='Error',text='Error on PopUp loading') {
     
     popUpTitle = document.getElementById("TitlePopUp");

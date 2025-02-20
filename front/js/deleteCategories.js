@@ -32,7 +32,7 @@ function deleteCategory() {
 
 function showActionBTN() {
     const deleteCategories = document.getElementById("PopUpDelete");
-    const deleteBtn = document.getElementById("deleteBtn");
+    const deleteBtn = document.querySelector(".removeBTN");
   
     if (deleteCategories.style.display === "block") {
         deleteCategories.style.display = "none";
