@@ -22,10 +22,11 @@ function showPopUp(status='Error',text='Error on PopUp loading') {
 
 function hidePopUp() {
     document.getElementById("PopUp").style.display = 'none'
-    if(createButton!=null){
-        createButton.disabled = false;
+    actionBTN = document.getElementsByClassName('action-btn')
+    for (let i = 0; i < actionBTN.length; i++) {
+        const element = actionBTN[i];
+        element.disabled = false;
     }
-
 }
 function checkText(textContent) {
     const maxLength = 27;
