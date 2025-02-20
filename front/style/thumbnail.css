@@ -9,6 +9,7 @@ header {
 
 main {
     h2 {
+        color: #555B6E;
         text-align: center;
         cursor: default;
     }
@@ -19,7 +20,7 @@ main {
         text-align: center;
         justify-content: space-around;
         .listContainer { 
-            color: black;
+            color: #555B6E;
             border: 4px double #555B6E;
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
