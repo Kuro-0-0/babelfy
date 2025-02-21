@@ -32,7 +32,7 @@ function hidePopUp() {
 function checkText(textContent) {
     const maxLength = 27;
     const minLength = 1;
-    const regEx = /^([a-zA-Z\. ,]){0,27}$/;
+    const regEx = /^([a-zA-Z0-9\. ,]){0,27}$/;
     const startsWith = /^[\ \,\.].*$/;
     const endsWith = /^.{1,26}[\ \,]$/;
     const consecutivePunctuation = /(\.{2,}|,{2,})/;
