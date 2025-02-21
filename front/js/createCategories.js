@@ -54,6 +54,7 @@ function createCategory() {
             })
 
             .then(text => {
+                globalThis.scrollTo({top:0,left:0, behavior:"smooth"});
                 showPopUp(estado,text)
             })
 
