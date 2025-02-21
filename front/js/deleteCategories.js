@@ -42,6 +42,7 @@ function showActionBTN() {
         deleteCategories.style.display = "none";
         deleteBtn.disabled = false; 
     } else {
+        globalThis.scrollTo({top:0,left:0, behavior:"smooth"});
         deleteCategories.style.display = "block";
         deleteBtn.disabled = true; 
     }

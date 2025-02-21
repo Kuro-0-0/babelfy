@@ -30,7 +30,7 @@ function hidePopUp() {
     
 }
 function checkText(textContent) {
-    const maxLength = 27;
+    const maxLength = 17;
     const minLength = 1;
     const regEx = /^([a-zA-Z0-9\. ,]){0,27}$/;
     const startsWith = /^[\ \,\.].*$/;
