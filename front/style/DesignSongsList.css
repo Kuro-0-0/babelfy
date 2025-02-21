@@ -13,18 +13,19 @@ main>section>a{
     border-top-right-radius: 20px;
     margin: 15px 10px 5px;
     width: 200px;
-    height: 200px;
+    height: 100px;
 }
 main>section>a>div>.imagen{
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
     background-color: #849cae83;
     width: 100%;
-    height: 150px
+    height: 60px;
 }
 
 main>section>a>div>p{
     color:#555B6E;
+    margin-top: 10px;
 }
 
 main>section>a:hover{
