@@ -1,13 +1,15 @@
 package com.babel.babelfy.model;
 
-import java.time.LocalDate;
-
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Data
+@RequiredArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Song {
 
     @Id
@@ -27,4 +29,7 @@ public class Song {
         this.albumName = albumName;
         this.releaseDate = releaseDate;
     }
+
+    
+
 }

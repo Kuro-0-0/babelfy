@@ -34,7 +34,7 @@ var categoryName;
         console.error('Error al cargar la categoria', error);
 
         //This also shows that there was an error but through the html
-        document.getElementById('main').innerHTML = '<p>Error al cargar la categoria.</p>';
+        document.getElementById('sectionDetails').innerHTML = '<div><h1 class="error">Error</h1><p>Something went wrong with the server connection.</p></div>';
       });
   }
 

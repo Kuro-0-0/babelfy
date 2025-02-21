@@ -1,7 +1,7 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
-  getAllCategories()
+  getAllSongs()
 
     .then(function () {
       let container = document.getElementById('ListSection')
@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       function preventLink(event) {
-        console.log("LLAMADA");
         event.preventDefault();
       }
 
@@ -33,8 +32,8 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-async function getAllCategories() {
-  const apiUrl = 'http://localhost:9000/categories';
+async function getAllSongs() {
+  const apiUrl = 'http://localhost:9000/songs';
 
   fetch(apiUrl)
 
@@ -47,8 +46,8 @@ async function getAllCategories() {
       return response.json();
     })
 
-    .then(function (categories) {
-      renderCategories(categories)
+    .then(function (songs) {
+      renderSongs(songs)
 
       .then(function() {
         return true;
@@ -56,45 +55,44 @@ async function getAllCategories() {
     })
 
     .catch(function (error) {
-      console.error('Error al cargar las categorias:', error);
-      document.getElementById('ListSection').innerHTML = '<div><h1 class="error"> Error </h1>' +
-      '<p>Something went wrong with the server connection.</p></div>'
+      console.error('Error al cargar las canciones:', error);
+      document.getElementById('main').innerHTML = '<div><h1 class="error">Error</h1><p>Something went wrong with the server connection.</p></div>';
     });
 }
 
-async function renderCategories(categories) {
+async function renderSongs(songs) {
   var container = document.getElementById('ListSection');
   container.innerHTML = '';
 
-  if (categories.length > 0 && categories) {
+  if (songs.length > 0 && songs) {
 
-    categories.forEach(function (category) {
+    songs.forEach(function (song) {
       var card = document.createElement('a');
 
       card.onclick = function () {
-        localStorage.setItem('idCategory', category.id);
+        localStorage.setItem('idSong', song.id);
       }
 
-      card.href = 'CategoryDetails.html'
+      card.href = 'SongDetails.html'
 
       var content = document.createElement('div');
       content.innerHTML =
         '<div class="imagen">' + '</div>' +
         '<i onclick="showActionBTN()" class="removeBTN bi bi-x-square-fill"></i>' +
-        '<p>' + category.name + '</p>'
+        '<p>' + song.name + '</p>'
 
       card.appendChild(content);
       container.appendChild(card);
     });
 
   } else {
-    showPopUp('Advise', 'There are no categories, please create a new one.')
+    showPopUp('Error', 'There are no songs, please create a new one.')
 
     list = document.getElementById('ListSection')
     div = document.createElement("div")
     div.innerHTML =
-      "<h1 class='error'>Advise</h1>" +
-      "<p>There are no categories, please create a new one.</p>"
+      "<h1 class='error'>ERROR</h1>" +
+      "<p>There are no songs, please create a new one.</p>"
       
     list.appendChild(div)
   }

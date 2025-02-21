@@ -16,10 +16,18 @@ public class SongDtoRequestCreate {
     private LocalDate releaseDate;
 
     public static Song SongDtoToSong(SongDtoRequestCreate songDto){
-        return new Song(songDto.getName(),songDto.getDuration(),
-        songDto.artistName, songDto.getAlbumName(), songDto.getReleaseDate());
+        return Song.builder()
+                .name(songDto.getName())
+                .duration(songDto.getDuration())
+                .artistName(songDto.getArtistName())
+                .albumName(songDto.getAlbumName())
+                .releaseDate(songDto.getReleaseDate())
+                .build();
     }
-
-
-
+    public static SongDTOResponseGetAll songToSongDTO(Song s) {
+        return SongDTOResponseGetAll.builder()
+                .id(s.getId())
+                .name(s.getName())
+                .build();
+    }
 }

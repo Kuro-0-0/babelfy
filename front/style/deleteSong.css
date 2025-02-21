@@ -22,14 +22,14 @@ div.PopUpDelete {
         margin: 0px;    
     }
     button:hover {
-        color: #BEE3DB !important;
+        color: #BEE3DB;
         background-color: #555B6E;
     }
     #noDelete {
         color: red
     }
     #yesDelete {
-        color: darkgreen;
+        color: greenyellow;
     }
 }
 
@@ -38,7 +38,7 @@ div.PopUpDelete {
     position: absolute;
     right: 10px;
     margin-right: 5px;
-    margin-top: 18px;
+    margin-top: 12px;
     color: #555B6E;
     height: 16px;
 }
