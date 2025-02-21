@@ -56,7 +56,7 @@ async function getAllSongs() {
 
     .catch(function (error) {
       console.error('Error al cargar las canciones:', error);
-      document.getElementById('main').innerHTML = '<div><h1 class="error">Error</h1><p>Something went wrong on Server side.</p></div>';
+      document.getElementById('main').innerHTML = '<div><h1 class="error">Error</h1><p>Something went wrong with the server connection.</p></div>';
     });
 }
 
