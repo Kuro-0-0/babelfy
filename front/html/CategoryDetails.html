@@ -11,28 +11,36 @@
 </head>
 
 <body>
+
     <header>
         <h1 id="name"></h1>
+
         <nav>
+
             <ul>
                 <a href="">
                     <li>Songs</li>
                 </a>
+
                 <a href="CategoriesList.html">
                     <li>Categories</li>
                 </a>
             </ul>
+
         </nav>
     </header>
+
     <main>
+        
         <div id="PopUp" class="PopUp">
             <h1 id="TitlePopUp">SUCCESS</h1>
-            <p id="textPopUp">lorem dhsauighas dsaghjkh sdaujfgh</p>
+            <p id="textPopUp"></p>
             <button onclick="hidePopUp()">OK</button>
         </div>
+
         <section>
+
             <div class="updater" id="updateCategory">
-    
                 <i class="bi bi-x-circle-fill quit" onclick="showChanger()"></i>
                 <h3>CHANGE NAME</h3>
                 
@@ -40,13 +48,10 @@
                     <input type="text" placeholder="Write here" id="newName">
                     <button onclick="changeName()">Update</button>
                 </form>
-    
-    
             </div>
-    
-    
+
+            <!-- This is an example table of songs because we don't have songs yet -->
             <table>
-    
                 <tr>
                     <th>Name</th>
                     <th>Duration</th>
@@ -104,15 +109,19 @@
                     <td><a href="" title="Delete from category"><i class="bi bi-x-square-fill"></i></a></td>
                 </tr>
             </table>
+
         </section>
+
     </main>
+
     <footer>
-                <p>Copyright <i class="bi bi-c-circle"></i> 2025 Babelfy Inc. Todos los derechos reservados.</p>
+        <p>Copyright <i class="bi bi-c-circle"></i> 2025 Babelfy Inc. Todos los derechos reservados.</p>
     </footer>
+
     <script src="../js/categoriesDetails.js"></script>
     <script src="../js/deleteCategories.js"></script>
     <script src="../js/script.js"></script>
-            <script src="../js/script.js"></script>
+            
 </body>
 
 </html>

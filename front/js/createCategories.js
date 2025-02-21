@@ -1,64 +1,70 @@
 function createCategory() {
     try {
+
         inputs = document.getElementsByClassName("dataAPI")
-    let paramName;
-    let paramValue;
-    let params = {};
-    let options;
+        let paramName;
+        let paramValue;
+        let params = {};
+        let options;
 
-    
-    for (let index = 0; index < inputs.length; index++) {
-        let element = inputs[index];
-        paramName = element.name;
-        paramValue = element.value;
+        for (let index = 0; index < inputs.length; index++) {
+            let element = inputs[index];
+            paramName = element.name;
+            paramValue = element.value;
 
-        switch (paramName) {
-            case "name":
-                paramValue = checkText(paramValue);
-                break;
-            default:
-                break;
-        }
-
-        if (paramValue instanceof Error) {
-            throw new Error(paramValue.message);
-        }
-        
-        params[paramName] = paramValue
-        element.value = ''
-    }
-
-    options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/JSON', 
-        },
-        body: JSON.stringify(params), 
-    };
-    fetch('http://localhost:9000/categories', options)
-        .then(response => {
-            console.log(response);
-            getAllCategories()
-            return response
-        })
-        .then (respuesta => {
-            showActionBTNcr()
-            if (respuesta.status == 200) {
-                estado = 'Success'
-            } else {
-                estado = 'Error'
+            switch (paramName) {
+                case "name":
+                    paramValue = checkText(paramValue);
+                    break;
+                default:
+                    break;
             }
-            return respuesta.text()
-        })
-        .then(text => {
-            showPopUp(estado,text)
-        })
-        .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
-        });
+
+            if (paramValue instanceof Error) {
+                throw new Error(paramValue.message);
+            }
+            
+            params[paramName] = paramValue
+            element.value = ''
+        }
+
+        options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/JSON', 
+            },
+            body: JSON.stringify(params), 
+        };
+
+        fetch('http://localhost:9000/categories', options)
+
+            .then(response => {
+                getAllCategories()
+                return response
+            })
+
+            .then (respuesta => {
+                showActionBTNcr()
+                if (respuesta.status == 200) {
+                    estado = 'Success'
+                } else {
+                    estado = 'Error'
+                }
+                return respuesta.text()
+            })
+
+            .then(text => {
+                showPopUp(estado,text)
+            })
+
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+
     } catch (error) {
         showPopUp('Error',error.message)
     }
+
 }
 
 function showActionBTNcr() {
@@ -73,6 +79,7 @@ function showActionBTNcr() {
         createCategories.style.display = "block";
         createBtn.disabled = true; 
     }
+
 }
 
 function checkText(textContent) {
@@ -81,6 +88,7 @@ function checkText(textContent) {
     const regEx = /^([a-zA-Z\. ,]){0,27}$/;
     const startsWith = /^[\ \,\.].*$/;
     const endsWith = /^.{1,26}[\ \,]$/;
+
     try {
         if (textContent.length > maxLength) {
             throw new Error("The text cant have more than 27 characters");
@@ -101,4 +109,5 @@ function checkText(textContent) {
     } catch (error) {
         return error
     }
+    
 }
