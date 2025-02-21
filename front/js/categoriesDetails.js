@@ -45,19 +45,14 @@ var categoryName;
     
     //This 'category.name' is from the .json that we got from before
     categoryName=category.name;
-
-    //This takes the name and 'writes' it in the object (the content)
-    title.innerHTML = categoryName;
-
-    var link = document.createElement('button');
+    title.innerHTML = categoryName + "  ";
     var pen = document.createElement('i');
     pen.classList='bi bi-pencil-fill';
-    link.id='clickForShowing';
-    link.onclick = showChanger;
+    pen.id='clickForShowing';
+    pen.onclick = showChanger;
 
     //This links the objects, saying that, whats in (), is inside of the other one
-    title.appendChild(link);
-    link.appendChild(pen);
+    title.appendChild(pen);
   }
 
   function showChanger(){

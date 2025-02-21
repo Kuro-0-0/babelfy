@@ -66,3 +66,8 @@ function checkText(textContent) {
         return error
     }
 }
+
+function moveToThumbnail() {
+    console.log('diosjap    ');
+    window.location.href = 'thumbnail.html'
+}
