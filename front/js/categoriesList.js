@@ -58,7 +58,7 @@ async function getAllCategories() {
     .catch(function (error) {
       console.error('Error al cargar las categorias:', error);
       document.getElementById('ListSection').innerHTML = '<div><h1 class="error"> Error </h1>' +
-      '<p>Something went wrong on server side.</p></div>'
+      '<p>Something went wrong with the server connection.</p></div>'
     });
 }
 
