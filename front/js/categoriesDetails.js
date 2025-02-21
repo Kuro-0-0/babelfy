@@ -1,72 +1,60 @@
-/*
- * Archivo: app.js
- * Descripción: Este archivo JavaScript se encarga de:
- *              1. Llamar a la API para obtener una lista de canciones.
- *              2. Procesar la respuesta de la API (en formato JSON).
- *              3. Crear y pintar en el HTML una tarjeta (card) para cada canción.
- * Cada paso se explica en detalle mediante comentarios.
- */
 
-/* 
- * Paso 1: Esperar a que el documento HTML se cargue completamente.
- * Esto asegura que todos los elementos (como el contenedor) estén disponibles.
- */
 var categoryName;
-document.addEventListener('DOMContentLoaded', function() {
 
-    /*
-     * Función: getSongs
-     * Descripción: Llama a la API para obtener la lista de canciones.
-     *              Luego, procesa la respuesta y llama a la función renderSongs.
-     */
-    
-  
-    // Paso 9: Llamar a la función getSongs para iniciar el proceso cuando se carga la página.
+  //This event waits for the content of the page to load to make sure the function works okay 
+  document.addEventListener('DOMContentLoaded', function() {
+
     showCategoryDetails();
+
   });
+
   function showCategoryDetails() {
-    // URL del endpoint de la API que devuelve la lista de canciones.
-    // Cambia la URL a la de tu API real si es necesario.
+    
+    //This is the endPoint, it uses the saved Id to show the category
     const apiUrl = 'http://localhost:9000/categories/'+localStorage.getItem('idCategory');
 
-    // Se realiza la petición a la API utilizando fetch.
+    //Then this calls the 'API' from the categoryController that brings that method
     fetch(apiUrl)
+
       .then(function(response) {
-        // Paso 2: Verificar que la respuesta sea exitosa.
         if (!response.ok) {
-          // Si no es exitosa, se lanza un error para que se capture en el catch.
+          //This error is thrown so that (if an error occurs) gets to the .catch
           throw new Error('Error en la respuesta de la API: ' + response.statusText);
         }
-        // Paso 3: Convertir la respuesta a formato JSON para poder trabajar con ella.
+        //This is .json because the render function needs it to be in this format
         return response.json();
       })
+      
       .then(function(category) {
-        // 'songs' es un array de objetos, donde cada objeto representa una canción.
-        // Se llama a la función que se encarga de pintar (renderizar) los datos en el HTML.
         renderCategoryDetails(category);
       })
+
+      //This .catch is here to show through the console any errors that could appear 
       .catch(function(error) {
-        // Paso 4: Manejo de errores.
-        // Si ocurre algún error durante la petición o la conversión, se muestra en la consola.
         console.error('Error al cargar la categoria', error);
-        // También se muestra un mensaje de error en el contenedor HTML.
+
+        //This also shows that there was an error but through the html
         document.getElementById('main').innerHTML = '<p>Error al cargar la categoria.</p>';
       });
   }
 
 
   function renderCategoryDetails(category) {
-    // Paso 5: Seleccionar el contenedor donde se mostrarán las tarjetas de canciones.
+    //This gets an objects in the html with the Id 'name'
     var title = document.getElementById('name');
-    // Limpiar el contenedor por si ya tenía contenido previo.
+    
+    //This 'category.name' is from the .json that we got from before
     categoryName=category.name;
     title.innerHTML = categoryName + "  ";
     var pen = document.createElement('i');
     pen.classList='bi bi-pencil-fill';
     pen.id='clickForShowing';
     pen.onclick = showChanger;
+
+    //This links the objects, saying that, whats in (), is inside of the other one
     title.appendChild(pen);
   }
+
   function showChanger(){
     var container = document.getElementById('updateCategory');
 
@@ -78,70 +66,69 @@ document.addEventListener('DOMContentLoaded', function() {
       container.style.display='block';
       var name = document.getElementById('newName');
       name.value = categoryName;
-
     }
-
   }
+
   function changeName(){
     try {
+
       var submitter = document.getElementById('newName');
-    var categoryId = localStorage.getItem('idCategory');
-    const apiUrlChange ='http://localhost:9000/categories';
-    var nameValue = checkText(submitter.value);
-    console.log(nameValue.message);
-    if(nameValue instanceof Error){
-      throw new Error (nameValue.message)
-    }
-    
-    options={
-      method: "put",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify ({
-        'id': localStorage.getItem('idCategory'),
-        'name': submitter.value
+      var categoryId = localStorage.getItem('idCategory');
+      const apiUrlChange ='http://localhost:9000/categories';
+      var nameValue = checkText(submitter.value);
+      
+      //This could be an error because the checkText function could return one
+      if(nameValue instanceof Error){
+        throw new Error (nameValue.message)
+      }
+      
+      //This options are needed to 'send back' the changes
+      options={
+        method: "put",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify ({
+          'id': localStorage.getItem('idCategory'),
+          'name': submitter.value
+        })
+      }
+      fetch(apiUrlChange,options)
+
+      .then(function(response){
+
+        //This 'ok' means that the status is a 200
+        if (response.ok){
+          estado = 'Message'
+          showCategoryDetails();
+      } else {
+          estado = 'Error'
+      }
+        return response.text()
       })
-    }
-    fetch(apiUrlChange,options)
-    .then(function(response) {
-      console.log(response)
-      return response;
-    })
-    .then(function(response){
-      console.log(response)
-      if (response.ok){
-        estado = 'Message'
-        showCategoryDetails();
-    } else {
-        estado = 'Error'
-    }
-      return response.text()
-    })
+
       .then(text => {
-          showChanger();
-          
-          showPopUp(estado,text)
-          var popupTitle = document.getElementById('TitlePopUp');
-          popupTitle.style.color ='#cdefed';
+        //Calling again this function makes it disappear (revert the show)
+        showChanger();
+            
+        showPopUp(estado,text)
+        var popupTitle = document.getElementById('TitlePopUp');
+        popupTitle.style.color ='#cdefed';
       })
-    .catch(function(error) {
-      // Paso 4: Manejo de errores.
-      // Si ocurre algún error durante la petición o la conversión, se muestra en la consola.
-      console.error('Error al cargar la categoria', error);
-      // También se muestra un mensaje de error en el contenedor HTML.
-      document.getElementById('main').innerHTML = '<p>Error al cargar la categoria.</p>';
-    });
+
+      .catch(function(error) {
+
+        console.error('Error al cargar la categoria', error);
+        document.getElementById('main').innerHTML = '<p>Error al cargar la categoria.</p>';
+      });
 
     } catch (error) {
       showPopUp('Error',error.message)
     }
   }
-//add new function when clic on submit button n send 'put' send back
 
-//request -> id, n new name
-document.getElementById('createForm').addEventListener('submit', function(event)
-{
+//The submit button in the form refreshes the page automatically, so this prevents that
+document.getElementById('createForm').addEventListener('submit', function(event){
   event.preventDefault();
 });
 

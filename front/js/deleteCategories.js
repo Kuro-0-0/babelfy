@@ -7,11 +7,13 @@ function deleteCategory() {
             'Content-Type': 'application/JSON', 
         },
     };
+
     fetch('http://localhost:9000/categories/'+localStorage.getItem('idCategory'), options)
+
         .then(response => {
-            console.log(response);
             return response
         })
+
         .then (respuesta => {
             showActionBTN()
             if (respuesta.status == 200) {
@@ -21,10 +23,12 @@ function deleteCategory() {
             }
             return respuesta.text()
         })
+
         .then(text => {
             showPopUp(estado,text)
             window.location.href = 'CategoriesList.html'
         })
+
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
         });

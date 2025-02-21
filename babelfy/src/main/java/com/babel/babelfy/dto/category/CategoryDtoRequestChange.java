@@ -1,21 +1,18 @@
 package com.babel.babelfy.dto.category;
 
 import com.babel.babelfy.model.Category;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CategoryDtoRequestChange {
 
     private long id;
     private String name;
-
-    public CategoryDtoRequestChange(long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public CategoryDtoRequestChange() {
-    }
 
     public static Category categoryDTOToCategory(CategoryDtoRequestChange c){
         return Category.builder()
@@ -23,14 +20,5 @@ public class CategoryDtoRequestChange {
                 .name(c.getName())
                 .build();
     }
-
-    @Override
-    public String toString() {
-        return "CategoryDtoRequestChange [id=" + id + ", name=" + name + "]";
-    }
-
-
-
-
 
 }
