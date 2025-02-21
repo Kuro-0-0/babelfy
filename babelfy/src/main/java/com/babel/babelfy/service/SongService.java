@@ -21,9 +21,34 @@ public class SongService {
     private final SongRepository songRepository;
 
     public String add(SongDtoRequestCreate cDTO){
+        String response="";
         Song newSong = SongDtoRequestCreate.SongDtoToSong(cDTO);
-        songRepository.save(newSong);
-        return "This song was created successfully";
+        List<Song> list = songRepository.findByName(newSong.getName());
+        boolean isHere=false;
+
+        System.out.println(list);
+        System.out.println(newSong);
+        if(list.isEmpty()){
+            
+            songRepository.save(newSong);
+            response="This song was created successfully";
+        }else {
+
+            for (int i = 0; i < list.size()&&!isHere; i++) {
+                if(list.get(i).getArtistName().equalsIgnoreCase(newSong.getArtistName())){
+                    isHere=true;
+                }
+            }
+            if(isHere){
+                response="This artist already has a song name like this";
+            }else{
+                songRepository.save(newSong);
+                response="This song was created successfully";
+            }
+
+        }
+        
+        return response;
     }
 
     public ResponseEntity<List<SongDTOResponseGetAll>> getAll() {

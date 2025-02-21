@@ -55,15 +55,15 @@ function createSong() {
 
             .then (respuesta => {
                 showActionBTNcr()
-                if (respuesta.status == 200) {
-                    estado = 'Success'
-                } else {
-                    estado = 'Error'
-                }
                 return respuesta.text()
             })
 
             .then(text => {
+                if (text!="This artist already has a song name like this") {
+                    estado = 'Success'
+                } else {
+                    estado = 'Error'
+                }
                 showPopUp(estado,text)
             })
 
