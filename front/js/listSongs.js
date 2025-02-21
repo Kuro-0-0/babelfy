@@ -56,7 +56,7 @@ async function getAllSongs() {
 
     .catch(function (error) {
       console.error('Error al cargar las canciones:', error);
-      document.getElementById('main').innerHTML = '<p>Error al cargar las canciones.</p>';
+      document.getElementById('main').innerHTML = '<div><h1 class="error">Error</h1><p>Something went wrong on Server side.</p></div>';
     });
 }
 
@@ -70,10 +70,10 @@ async function renderSongs(songs) {
       var card = document.createElement('a');
 
       card.onclick = function () {
-        localStorage.setItem('idCategory', song.id);
+        localStorage.setItem('idSong', song.id);
       }
 
-      card.href = 'CategoryDetails.html'
+      card.href = 'SongDetails.html'
 
       var content = document.createElement('div');
       content.innerHTML =
