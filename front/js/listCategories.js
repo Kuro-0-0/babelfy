@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       function preventLink(event) {
-        console.log("LLAMADA");
         event.preventDefault();
       }
 

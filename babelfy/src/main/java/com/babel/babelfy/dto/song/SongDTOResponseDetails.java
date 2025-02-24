@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Data
 @Builder
-public class SongDTOResponseDetails {
+public class SongDtoResponseDetails {
 
     private String name;
     private int duration;
@@ -16,8 +16,8 @@ public class SongDTOResponseDetails {
     private String albumName;
     private LocalDate releaseDate;
 
-    public static SongDTOResponseDetails songToCSongDTO(Song s) {
-        return SongDTOResponseDetails.builder()
+    public static SongDtoResponseDetails songToCSongDTO(Song s) {
+        return SongDtoResponseDetails.builder()
                 .name(s.getName())
                 .duration(s.getDuration())
                 .artistName(s.getArtistName())

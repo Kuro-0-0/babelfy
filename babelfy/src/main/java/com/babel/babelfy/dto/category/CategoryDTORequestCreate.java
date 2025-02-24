@@ -6,13 +6,13 @@ import lombok.Data;
 
 @Builder
 @Data
-public class CategoryDTORequestCreate {
+public class CategoryDtoRequestCreate {
 
     private String name;
 
     // Helpers
 
-    public static Category categoryDTOToCategory (CategoryDTORequestCreate categoryDTO){
+    public static Category categoryDTOToCategory (CategoryDtoRequestCreate categoryDTO){
         return Category.builder()
                 .name(categoryDTO.getName())
                 .build();

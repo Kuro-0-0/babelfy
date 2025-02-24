@@ -2,11 +2,11 @@ package com.babel.babelfy.controller;
 
 import java.util.List;
 
-import com.babel.babelfy.dto.song.SongDTORequestUpdate;
+import com.babel.babelfy.dto.song.SongDtoRequestUpdate;
 import lombok.RequiredArgsConstructor;
 
-import com.babel.babelfy.dto.song.SongDTOResponseDetails;
-import com.babel.babelfy.dto.song.SongDTOResponseGetAll;
+import com.babel.babelfy.dto.song.SongDtoResponseDetails;
+import com.babel.babelfy.dto.song.SongDtoResponseGetAll;
 import com.babel.babelfy.dto.song.SongDtoRequestCreate;
 import com.babel.babelfy.service.SongService;
 
@@ -21,12 +21,12 @@ public class SongController {
     private final SongService songService;
 
     @GetMapping
-    public ResponseEntity<List<SongDTOResponseGetAll>> getAll() {
+    public ResponseEntity<List<SongDtoResponseGetAll>> getAll() {
         return songService.getAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SongDTOResponseDetails> getDetails(@PathVariable long id){return songService.getDetails(id);}
+    public ResponseEntity<SongDtoResponseDetails> getDetails(@PathVariable long id){return songService.getDetails(id);}
 
 
 
@@ -36,7 +36,7 @@ public class SongController {
     }
 
     @PutMapping
-    public ResponseEntity<String> update(@RequestBody SongDTORequestUpdate sDTO) {return songService.update(sDTO);}
+    public ResponseEntity<String> update(@RequestBody SongDtoRequestUpdate sDTO) {return songService.update(sDTO);}
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable long id){

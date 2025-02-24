@@ -39,11 +39,9 @@ function showActionBTN() {
         deleteSong.style.display = "none";
         deleteBtn.disabled = false; 
 
-        console.log('sgsegse')
     } else {
         globalThis.scrollTo({top:0,left:0, behavior:"smooth"});
         deleteSong.style.display = "block";
         deleteBtn.disabled = true; 
-        console.log('sgsafaaaaaaegse')
     }
   }
