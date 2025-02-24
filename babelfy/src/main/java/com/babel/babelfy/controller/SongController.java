@@ -38,4 +38,9 @@ public class SongController {
     @PutMapping
     public ResponseEntity<String> update(@RequestBody SongDTORequestUpdate sDTO) {return songService.update(sDTO);}
 
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable long id){
+        return songService.delete(id);
+    }
+
 }
