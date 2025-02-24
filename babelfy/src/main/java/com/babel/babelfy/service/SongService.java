@@ -1,6 +1,6 @@
 package com.babel.babelfy.service;
 
-import com.babel.babelfy.dto.SongDTO;
+import com.babel.babelfy.dto.song.SongDTO;
 import com.babel.babelfy.dto.song.SongDTOResponseGetAll;
 import com.babel.babelfy.dto.song.SongDtoRequestCreate;
 
