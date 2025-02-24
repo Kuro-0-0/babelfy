@@ -1,4 +1,4 @@
-function createCategory() {
+function createSong() {
     try {
 
         inputs = document.getElementsByClassName("dataAPI")
@@ -13,9 +13,19 @@ function createCategory() {
             paramValue = element.value;
 
             switch (paramName) {
+
                 case "name":
                     paramValue = checkText(paramValue);
                     break;
+
+                case "artistName":
+                    paramValue = checkText(paramValue);
+                    break;
+
+                case "albumName":
+                    paramValue = checkText(paramValue);
+                    break;
+
                 default:
                     break;
             }
@@ -36,25 +46,24 @@ function createCategory() {
             body: JSON.stringify(params), 
         };
 
-        fetch('http://localhost:9000/categories', options)
+        fetch('http://localhost:9000/songs', options)
 
             .then(response => {
-                getAllCategories()
+                getAllSongs()
                 return response
             })
 
             .then (respuesta => {
                 showActionBTNcr()
-                if (respuesta.status == 200) {
-                    estado = 'Success'
-                } else {
-                    estado = 'Error'
-                }
                 return respuesta.text()
             })
 
             .then(text => {
-                globalThis.scrollTo({top:0,left:0, behavior:"smooth"});
+                if (text!="This artist already has a song name like this") {
+                    estado = 'Success'
+                } else {
+                    estado = 'Error'
+                }
                 showPopUp(estado,text)
             })
 
