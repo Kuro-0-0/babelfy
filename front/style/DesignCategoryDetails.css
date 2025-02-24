@@ -1,52 +1,4 @@
 
-main{
-    text-align: center;
-}
-
-header>h1{
-    text-transform: uppercase;
-}
-main>section>table>tbody>tr>th{
-    text-transform: uppercase;
-    padding: 15px;
-    background-color: #555B6E;
-    color:#BEE3DB;
-}
-
-main>section>table>tbody>tr:hover{
-    background-color: #cdefed;
-}
-
-main>section>table>tbody>tr>td{
-    padding: 12px;
-}
-h1>button>i{
-    color:#555B6E;
-    cursor: pointer;
-}
-h1>button{
-    background-color: transparent;
-    border-width: 0px;
-    transform: scale(1.7);
-}
-
-main>section>table{
-    margin: 50px auto 0px;
-    border: 1px solid #555B6E;
-    border-collapse: collapse;
-    max-width: 80%;
-}
-main>section>table>tbody>tr:first-child{
-    border-bottom: 2px solid #555B6E;
-}
-main>section>table>tbody>tr>th:first-child,main>section>table>tbody>tr>td:first-child{
-    padding-right: 80px;
-    padding-left: 15px;
-}
-
-main>section>table>tbody>tr>td:first-child{
-    min-width: 100px;
-}
 
 div.updater {
     display: none;
@@ -121,62 +73,16 @@ main {
     justify-content: center;
     height: fit-content !important;
 
-    section.ListSection {
+    section#sectionDetails {
         display: flex;
         flex-wrap: wrap;
         text-align: center;
         justify-content: center;
-    }
-
-    section.deleteSection {
-        width: 20%;
-        margin: 0 auto;
-        position: absolute;
-        left: 0;
-    }
-
-    button.dlCategory-btn {
-        margin: 30px 10px 5px;
-        width: 5vw;
-        height: 5vh;
-        left: 0;
-        font-family: Coolvetica;
-        background-color: #89B0AE;
         color: #555B6E;
-        border: 4px double #89B0AE;
-        border-radius: 9px;
-        font-size: 2.5vh;
-        color: #89B0AE;
-        background-color: #555B6E;
-    }
-    a {
-        position: relative;
-        i.remove {
-            position: absolute;
-            margin: 10px;
-            right: 0;
+        border: 5px double #555B6E;
+        .dataContainer {
+            margin: 0px 20px 10px;
         }
-    }
-
-    button.dlCategory-btn:hover {
-        background-color: #89B0AE;
-        color: #555B6E;
-        border: 4px double #555B6E;
-        box-shadow: 1px 2px 32px 7px rgb(253, 255, 255);
-    }
-}
-
-main {
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    height: fit-content !important;
-
-    section.ListSection {
-        display: flex;
-        flex-wrap: wrap;
-        text-align: center;
-        justify-content: center;
     }
 
     section.deleteSection {
