@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import com.babel.babelfy.model.Category;
 import com.babel.babelfy.repository.CategoryRepository;
 
-import com.babel.babelfy.dto.category.CategoryDTORequestCreate;
+import com.babel.babelfy.dto.category.CategoryDtoRequestCreate;
 import com.babel.babelfy.dto.category.CategoryDtoResponseDetails;
 import com.babel.babelfy.dto.category.CategoryDtoResponseList;
-import com.babel.babelfy.dto.category.CategoryDtoRequestChange;
+import com.babel.babelfy.dto.category.CategoryDtoRequestUpdate;
 
 @Service
 @RequiredArgsConstructor
@@ -39,19 +39,19 @@ public class CategoryService {
         return CategoryDtoResponseDetails.categoryToCategoryDTO(c);
     }
 
-    public ResponseEntity<String> add(CategoryDTORequestCreate cDTO) {
+    public ResponseEntity<String> add(CategoryDtoRequestCreate cDTO) {
         ResponseEntity<String> response;
         Category newCategory;
 
         try {
             List<Category> c = categoryRepository.findByName(cDTO.getName());
             if (c.isEmpty()) {
-                newCategory = CategoryDTORequestCreate.categoryDTOToCategory(cDTO);
+                newCategory = CategoryDtoRequestCreate.categoryDTOToCategory(cDTO);
                 categoryRepository.save(newCategory);
                 response = ResponseEntity.ok("Category " + cDTO.getName() + " created.");
             } else {
                 response = ResponseEntity.badRequest().body
-                ("You cant create this category because there is another one created with that name.");
+                ("You can't create this category because there is already one with that name.");
             }
         } catch (Exception e) {
             response = ResponseEntity.internalServerError().body
@@ -61,21 +61,21 @@ public class CategoryService {
         return response;
     }
 
-    public String change(CategoryDtoRequestChange request){
+    public String change(CategoryDtoRequestUpdate request){
         String response;
-        Category c=CategoryDtoRequestChange.categoryDTOToCategory(request);
+        Category c=CategoryDtoRequestUpdate.categoryDTOToCategory(request);
         Category old=categoryRepository.findById(c.getId()).orElse(null);
         List<Category> list= categoryRepository.findByName(c.getName());
 
         if(list.isEmpty()){
             if(old!=null){
                 categoryRepository.save(c);
-                response="Changes made successfully.";
+                response="Changes made successfully";
             }else{
-                response="You can´t make this change because this category does not exist.";
+                response="You can't make this change because this category does not exist";
             }
         } else{
-            response="You can´t make this change because this name is already in use.";
+            response="You can't make this change because this name is already in use";
         }
 
         return response;

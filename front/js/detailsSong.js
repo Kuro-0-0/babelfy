@@ -36,7 +36,6 @@ function showSongDetails() {
 
 
 function renderSongDetails(song) {
-    console.log(song);
     
     title = document.getElementById('name')
     title.innerHTML = song.name

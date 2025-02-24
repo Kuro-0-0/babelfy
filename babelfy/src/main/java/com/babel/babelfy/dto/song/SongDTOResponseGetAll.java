@@ -6,13 +6,13 @@ import lombok.Data;
 
 @Builder
 @Data
-public class SongDTOResponseGetAll {
+public class SongDtoResponseGetAll {
 
     private long id;
     private String name;
 
-    public static SongDTOResponseGetAll songToSongDTO(Song s) {
-        return SongDTOResponseGetAll.builder()
+    public static SongDtoResponseGetAll songToSongDTO(Song s) {
+        return SongDtoResponseGetAll.builder()
                 .id(s.getId())
                 .name(s.getName())
                 .build();

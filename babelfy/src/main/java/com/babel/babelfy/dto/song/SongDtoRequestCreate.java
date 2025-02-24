@@ -24,8 +24,8 @@ public class SongDtoRequestCreate {
                 .releaseDate(songDto.getReleaseDate())
                 .build();
     }
-    public static SongDTOResponseGetAll songToSongDTO(Song s) {
-        return SongDTOResponseGetAll.builder()
+    public static SongDtoResponseGetAll songToSongDTO(Song s) {
+        return SongDtoResponseGetAll.builder()
                 .id(s.getId())
                 .name(s.getName())
                 .build();

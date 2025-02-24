@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategoryDtoRequestChange {
+public class CategoryDtoRequestUpdate {
 
     private long id;
     private String name;
 
-    public static Category categoryDTOToCategory(CategoryDtoRequestChange c){
+    public static Category categoryDTOToCategory(CategoryDtoRequestUpdate c){
         return Category.builder()
                 .id(c.getId())
                 .name(c.getName())

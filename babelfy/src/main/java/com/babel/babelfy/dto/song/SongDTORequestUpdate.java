@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Builder
 @Data
-public class SongDTORequestUpdate {
+public class SongDtoRequestUpdate {
 
     private long id;
     private String name;
@@ -17,7 +17,7 @@ public class SongDTORequestUpdate {
     private String albumName;
     private LocalDate releaseDate;
 
-    public static Song songDTOtoSong(SongDTORequestUpdate sDTO) {
+    public static Song songDTOtoSong(SongDtoRequestUpdate sDTO) {
         return Song.builder()
                 .id(sDTO.id)
                 .name(sDTO.name)

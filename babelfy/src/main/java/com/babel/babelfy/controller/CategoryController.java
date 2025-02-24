@@ -6,8 +6,9 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
 
-import com.babel.babelfy.dto.category.CategoryDTORequestCreate;
-import com.babel.babelfy.dto.category.CategoryDtoRequestChange;
+
+import com.babel.babelfy.dto.category.CategoryDtoRequestUpdate;
+import com.babel.babelfy.dto.category.CategoryDtoRequestCreate;
 import com.babel.babelfy.dto.category.CategoryDtoResponseDetails;
 import com.babel.babelfy.dto.category.CategoryDtoResponseList;
 import com.babel.babelfy.service.CategoryService;
@@ -41,7 +42,7 @@ public class CategoryController {
     }
     
     @PostMapping("")
-    public ResponseEntity<String> create(@RequestBody CategoryDTORequestCreate cDTO) {
+    public ResponseEntity<String> create(@RequestBody CategoryDtoRequestCreate cDTO) {
         return categoryService.add(cDTO);
     }
 
@@ -51,7 +52,7 @@ public class CategoryController {
     }
 
     @PutMapping("")
-    public String change(@RequestBody CategoryDtoRequestChange request){
+    public String change(@RequestBody CategoryDtoRequestUpdate request){
         return categoryService.change(request);
     }
     
