@@ -136,10 +136,3 @@ function changeName() {
     }
 }
 
-//The submit button in the form refreshes the page automatically, so this prevents that
-document.getElementById('createForm').addEventListener('submit', function (event) {
-    event.preventDefault();
-});
-
-
-
