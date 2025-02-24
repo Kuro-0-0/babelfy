@@ -1,0 +1,25 @@
+input {
+    color: #FAF9F9;
+    background-color: #555B6E;
+    border-radius: 0.4vh;
+    padding: 0.5vh;
+    width: 20vh;
+}
+input::placeholder{
+    font-size: 1.5vh;
+    color: #faf9f9a0;
+}
+
+input.title-input {
+    margin-top: 3vh;
+    margin: 0 auto;
+}
+
+button.sbt-upSong-btn {
+    display: none;
+    margin-top: 40px !important;
+}
+
+#nameContainer {
+    justify-content: center;
+}

@@ -1,10 +1,7 @@
 package com.babel.babelfy.service;
 
-import com.babel.babelfy.dto.song.SongDTO;
-import com.babel.babelfy.dto.song.SongDTOResponseGetAll;
-import com.babel.babelfy.dto.song.SongDtoRequestCreate;
+import com.babel.babelfy.dto.song.*;
 
-import com.babel.babelfy.dto.song.SongDTOResponseDetails;
 import com.babel.babelfy.model.Song;
 import com.babel.babelfy.repository.SongRepository;
 
@@ -87,6 +84,26 @@ public class SongService {
         }
         catch (Exception e) {
             response = ResponseEntity.internalServerError().body(null);
+        }
+        return response;
+    }
+
+    public ResponseEntity<String> update(SongDTORequestUpdate sDTO) {
+        ResponseEntity<String> response;
+        Song modSong;
+        try {
+            modSong = songRepository.findById(sDTO.getId()).orElse(null);
+            System.out.println(sDTO);
+            if (modSong != null) {
+                modSong = SongDTORequestUpdate.songDTOtoSong(sDTO);
+                songRepository.save(modSong);
+                response = ResponseEntity.ok().body("Song updated");
+            } else {
+                response = ResponseEntity.badRequest().body("That song doesnt exist.");
+            }
+
+        } catch (Exception e) {
+            response = ResponseEntity.internalServerError().body("Something went wrong on the Server side");
         }
         return response;
     }
