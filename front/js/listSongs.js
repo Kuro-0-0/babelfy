@@ -68,6 +68,7 @@ async function renderSongs(songs) {
 
     songs.forEach(function (song) {
       var card = document.createElement('a');
+      card.classList.add('song')
 
       card.onclick = function () {
         localStorage.setItem('idSong', song.id);
@@ -78,7 +79,7 @@ async function renderSongs(songs) {
       var content = document.createElement('div');
       content.innerHTML =
         '<div class="imagen">' + '</div>' +
-        '<i onclick="showActionBTN()" class="removeBTN bi bi-x-square-fill"></i>' +
+        '<i onclick="showActionBTN()" class="removeBTN song bi bi-x-square-fill"></i>' +
         '<p>' + song.name + '</p>'
 
       card.appendChild(content);

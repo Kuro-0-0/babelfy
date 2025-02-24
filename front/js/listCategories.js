@@ -69,6 +69,7 @@ async function renderCategories(categories) {
 
     categories.forEach(function (category) {
       var card = document.createElement('a');
+      card.classList.add('category')
 
       card.onclick = function () {
         localStorage.setItem('idCategory', category.id);
@@ -79,7 +80,7 @@ async function renderCategories(categories) {
       var content = document.createElement('div');
       content.innerHTML =
         '<div class="imagen">' + '</div>' +
-        '<i onclick="showActionBTN()" class="removeBTN bi bi-x-square-fill"></i>' +
+        '<i onclick="showActionBTN()" class="removeBTN category bi bi-x-square-fill"></i>' +
         '<p>' + category.name + '</p>'
 
       card.appendChild(content);
