@@ -29,8 +29,15 @@ function hidePopUp() {
     }
     
 }
-function checkText(textContent) {
-    const maxLength = 17;
+function checkText(textContent,showable = false) {
+    let maxLength;
+
+    if (showable) {
+        maxLength = 17
+    } else {
+        maxLength = 27
+    }
+
     const minLength = 1;
     const regEx = /^([a-zA-Z0-9\. ,]){0,27}$/;
     const startsWith = /^[\ \,\.].*$/;
@@ -40,7 +47,7 @@ function checkText(textContent) {
 
     try {
         if (textContent.length > maxLength) {
-            throw new Error("The name can't have more than 27 characters");
+            throw new Error("The name can't have more than "+maxLength+" characters");
         }
         if (textContent.length < minLength) {
             throw new Error("The name must contain at least one character");

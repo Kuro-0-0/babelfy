@@ -30,7 +30,7 @@ function showSongDetails() {
             console.error('Error al cargar la cancion', error);
 
             //This also shows that there was an error but through the html
-            document.getElementById('sectionDetails').innerHTML = '<div><h1 class="error">Error</h1><p>Something went wrong with the server connection.</p></div>';
+            document.getElementById('main').innerHTML = '<div><h1 class="error">Error</h1><p>Something went wrong with the server connection.</p></div>';
         });
 }
 
@@ -39,25 +39,27 @@ function renderSongDetails(song) {
     console.log(song);
     
     title = document.getElementById('name')
-    title.innerHTML = song.name;
+    title.innerHTML = song.name
     section = document.getElementById('sectionDetails');
 
     section.innerHTML = `
-    <div class="dataContainer">
-        <h2>Duration</h2>
-        <p>${song.duration}</p>
-    </div>
-    <div class="dataContainer">
-        <h2>Artist name</h2>
-        <p>${song.artistName}</p>
-    </div>
-    <div class="dataContainer">
-        <h2>Album name</h2>
-        <p>${song.albumName}</p>
-    </div>
-    <div class="dataContainer">
-        <h2>Release date</h2>
-        <p>${song.releaseDate}</p>
+    <div class="usualDataContainer">
+        <div class="dataContainer">
+            <h2>Duration</h2>
+            <p id="duration" class="original-view">${song.duration}</p>
+        </div>
+        <div class="dataContainer">
+            <h2>Artist name</h2>
+            <p id="artistName" class="original-view">${song.artistName}</p>
+        </div>
+        <div class="dataContainer">
+            <h2>Album name</h2>
+            <p id="albumName" class="original-view">${song.albumName}</p>
+        </div>
+        <div class="dataContainer">
+            <h2>Release date</h2>
+            <p id="releaseDate" class="original-view">${song.releaseDate}</p>
+        </div>
     </div>
 `;
 

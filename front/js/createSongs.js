@@ -15,7 +15,7 @@ function createSong() {
             switch (paramName) {
 
                 case "name":
-                    paramValue = checkText(paramValue);
+                    paramValue = checkText(paramValue,true);
                     paramValue.message = paramValue.message + '. Refering to the song name.'
                     break;
 

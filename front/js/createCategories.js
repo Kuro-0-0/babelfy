@@ -14,7 +14,7 @@ function createCategory() {
 
             switch (paramName) {
                 case "name":
-                    paramValue = checkText(paramValue);
+                    paramValue = checkText(paramValue,true);
                     break;
                 default:
                     break;

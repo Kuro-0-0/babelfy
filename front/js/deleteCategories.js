@@ -26,7 +26,7 @@ function deleteCategory() {
 
         .then(text => {
             showPopUp(estado,text)
-            window.location.href = 'CategoriesList.html'
+            getAllCategories()
         })
 
         .catch(error => {
