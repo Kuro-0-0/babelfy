@@ -6,13 +6,6 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-
-import com.babel.babelfy.dto.song.SongDTO;
 import com.babel.babelfy.dto.song.SongDTOResponseGetAll;
 import com.babel.babelfy.dto.song.SongDtoRequestCreate;
 
@@ -21,11 +14,7 @@ import com.babel.babelfy.model.Song;
 import com.babel.babelfy.repository.SongRepository;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @RequiredArgsConstructor
 @Service
