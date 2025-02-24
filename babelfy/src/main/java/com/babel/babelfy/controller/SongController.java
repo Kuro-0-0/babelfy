@@ -1,19 +1,17 @@
 package com.babel.babelfy.controller;
 
 import java.util.List;
+
+import com.babel.babelfy.dto.song.SongDTORequestUpdate;
 import lombok.RequiredArgsConstructor;
-import com.babel.babelfy.dto.song.*;
+
+import com.babel.babelfy.dto.song.SongDTOResponseDetails;
+import com.babel.babelfy.dto.song.SongDTOResponseGetAll;
+import com.babel.babelfy.dto.song.SongDtoRequestCreate;
 import com.babel.babelfy.service.SongService;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @RequestMapping("/songs")
 @RestController
@@ -37,8 +35,7 @@ public class SongController {
         return songService.add(sDTO);
     }
 
-    @DeleteMapping("/{id}")
-    public String delete(@PathVariable long id){
-        return songService.delete(id);
-    }
+    @PutMapping
+    public ResponseEntity<String> update(@RequestBody SongDTORequestUpdate sDTO) {return songService.update(sDTO);}
+
 }
