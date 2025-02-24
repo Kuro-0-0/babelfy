@@ -86,12 +86,12 @@ async function renderSongs(songs) {
     });
 
   } else {
-    showPopUp('Error', 'There are no songs, please create a new one.')
+    showPopUp('Advise', 'There are no songs, please create a new one.')
 
     list = document.getElementById('ListSection')
     div = document.createElement("div")
     div.innerHTML =
-      "<h1 class='error'>ERROR</h1>" +
+      "<h1 class='error'>Advise</h1>" +
       "<p>There are no songs, please create a new one.</p>"
       
     list.appendChild(div)

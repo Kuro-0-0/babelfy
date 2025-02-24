@@ -6,12 +6,26 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.babel.babelfy.dto.song.SongDTO;
 import com.babel.babelfy.dto.song.SongDTOResponseGetAll;
 import com.babel.babelfy.dto.song.SongDtoRequestCreate;
+
+import com.babel.babelfy.dto.song.SongDTOResponseDetails;
 import com.babel.babelfy.model.Song;
 import com.babel.babelfy.repository.SongRepository;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -25,7 +39,7 @@ public class SongService {
         List<Song> list = songRepository.findByName(newSong.getName());
         boolean isHere=false;
         if(list.isEmpty()){
-            
+
             songRepository.save(newSong);
             response="This song was created successfully";
         }else {
@@ -57,6 +71,7 @@ public class SongService {
             response="There is not a song with such id";
         }
 
+
         return response;
     }
 
@@ -73,5 +88,26 @@ public class SongService {
         }
         return respuesta;
 
+    }
+
+    public ResponseEntity<SongDTOResponseDetails> getDetails(long id) {
+
+        ResponseEntity<SongDTOResponseDetails> response;
+
+        try {
+            Song s;
+            s = songRepository.findById(id).orElse(null);
+
+            if (s != null) {
+                response = ResponseEntity.ok().body(SongDTOResponseDetails.songToCSongDTO(s));
+            } else {
+                response = ResponseEntity.badRequest().body(null);
+            }
+
+        }
+        catch (Exception e) {
+            response = ResponseEntity.internalServerError().body(null);
+        }
+        return response;
     }
 }
