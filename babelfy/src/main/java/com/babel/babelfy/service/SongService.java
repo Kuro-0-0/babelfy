@@ -1,12 +1,18 @@
 package com.babel.babelfy.service;
 
 import com.babel.babelfy.dto.song.*;
-
-import com.babel.babelfy.model.Song;
-import com.babel.babelfy.repository.SongRepository;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.babel.babelfy.dto.song.SongDTOResponseGetAll;
+import com.babel.babelfy.dto.song.SongDtoRequestCreate;
+
+import com.babel.babelfy.dto.song.SongDTOResponseDetails;
+import com.babel.babelfy.model.Song;
+import com.babel.babelfy.repository.SongRepository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +21,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
 @RequiredArgsConstructor
+@Service
 public class SongService {
 
     private final SongRepository songRepository;
@@ -26,9 +32,6 @@ public class SongService {
         Song newSong = SongDtoRequestCreate.SongDtoToSong(cDTO);
         List<Song> list = songRepository.findByName(newSong.getName());
         boolean isHere=false;
-
-        System.out.println(list);
-        System.out.println(newSong);
         if(list.isEmpty()){
 
             songRepository.save(newSong);
@@ -51,6 +54,17 @@ public class SongService {
 
         return response;
     }
+    public String delete(long id){
+        Song s=songRepository.findById(id).orElse(null);
+        String response="";
+        if(s!=null){
+            songRepository.delete(s);
+            response="This song was deleted successfully";
+        }else{
+            response="There is not a song with such id";
+        }
+
+
 
     public ResponseEntity<List<SongDTOResponseGetAll>> getAll() {
         ResponseEntity<List<SongDTOResponseGetAll>> respuesta;

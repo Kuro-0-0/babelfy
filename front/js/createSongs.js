@@ -16,14 +16,27 @@ function createSong() {
 
                 case "name":
                     paramValue = checkText(paramValue);
+                    paramValue.message = paramValue.message + '. Refering to the song name.'
                     break;
 
                 case "artistName":
                     paramValue = checkText(paramValue);
+                    paramValue.message = paramValue.message + '. Refering to the artist name.'
                     break;
 
                 case "albumName":
                     paramValue = checkText(paramValue);
+                    paramValue.message = paramValue.message + '. Refering to the album name.'
+                    break;
+                case "duration":
+                    if(paramValue<=0||paramValue==null){
+                        paramValue = new Error ('You need to add a valid duration')
+                    }
+                    break;
+                case "releaseDate":
+                    if(paramValue<=0||paramValue==null){
+                        paramValue = new Error ('You need to add a release date')
+                    }
                     break;
 
                 default:
