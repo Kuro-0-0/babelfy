@@ -6,7 +6,7 @@ section#sectionDetails {
     display: flex;
     flex-wrap: wrap;
     text-align: center;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     width: fit-content;
     margin: 0 auto;
