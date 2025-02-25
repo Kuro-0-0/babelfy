@@ -3,6 +3,7 @@ package com.babel.babelfy.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.babel.babelfy.dto.category.*;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
@@ -10,11 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.babel.babelfy.model.Category;
 import com.babel.babelfy.repository.CategoryRepository;
-
-import com.babel.babelfy.dto.category.CategoryDtoRequestCreate;
-import com.babel.babelfy.dto.category.CategoryDtoResponseDetails;
-import com.babel.babelfy.dto.category.CategoryDtoResponseList;
-import com.babel.babelfy.dto.category.CategoryDtoRequestUpdate;
 
 @Service
 @RequiredArgsConstructor
@@ -103,4 +99,25 @@ public class CategoryService {
         return response;
     }
 
+    public ResponseEntity<List<CategoryDtoResponseGetIDName>> getIDName() {
+        ResponseEntity<List<CategoryDtoResponseGetIDName>> response;
+        List<CategoryDtoResponseGetIDName> categoryDtoResponseGetIDNameList = new ArrayList<CategoryDtoResponseGetIDName>();
+        List<Category> categoryList = new ArrayList<Category>();
+        try {
+
+            categoryList = categoryRepository.findAll();
+            if (!categoryList.isEmpty()) {
+                for (Category c : categoryList) {
+                    categoryDtoResponseGetIDNameList.add(CategoryDtoResponseGetIDName.categoryToCategoryDto(c));
+                }
+                response = ResponseEntity.ok().body(categoryDtoResponseGetIDNameList);
+            } else {
+                response = ResponseEntity.badRequest().body(null);
+            }
+
+        } catch (Exception e) {
+            response  = ResponseEntity.internalServerError().body(null);
+        }
+        return response;
+    }
 }
