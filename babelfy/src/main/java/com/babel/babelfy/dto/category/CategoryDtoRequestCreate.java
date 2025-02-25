@@ -12,7 +12,7 @@ public class CategoryDtoRequestCreate {
 
     // Helpers
 
-    public static Category categoryDTOToCategory(com.babel.babelfy.dto.category.CategoryDtoRequestCreate categoryDTO) {
+    public static Category categoryDtoToCategory(CategoryDtoRequestCreate categoryDTO) {
         return Category.builder()
                 .name(categoryDTO.getName())
                 .build();

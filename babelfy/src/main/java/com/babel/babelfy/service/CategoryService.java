@@ -42,7 +42,7 @@ public class CategoryService {
         try {
             List<Category> c = categoryRepository.findByName(cDTO.getName());
             if (c.isEmpty()) {
-                newCategory = CategoryDtoRequestCreate.categoryDTOToCategory(cDTO);
+                newCategory = CategoryDtoRequestCreate.categoryDtoToCategory(cDTO);
                 categoryRepository.save(newCategory);
                 response = ResponseEntity.ok("Category " + cDTO.getName() + " created.");
             } else {
