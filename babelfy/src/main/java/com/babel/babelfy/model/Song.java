@@ -22,6 +22,9 @@ public class Song {
     private String albumName;
     private LocalDate releaseDate;
 
+    @ManyToOne
+    private Category category;
+
     public Song(String name, int duration, String artistName, String albumName, LocalDate releaseDate) {
         this.name = name;
         this.duration = duration;

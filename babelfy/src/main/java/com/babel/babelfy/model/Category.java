@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -16,5 +18,8 @@ public class Category {
     private long id;
     
     private String name;
+
+    @OneToMany
+    private List<Song> songs;
 
 }

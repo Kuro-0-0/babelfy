@@ -77,3 +77,18 @@ function checkText(textContent,showable = false) {
 function moveToThumbnail() {
     window.location.href = 'thumbnail.html'
 }
+
+function getCategoryData() {
+    options = {
+        method: 'GET',
+    };
+
+    return fetch("http://localhost:9000/categories/names",options)
+    .then(data => {
+        console.log(data);
+        return data.json();
+    })
+    .catch(error => {
+        console.log(error);
+    })
+}

@@ -28,8 +28,6 @@ public class SongController {
     @GetMapping("/{id}")
     public ResponseEntity<SongDtoResponseDetails> getDetails(@PathVariable long id){return songService.getDetails(id);}
 
-
-
     @PostMapping("")
     public String create(@RequestBody SongDtoRequestCreate sDTO) {
         return songService.add(sDTO);
