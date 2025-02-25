@@ -3,6 +3,7 @@ package com.babel.babelfy.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.babel.babelfy.dto.category.*;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
@@ -47,7 +48,7 @@ public class CategoryService {
         try {
             List<Category> c = categoryRepository.findByName(cDTO.getName());
             if (c.isEmpty()) {
-                newCategory = CategoryDtoRequestCreate.categoryDTOToCategory(cDTO);
+                newCategory = CategoryDtoRequestCreate.categoryDtoToCategory(cDTO);
                 categoryRepository.save(newCategory);
                 response = ResponseEntity.ok("Category " + cDTO.getName() + " created.");
             } else {

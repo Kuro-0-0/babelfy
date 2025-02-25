@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -20,6 +22,6 @@ public class Category {
     private String name;
 
     @OneToMany
-    private List<Song> list;
+    private List<Song> songs;
 
 }

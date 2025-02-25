@@ -5,6 +5,8 @@ import com.babel.babelfy.dto.song.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.babel.babelfy.repository.CategoryRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -80,17 +82,17 @@ public class SongService {
     }
 
         public ResponseEntity<List<SongDtoResponseGetAll>> getAll() {
-            ResponseEntity<List<SongDtoResponseGetAll>> respuesta;
-            List<SongDtoResponseGetAll> songList = new ArrayList<SongDtoResponseGetAll>();
+            ResponseEntity<List<SongDtoResponseGetAll>> response;
+            List<SongDtoResponseGetAll> songList = new ArrayList<>();
             try {
                 for (Song s : songRepository.findAll()) {
                     songList.add(SongDtoResponseGetAll.songToSongDTO(s));
                 }
-                respuesta = ResponseEntity.ok().body(songList);
+                response = ResponseEntity.ok().body(songList);
             } catch (Exception e) {
-                respuesta = ResponseEntity.internalServerError().body(null);
+                response = ResponseEntity.internalServerError().body(null);
             }
-            return respuesta;
+            return response;
 
         }
 
@@ -114,23 +116,48 @@ public class SongService {
             return response;
         }
 
+        @Transactional
         public ResponseEntity<String> update (SongDtoRequestUpdate sDTO){
-            ResponseEntity<String> response;
+            ResponseEntity<String> response = ResponseEntity.internalServerError().body("Something went wrong while processing the data");
             Song modSong;
             try {
                 modSong = songRepository.findById(sDTO.getId()).orElse(null);
                 System.out.println(sDTO);
+                List<Song> artistSongs;
+                boolean find = false;
                 if (modSong != null) {
-                    modSong = SongDtoRequestUpdate.songDTOtoSong(sDTO);
-                    songRepository.save(modSong);
-                    response = ResponseEntity.ok().body("Song data updated");
+
+                    artistSongs = songRepository.findByArtistName(modSong.getArtistName());
+
+                    if (!artistSongs.isEmpty()) {
+                        for (Song s : artistSongs) {
+                            if (!find && s.getName().equalsIgnoreCase(modSong.getName()) && s.getId() != sDTO.getId()) {
+                                find = true;
+                                response = ResponseEntity.badRequest().body("There is already song of that artist with that name.");
+                            }
+                        }
+
+                        if (!find) {
+                            modSong = songDTOtoSong(sDTO);
+                            System.out.println(modSong);
+                            songRepository.save(modSong);
+                            response = ResponseEntity.ok().body("Song data updated");
+                        }
+
+                    } else {
+                        modSong = songDTOtoSong(sDTO);
+                        songRepository.save(modSong);
+                        response = ResponseEntity.ok().body("Song data updated");
+                    }
                 } else {
                     response = ResponseEntity.badRequest().body("That song doesn't exist");
                 }
 
             } catch (Exception e) {
+                System.out.println(e);
                 response = ResponseEntity.internalServerError().body("Something went wrong on the Server side");
             }
             return response;
         }
-    }
+
+}

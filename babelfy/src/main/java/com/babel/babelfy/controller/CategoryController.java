@@ -2,6 +2,7 @@ package com.babel.babelfy.controller;
 
 import java.util.List;
 
+import com.babel.babelfy.dto.category.*;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
@@ -56,7 +57,7 @@ public class CategoryController {
     public String change(@RequestBody CategoryDtoRequestUpdate request){
         return categoryService.change(request);
     }
-    
+
     @GetMapping("/names")
     public ResponseEntity<List<CategoryDtoResponseGetIDName>> getIDName() {
         return categoryService.getIDName();

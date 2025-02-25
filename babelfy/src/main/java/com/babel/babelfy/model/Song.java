@@ -25,6 +25,9 @@ public class Song {
     @ManyToOne
     private Category category;
 
+    @ManyToOne
+    private Category category;
+
     
     public Song(String name, int duration, String artistName, String albumName, LocalDate releaseDate,
             Category category) {
