@@ -40,9 +40,50 @@ var categoryName;
 
 
   function renderCategoryDetails(category) {
+    console.log(category);
+    
     //This gets an objects in the html with the Id 'name'
     var title = document.getElementById('name');
+    var div = document.getElementById('songsTable');
+
+    if(category.songs.length<=0){
+      div.innerHTML = ''
+      div.innerHTML =       
+      "<h1 class='error'>Comment</h1>" +
+      "<p>This category does not have any song</p>"
+    }else{
+      div.innerHTML = ''
+      var table = document.createElement('table');
+      var tbody = document.createElement('tbody');
+      table.innerHTML =
+          `<thead>
+          <tr>
+            <th>Name</th>
+            <th>Duration</th>
+            <th>Artist</th>
+            <th>Album</th>
+            <th>Release Date</th>
+            <th></th>
+          </tr>
+          </thead>`
+          div.appendChild(table);
+          table.appendChild(tbody);
+      category.songs.forEach(function (song){
+        var row = document.createElement('tr');
+        row.innerHTML = `
+          
+          <td>${song.name}</td>
+          <td>${song.duration}</td>
+          <td>${song.artistName}</td>
+          <td>${song.albumName}</td>
+          <td>${song.releaseDate}</td>
+          <td><a href="" title="Delete from category"><i class="bi bi-x-square-fill"></i></a></td>
+        `
+        
+        tbody.appendChild(row);
+      })
     
+    }
     //This 'category.name' is from the .json that we got from before
     categoryName=category.name;
     title.innerHTML = categoryName + "  ";
@@ -53,6 +94,7 @@ var categoryName;
 
     //This links the objects, saying that, whats in (), is inside of the other one
     title.appendChild(pen);
+    
   }
 
   function showChanger(){

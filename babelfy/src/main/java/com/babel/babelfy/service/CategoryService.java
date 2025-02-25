@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import com.babel.babelfy.model.Category;
 import com.babel.babelfy.repository.CategoryRepository;
 
+import jakarta.transaction.Transactional;
+
 import com.babel.babelfy.dto.category.CategoryDtoRequestCreate;
 import com.babel.babelfy.dto.category.CategoryDtoResponseDetails;
 import com.babel.babelfy.dto.category.CategoryDtoResponseGetIDName;
@@ -36,6 +38,7 @@ public class CategoryService {
         return list;
     }
 
+    @Transactional
     public CategoryDtoResponseDetails showDetails(long id) {
         Category c = categoryRepository.findById(id).orElse(null);
         return CategoryDtoResponseDetails.categoryToCategoryDTO(c);

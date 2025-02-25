@@ -27,7 +27,6 @@ public class SongService {
 
     @Transactional
     public Song SongDtoToSong(SongDtoRequestCreate songDto){
-        System.out.println(songDto);
         Category c=categoryRepository.findById(songDto.getIdCategory()).orElse(null);
         return Song.builder()
                 .name(songDto.getName())
@@ -40,6 +39,19 @@ public class SongService {
     }
 
     @Transactional
+    public Song songDtoToSong(SongDtoRequestUpdate sDTO) {
+        return Song.builder()
+                .id(sDTO.getId())
+                .name(sDTO.getName())
+                .duration(sDTO.getDuration())
+                .artistName(sDTO.getArtistName())
+                .albumName(sDTO.getArtistName())
+                .releaseDate(sDTO.getReleaseDate())
+                .category(categoryRepository.findById(sDTO.getCategoryId()).orElse(null))
+                .build();
+    }
+
+    @Transactional
     public String add(SongDtoRequestCreate cDTO) {
         String response = "";
         Song newSong = SongDtoToSong(cDTO);
@@ -47,7 +59,8 @@ public class SongService {
         boolean isHereArtist = false;
         if (list.isEmpty()) {
             songRepository.save(newSong);
-            newSong.getCategory().getList().add(newSong);
+            newSong.getCategory().getSongs().add(newSong);
+            categoryRepository.save(newSong.getCategory());
             response = "This song was successfully created";
         } else {
 
@@ -60,7 +73,7 @@ public class SongService {
                 response = "This artist already has a song named like this";
             } else {
                 songRepository.save(newSong);
-                newSong.getCategory().getList().add(newSong);
+                newSong.getCategory().getSongs().add(newSong);
                 response = "This song was successfully created ";
             }
 
@@ -122,7 +135,6 @@ public class SongService {
             Song modSong;
             try {
                 modSong = songRepository.findById(sDTO.getId()).orElse(null);
-                System.out.println(sDTO);
                 List<Song> artistSongs;
                 boolean find = false;
                 if (modSong != null) {
@@ -138,14 +150,13 @@ public class SongService {
                         }
 
                         if (!find) {
-                            modSong = songDTOtoSong(sDTO);
-                            System.out.println(modSong);
+                            modSong = songDtoToSong(sDTO);
                             songRepository.save(modSong);
                             response = ResponseEntity.ok().body("Song data updated");
                         }
 
                     } else {
-                        modSong = songDTOtoSong(sDTO);
+                        modSong = songDtoToSong(sDTO);
                         songRepository.save(modSong);
                         response = ResponseEntity.ok().body("Song data updated");
                     }
@@ -154,7 +165,6 @@ public class SongService {
                 }
 
             } catch (Exception e) {
-                System.out.println(e);
                 response = ResponseEntity.internalServerError().body("Something went wrong on the Server side");
             }
             return response;
