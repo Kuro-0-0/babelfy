@@ -1,5 +1,7 @@
 package com.babel.babelfy.model;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 import lombok.*;
@@ -19,7 +21,7 @@ public class Category {
     
     private String name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "category")
     private List<Song> songs;
 
 }

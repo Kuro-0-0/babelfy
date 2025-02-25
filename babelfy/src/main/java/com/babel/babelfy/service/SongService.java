@@ -10,13 +10,12 @@ import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.babel.babelfy.dto.song.SongDtoResponseGetAll;
-import com.babel.babelfy.dto.song.SongDtoRequestCreate;
-
-import com.babel.babelfy.dto.song.SongDtoResponseDetails;
+import com.babel.babelfy.model.Category;
 import com.babel.babelfy.model.Song;
+import com.babel.babelfy.repository.CategoryRepository;
 import com.babel.babelfy.repository.SongRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -27,10 +26,20 @@ public class SongService {
     private final CategoryRepository categoryRepository;
 
     @Transactional
-    public Song songDTOtoSong(SongDtoRequestUpdate sDTO) {
+    public Song SongDtoToSong(SongDtoRequestCreate songDto){
+        Category c=categoryRepository.findById(songDto.getIdCategory()).orElse(null);
+        return Song.builder()
+                .name(songDto.getName())
+                .duration(songDto.getDuration())
+                .artistName(songDto.getArtistName())
+                .albumName(songDto.getAlbumName())
+                .releaseDate(songDto.getReleaseDate())
+                .category(c)
+                .build();
+    }
 
-        System.out.println(sDTO);
-
+    @Transactional
+    public Song songDtoToSong(SongDtoRequestUpdate sDTO) {
         return Song.builder()
                 .id(sDTO.getId())
                 .name(sDTO.getName())
@@ -42,26 +51,29 @@ public class SongService {
                 .build();
     }
 
+    @Transactional
     public String add(SongDtoRequestCreate cDTO) {
         String response = "";
-        Song newSong = SongDtoRequestCreate.SongDtoToSong(cDTO);
+        Song newSong = SongDtoToSong(cDTO);
         List<Song> list = songRepository.findByName(newSong.getName());
-        boolean isHere = false;
+        boolean isHereArtist = false;
         if (list.isEmpty()) {
-
             songRepository.save(newSong);
+            newSong.getCategory().getSongs().add(newSong);
+            categoryRepository.save(newSong.getCategory());
             response = "This song was successfully created";
         } else {
 
-            for (int i = 0; i < list.size() && !isHere; i++) {
+            for (int i = 0; i < list.size() && !isHereArtist; i++) {
                 if (list.get(i).getArtistName().equalsIgnoreCase(newSong.getArtistName())) {
-                    isHere = true;
+                    isHereArtist = true;
                 }
             }
-            if (isHere) {
+            if (isHereArtist) {
                 response = "This artist already has a song named like this";
             } else {
                 songRepository.save(newSong);
+                newSong.getCategory().getSongs().add(newSong);
                 response = "This song was successfully created ";
             }
 
@@ -123,7 +135,6 @@ public class SongService {
             Song modSong;
             try {
                 modSong = songRepository.findById(sDTO.getId()).orElse(null);
-                System.out.println(sDTO);
                 List<Song> artistSongs;
                 boolean find = false;
                 if (modSong != null) {
@@ -139,14 +150,13 @@ public class SongService {
                         }
 
                         if (!find) {
-                            modSong = songDTOtoSong(sDTO);
-                            System.out.println(modSong);
+                            modSong = songDtoToSong(sDTO);
                             songRepository.save(modSong);
                             response = ResponseEntity.ok().body("Song data updated");
                         }
 
                     } else {
-                        modSong = songDTOtoSong(sDTO);
+                        modSong = songDtoToSong(sDTO);
                         songRepository.save(modSong);
                         response = ResponseEntity.ok().body("Song data updated");
                     }
@@ -155,7 +165,6 @@ public class SongService {
                 }
 
             } catch (Exception e) {
-                System.out.println(e);
                 response = ResponseEntity.internalServerError().body("Something went wrong on the Server side");
             }
             return response;
