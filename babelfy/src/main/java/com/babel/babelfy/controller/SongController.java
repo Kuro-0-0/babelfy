@@ -41,4 +41,9 @@ public class SongController {
         return songService.delete(id);
     }
 
+    @DeleteMapping("/category/{id}")
+    public ResponseEntity<String> deleteCategory(@PathVariable long id) {
+        return songService.deleteCategory(id);
+    }
+
 }

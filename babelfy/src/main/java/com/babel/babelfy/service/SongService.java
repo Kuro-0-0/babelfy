@@ -170,4 +170,26 @@ public class SongService {
             return response;
         }
 
+    public ResponseEntity<String> deleteCategory(long id) {
+
+        ResponseEntity<String> response;
+        Song song;
+
+        try {
+            song = songRepository.findById(id).orElse(null);
+            if (song != null) {
+                song.setCategory(null);
+                songRepository.save(song);
+                response = ResponseEntity.ok().body("Category detachment successful");
+            } else {
+                response = ResponseEntity.badRequest().body("The song selected, doesnt exists.");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            response = ResponseEntity.internalServerError().body("Something went wrong on the server side.");
+        }
+
+        return response;
+
+    }
 }

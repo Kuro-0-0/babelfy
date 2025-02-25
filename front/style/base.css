@@ -149,3 +149,6 @@ button.options:hover {
     background-color: #555B6E;
     cursor: pointer;
 }
+.pointer {
+    cursor: pointer;
+}
