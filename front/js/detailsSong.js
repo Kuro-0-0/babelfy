@@ -41,7 +41,7 @@ function renderSongDetails(song) {
     title.innerHTML = song.name
     section = document.getElementById('sectionDetails');
     console.log(song);
-    
+
     section.innerHTML = `
     <div class="usualDataContainer">
         <div class="dataContainer">
@@ -63,12 +63,16 @@ function renderSongDetails(song) {
         
         <div class="dataContainer">
             <h2>Category</h2>
-            <a id="categoryName" class="original-view">${song.categoryName}</a>
+            <a id="categoryName" onclick="openCategoryDetails(${song.categoryID})" class="pointer original-view">${song.categoryName}</a>
         </div>
     </div>
 `;
 
+}
 
+function openCategoryDetails(id) {
+    localStorage.setItem("idCategory",id)
+    window.location.href = "CategoryDetails.html"
 }
 
 function showChanger() {

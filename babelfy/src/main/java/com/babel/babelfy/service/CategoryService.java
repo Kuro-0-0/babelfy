@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.babel.babelfy.dto.category.*;
+import com.babel.babelfy.model.Song;
+import com.babel.babelfy.repository.SongRepository;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,8 @@ import com.babel.babelfy.dto.category.CategoryDtoRequestUpdate;
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
+    private final SongRepository songRepository;
+
 
     public List<CategoryDtoResponseList> listAll() {
         List<CategoryDtoResponseList> list = new ArrayList<>();
@@ -86,6 +90,7 @@ public class CategoryService {
         return response;
     }
 
+    @Transactional
     public ResponseEntity<String> delete(long id) {
         ResponseEntity<String> response;
         Category c;
@@ -93,6 +98,11 @@ public class CategoryService {
         try {
             c = categoryRepository.findById(id).orElse(null);
             if (c != null) {
+
+                for (Song s : c.getSongs()) {
+                    s.setCategory(null);
+                    songRepository.save(s);
+                }
                 categoryRepository.delete(c);
                 response = ResponseEntity.ok("Category " + c.getName() + " deleted");
             } else {
@@ -101,6 +111,7 @@ public class CategoryService {
             }
         }
         catch (Exception e) {
+            System.out.println(e);
             response = ResponseEntity.internalServerError().body
             ("Something went wrong while deleting the category");
         }
