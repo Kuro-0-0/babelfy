@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class CategoryDtoResponseDetails {
 
     private String name;
+    
 
     public static CategoryDtoResponseDetails categoryToCategoryDTO(Category c) {
         return new CategoryDtoResponseDetails(c.getName());

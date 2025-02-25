@@ -8,13 +8,12 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.babel.babelfy.dto.song.SongDtoResponseGetAll;
-import com.babel.babelfy.dto.song.SongDtoRequestCreate;
-
-import com.babel.babelfy.dto.song.SongDtoResponseDetails;
+import com.babel.babelfy.model.Category;
 import com.babel.babelfy.model.Song;
+import com.babel.babelfy.repository.CategoryRepository;
 import com.babel.babelfy.repository.SongRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -22,27 +21,44 @@ import lombok.RequiredArgsConstructor;
 public class SongService {
 
     private final SongRepository songRepository;
+    private final CategoryRepository categoryRepository;
 
+    @Transactional
+    public Song SongDtoToSong(SongDtoRequestCreate songDto){
+        System.out.println(songDto);
+        Category c=categoryRepository.findById(songDto.getIdCategory()).orElse(null);
+        return Song.builder()
+                .name(songDto.getName())
+                .duration(songDto.getDuration())
+                .artistName(songDto.getArtistName())
+                .albumName(songDto.getAlbumName())
+                .releaseDate(songDto.getReleaseDate())
+                .category(c)
+                .build();
+    }
+
+    @Transactional
     public String add(SongDtoRequestCreate cDTO) {
         String response = "";
-        Song newSong = SongDtoRequestCreate.SongDtoToSong(cDTO);
+        Song newSong = SongDtoToSong(cDTO);
         List<Song> list = songRepository.findByName(newSong.getName());
-        boolean isHere = false;
+        boolean isHereArtist = false;
         if (list.isEmpty()) {
-
             songRepository.save(newSong);
+            newSong.getCategory().getList().add(newSong);
             response = "This song was successfully created";
         } else {
 
-            for (int i = 0; i < list.size() && !isHere; i++) {
+            for (int i = 0; i < list.size() && !isHereArtist; i++) {
                 if (list.get(i).getArtistName().equalsIgnoreCase(newSong.getArtistName())) {
-                    isHere = true;
+                    isHereArtist = true;
                 }
             }
-            if (isHere) {
+            if (isHereArtist) {
                 response = "This artist already has a song named like this";
             } else {
                 songRepository.save(newSong);
+                newSong.getCategory().getList().add(newSong);
                 response = "This song was successfully created ";
             }
 
