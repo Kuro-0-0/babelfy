@@ -1,8 +1,11 @@
 package com.babel.babelfy.model;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 import lombok.*;
+
 
 @Entity
 @Data
@@ -16,5 +19,9 @@ public class Category {
     private long id;
     
     private String name;
+    private String color;
+
+    @OneToMany(mappedBy = "category")
+    private List<Song> songs;
 
 }

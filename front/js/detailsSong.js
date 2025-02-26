@@ -4,14 +4,24 @@ var songName;
 //This event waits for the content of the page to load to make sure the function works okay 
 document.addEventListener('DOMContentLoaded', function () {
 
-    showSongDetails();
+    showSongDetails()
+    .then(data => {
+        if (data.categoryID == -1) {
+            console.log(data);
+            
+            categoryName = document.getElementById("categoryName")
+            categoryName.classList.remove("pointer")
+            categoryName.classList.remove("categoryHover")
+            categoryName.setAttribute('onclick','')
+        }
+    })
 
 });
 
-function showSongDetails() {
+async function showSongDetails() {
     const apiUrl = 'http://localhost:9000/songs/' + localStorage.getItem('idSong');
 
-    fetch(apiUrl)
+    return fetch(apiUrl)
         .then(function (response) {
             if (!response.ok) {
                 //This error is thrown so that (if an error occurs) gets to the .catch
@@ -23,6 +33,7 @@ function showSongDetails() {
 
         .then(function (song) {
             renderSongDetails(song);
+            return song;
         })
 
         //This .catch is here to show through the console any errors that could appear 
@@ -40,6 +51,7 @@ function renderSongDetails(song) {
     title = document.getElementById('name')
     title.innerHTML = song.name
     section = document.getElementById('sectionDetails');
+    console.log(song);
 
     section.innerHTML = `
     <div class="usualDataContainer">
@@ -48,21 +60,30 @@ function renderSongDetails(song) {
             <p id="duration" class="original-view">${song.duration}</p>
         </div>
         <div class="dataContainer">
-            <h2>Artist name</h2>
+            <h2>Artist</h2>
             <p id="artistName" class="original-view">${song.artistName}</p>
         </div>
         <div class="dataContainer">
-            <h2>Album name</h2>
+            <h2>Album</h2>
             <p id="albumName" class="original-view">${song.albumName}</p>
         </div>
         <div class="dataContainer">
             <h2>Release date</h2>
             <p id="releaseDate" class="original-view">${song.releaseDate}</p>
         </div>
+        
+        <div class="dataContainer">
+            <h2>Category</h2>
+            <a id="categoryName" onclick="openCategoryDetails(${song.categoryID})" class="pointer categoryHover original-view">${song.categoryName}</a>
+        </div>
     </div>
 `;
 
+}
 
+function openCategoryDetails(id) {
+    localStorage.setItem("idCategory",id)
+    window.location.href = "CategoryDetails.html"
 }
 
 function showChanger() {

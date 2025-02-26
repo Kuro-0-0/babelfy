@@ -21,15 +21,19 @@ public class Song {
     private String artistName;
     private String albumName;
     private LocalDate releaseDate;
+    private String color;
 
-    public Song(String name, int duration, String artistName, String albumName, LocalDate releaseDate) {
+    @ManyToOne
+    private Category category;
+    
+    public Song(String name, int duration, String artistName, String albumName, LocalDate releaseDate,
+            Category category) {
         this.name = name;
         this.duration = duration;
         this.artistName = artistName;
         this.albumName = albumName;
         this.releaseDate = releaseDate;
+        this.category = category;
     }
-
-    
 
 }

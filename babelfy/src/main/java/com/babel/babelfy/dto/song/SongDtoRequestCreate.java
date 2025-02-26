@@ -14,16 +14,9 @@ public class SongDtoRequestCreate {
     private String artistName;
     private String albumName;
     private LocalDate releaseDate;
+    private long idCategory;
 
-    public static Song SongDtoToSong(SongDtoRequestCreate songDto){
-        return Song.builder()
-                .name(songDto.getName())
-                .duration(songDto.getDuration())
-                .artistName(songDto.getArtistName())
-                .albumName(songDto.getAlbumName())
-                .releaseDate(songDto.getReleaseDate())
-                .build();
-    }
+    
     public static SongDtoResponseGetAll songToSongDTO(Song s) {
         return SongDtoResponseGetAll.builder()
                 .id(s.getId())

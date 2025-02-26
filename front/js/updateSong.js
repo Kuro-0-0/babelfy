@@ -42,7 +42,7 @@ function updater(confirmed=false,reloading = false) {
                 seccion.innerHTML = `
             <div id="nameContainer">
                 <div class="dataContainer">
-                    <h2>Song Name</h2>
+                    <h2>Name</h2>
                     <p id="name" class="original-view">${document.getElementById("name").textContent}</p>
                 </div>
             </div>
@@ -52,18 +52,41 @@ function updater(confirmed=false,reloading = false) {
                     const element = ps[i];
                     element.style.display = "none"
                     divContainer = element.closest("div")
-                    input = document.createElement("input")
+
+                    if (element.id == "categoryName") {
+                        input = document.createElement("select")
+                        input.name = "categoryId"
+                    } else {
+                        input = document.createElement("input")
+                        input.value = element.textContent
+                        input.name = element.id
+                    }
+
                     input.classList.add("false-view")
                     input.classList.add("dataAPI")
-                    input.value = element.textContent
     
-                    input.name = element.id
     
                     if (element.id == "releaseDate") {
                         input.type = "date"
                     } else if (element.id == "duration") {
                         input.type = "number"
+                    } else if (element.id == "categoryName") {
+                        getCategoryData()
+                        .then(data => {
+                            for (let i = 0; i < data.length; i++) {
+                                const elementOption = data[i];
+                                option = document.createElement("option")
+                                option.value = elementOption.id
+                                option.textContent = elementOption.name
+                                input.appendChild(option)  
+
+                                if (element.textContent == elementOption.name ) {
+                                    input.value = elementOption.id;
+                                }
+                            }
+                        })     
                     }
+
                     divContainer.appendChild(input)
                 }
             } else {
