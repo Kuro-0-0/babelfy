@@ -22,7 +22,7 @@ public class Song {
     private String artistName;
     private String albumName;
     private LocalDate releaseDate;
-    private List<Integer> color;
+    private String color;
 
     @ManyToOne
     private Category category;

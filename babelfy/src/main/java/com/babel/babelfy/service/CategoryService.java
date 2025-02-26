@@ -57,10 +57,14 @@ public class CategoryService {
             List<Category> c = categoryRepository.findByName(cDTO.getName());
             if (c.isEmpty()) {
                 newCategory = CategoryDtoRequestCreate.categoryDtoToCategory(cDTO);
-                Random r = new Random();
-                for (int i = 0; i < 4; i++) {
-                    newCategory.getColor().add(r.nextInt(255)+1);
+                String values[]= {"A","B","C","D","E","F","0","1","2","3","4","5","6","7","8","9"};
+                String color="";
+                Random rnd = new Random();
+                
+                for (int i = 0; i < values.length; i++) {
+                    color=color+values[rnd.nextInt(values.length-1)+1];
                 }
+                newCategory.setColor(color);
                 categoryRepository.save(newCategory);
                 response = ResponseEntity.ok("Category " + cDTO.getName() + " created.");
             } else {
@@ -68,6 +72,7 @@ public class CategoryService {
                 ("You can't create this category because there is already one with that name.");
             }
         } catch (Exception e) {
+            System.out.println(e);
             response = ResponseEntity.internalServerError().body
             ("Something went wrong while creating the category");
         }

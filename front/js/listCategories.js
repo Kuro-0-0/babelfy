@@ -85,6 +85,8 @@ async function renderCategories(categories) {
 
       card.appendChild(content);
       container.appendChild(card);
+      console.log(category);
+      
 
       document.getElementById("img"+category.id).style.backgroundColor = `rgba(${category.color[0]},${category.color[1]},${category.color[2]},0.57)`
     });

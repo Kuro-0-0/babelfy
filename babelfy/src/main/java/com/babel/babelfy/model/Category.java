@@ -20,7 +20,7 @@ public class Category {
     private long id;
     
     private String name;
-    private List<Integer> color;
+    private String color;
 
     @OneToMany(mappedBy = "category")
     private List<Song> songs;

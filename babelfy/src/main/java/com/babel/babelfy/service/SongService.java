@@ -13,10 +13,8 @@ import org.springframework.stereotype.Service;
 
 import com.babel.babelfy.model.Category;
 import com.babel.babelfy.model.Song;
-import com.babel.babelfy.repository.CategoryRepository;
 import com.babel.babelfy.repository.SongRepository;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -59,10 +57,14 @@ public class SongService {
         List<Song> list = songRepository.findByName(newSong.getName());
         boolean isHereArtist = false;
         if (list.isEmpty()) {
-            Random r = new Random();
-                for (int i = 0; i < 4; i++) {
-                    newSong.getColor().add(r.nextInt(255)+1);
+            String values[]= {"A","B","C","D","E","F","0","1","2","3","4","5","6","7","8","9"};
+                String color="";
+                Random rnd = new Random();
+                
+                for (int i = 0; i < values.length; i++) {
+                    color=color+values[rnd.nextInt(values.length-1)+1];
                 }
+                newSong.setColor(color);
             songRepository.save(newSong);
             newSong.getCategory().getSongs().add(newSong);
             categoryRepository.save(newSong.getCategory());
@@ -123,7 +125,7 @@ public class SongService {
             s = songRepository.findById(id).orElse(null);
 
             if (s != null) {
-                response = ResponseEntity.ok().body(SongDtoResponseDetails.songToSongDTO(s));
+                response = ResponseEntity.ok().body(SongDtoResponseDetails.songToCSongDTO(s));
             } else {
                 response = ResponseEntity.badRequest().body(null);
             }

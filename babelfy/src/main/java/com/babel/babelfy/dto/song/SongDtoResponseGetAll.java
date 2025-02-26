@@ -2,6 +2,8 @@ package com.babel.babelfy.dto.song;
 
 import java.util.List;
 
+import org.hibernate.engine.jdbc.connections.internal.ConnectionProviderInitiator.SettingConsumer;
+
 import com.babel.babelfy.model.Song;
 import lombok.Builder;
 import lombok.Data;
@@ -12,9 +14,10 @@ public class SongDtoResponseGetAll {
 
     private long id;
     private String name;
-    private List<Integer> color;
+    private String color;
 
     public static SongDtoResponseGetAll songToSongDTO(Song s) {
+        
         return SongDtoResponseGetAll.builder()
                 .id(s.getId())
                 .name(s.getName())
