@@ -101,10 +101,6 @@ function showCategoryOptions(){
         console.log(data)
     if (data.length > 0 && data){
         listoptions.textContent = ''
-        var firstOption = document.createElement('option');
-            firstOption.value = null
-            firstOption.textContent = 'None'
-            listoptions.appendChild(firstOption);
         data.forEach(function (category) {
             var option = document.createElement('option');
             option.value = category.id

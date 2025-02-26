@@ -56,13 +56,6 @@ function updater(confirmed=false,reloading = false) {
                     if (element.id == "categoryName") {
                         input = document.createElement("select")
                         input.name = "categoryId"
-
-                        option = document.createElement("option")
-                        option.value = "-1";
-                        option.textContent = "None"
-
-                        input.appendChild(option)
-
                     } else {
                         input = document.createElement("input")
                         input.value = element.textContent
