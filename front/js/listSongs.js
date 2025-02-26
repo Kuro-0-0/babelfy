@@ -78,12 +78,15 @@ async function renderSongs(songs) {
 
       var content = document.createElement('div');
       content.innerHTML =
-        '<div class="imagen">' + '</div>' +
-        '<i onclick="showActionBTN()" class="removeBTN song bi bi-x-square-fill"></i>' +
+      '<div class="imagen" id=img'+song.id+'>' + '</div>' +
+      '<i onclick="showActionBTN()" class="removeBTN song bi bi-x-square-fill"></i>' +
         '<p>' + song.name + '</p>'
 
       card.appendChild(content);
       container.appendChild(card);
+
+      document.getElementById("img"+song.id).style.backgroundColor = `rgba(${song.color[0]},${song.color[1]},${song.color[2]},${song.color[3]})`
+
     });
 
   } else {

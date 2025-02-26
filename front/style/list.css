@@ -9,7 +9,7 @@ main>section>a {
 main>section>a>div>.imagen {
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
-    background-color: #849cae83;
+    background-color: rgb(132, 156, 174);
     width: 100%;
 }
 
@@ -158,7 +158,7 @@ div.form {
                 margin-bottom: 5px;
             }
 
-            input {
+            input ,select{
                 color: #FAF9F9;
                 background-color: #555B6E;
                 border-radius: 0.4vh;
@@ -211,6 +211,9 @@ div.PopUpDelete {
     }
 
     #yesDelete {
+        color: green;
+    }
+    #yesDelete:hover {
         color: greenyellow;
     }
 }
