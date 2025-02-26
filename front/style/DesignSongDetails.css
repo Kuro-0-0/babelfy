@@ -68,3 +68,7 @@ div.PopUp {
 .btn-container {
     margin: 0 auto;
 }
+
+a#categoryName:hover {
+    color: black;
+}

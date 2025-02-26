@@ -200,16 +200,36 @@ function deleteSong(idSong) {
 
 function showActionBTN(idSong) {
   const deleteCategories = document.getElementById("PopUpDelete");
-  const deleteBtn = document.querySelector(".deleteSong");
+  const pointers = document.getElementsByClassName("pointer");
+  
+  document.getElementById("yesDelete").setAttribute("onclick","deleteSong("+idSong+")")
+  globalThis.scrollTo({top:0,left:0, behavior:"smooth"});
+  deleteCategories.style.display = "block";
 
-    document.getElementById("yesDelete").setAttribute("onclick","deleteSong("+idSong+")")
-    globalThis.scrollTo({top:0,left:0, behavior:"smooth"});
-    deleteCategories.style.display = "block";
+  for (let i = 0; i < pointers.length; i++) {
+    const element = pointers[i];
+    if (element.nodeName != 'A') {
+      console.log(element);
+      element.classList.add("NotPointer")
+      element.classList.remove("pointer")
+    }
+  }
+
 }
 
 function hideActionBTN() {
+  const NotPointer = document.getElementsByClassName("NotPointer")
+  
   const deleteCategories = document.getElementById("PopUpDelete");
   deleteCategories.style.display = "none";
+
+  for (let i = 0; i < NotPointer.length; i++) {
+    const element = NotPointer[i];
+    element.classList.add("pointer")
+    element.classList.remove("NotPointer")
+
+    
+  }
 }
 
 function openSongDetails(id) {
