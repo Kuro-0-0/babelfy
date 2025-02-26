@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -19,5 +21,8 @@ public class Category {
     
     private String name;
     private List<Integer> color;
+
+    @OneToMany(mappedBy = "category")
+    private List<Song> songs;
 
 }

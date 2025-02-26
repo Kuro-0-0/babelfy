@@ -19,6 +19,21 @@ function showPopUp(status='Error',text='Error on PopUp loading') {
     }
 }
 
+function getCategoryData() {
+    options = {
+        method: 'GET',
+    };
+
+    return fetch("http://localhost:9000/categories/names",options)
+    .then(data => {
+        console.log(data);
+        return data.json();
+    })
+    .catch(error => {
+        console.log(error);
+    })
+}
+
 function hidePopUp() {
     document.getElementById("PopUp").style.display = 'none'
     actionBTN = document.getElementsByClassName('action-btn')
@@ -39,7 +54,7 @@ function checkText(textContent,showable = false) {
     }
 
     const minLength = 1;
-    const regEx = /^([a-zA-Z0-9\. ,]){0,27}$/;
+    const regEx = /^([a-zA-Z0-9\.\/ ,]){0,27}$/;
     const startsWith = /^[\ \,\.].*$/;
     const endsWith = /^.{1,26}[\ \,]$/;
     const consecutivePunctuation = /(\.{2,}|,{2,})/;
@@ -76,4 +91,19 @@ function checkText(textContent,showable = false) {
 
 function moveToThumbnail() {
     window.location.href = 'thumbnail.html'
+}
+
+function getCategoryData() {
+    options = {
+        method: 'GET',
+    };
+
+    return fetch("http://localhost:9000/categories/names",options)
+    .then(data => {
+        console.log(data);
+        return data.json();
+    })
+    .catch(error => {
+        console.log(error);
+    })
 }

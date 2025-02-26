@@ -46,7 +46,8 @@
                     
                 </section>
                 <section class="ListSection" id="ListSection"></section>
-                <div id="createCategories" class="form song">
+
+                <div id="createSong" class="form song">
                         <i onclick="showActionBTNcr()" class="bi bi-x-circle-fill"></i>
 
                         <div class="option">
@@ -55,6 +56,12 @@
                                 <label class="input-name" for="inputName">Name</label>
                                 <input class="dataAPI" id="inputName" name="name" 
                                 type="text" placeholder="Write the name here">
+                            </div>
+                            <div class="input-container">
+                                <label class="input-name" for="inputName">Category</label>
+                                <select class="dataAPI" id="categoryList" name="idCategory">
+                                </select>
+                                
                             </div>
                             <div class="input-container">
                                 <label class="input-name" for="inputName">Duration</label>
@@ -73,8 +80,8 @@
                             </div>
                             <div class="input-container">
                                 <label class="input-name" for="inputName">Release date</label>
-                                <input class="dataAPI" id="inputName" name="releaseDate" 
-                                type="date" placeholder="">
+                                <input class="dataAPI" id="releaseDate" name="releaseDate" 
+                                type="date" placeholder="" max="">
                             </div>
 
                             <div class="button-ctn">
@@ -96,5 +103,8 @@
             <script src="../js/script.js"></script>
             <script src="../js/createSong.js"></script>
             <script src="../js/deleteSongs.js"></script>
+            <script>
+                    document.getElementById('releaseDate').max = new Date().toISOString().split('T')[0];
+            </script>
 </body>
 </html>

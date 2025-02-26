@@ -79,12 +79,14 @@ async function renderCategories(categories) {
 
       var content = document.createElement('div');
       content.innerHTML =
-        '<div class="imagen">' + '</div>' +
+        '<div class="imagen" id=img'+category.id+'>' + '</div>' +
         '<i onclick="showActionBTN()" class="removeBTN category bi bi-x-square-fill"></i>' +
         '<p>' + category.name + '</p>'
 
       card.appendChild(content);
       container.appendChild(card);
+
+      document.getElementById("img"+category.id).style.backgroundColor = `rgba(${category.color[0]},${category.color[1]},${category.color[2]},0.57)`
     });
 
   } else {
