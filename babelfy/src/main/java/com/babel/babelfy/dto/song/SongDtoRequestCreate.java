@@ -2,7 +2,6 @@ package com.babel.babelfy.dto.song;
 
 import java.time.LocalDate;
 
-import com.babel.babelfy.model.Category;
 import com.babel.babelfy.model.Song;
 
 import lombok.Data;

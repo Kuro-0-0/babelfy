@@ -1,9 +1,5 @@
 package com.babel.babelfy.dto.song;
 
-import java.util.List;
-
-import org.hibernate.engine.jdbc.connections.internal.ConnectionProviderInitiator.SettingConsumer;
-
 import com.babel.babelfy.model.Song;
 import lombok.Builder;
 import lombok.Data;

@@ -1,7 +1,5 @@
 package com.babel.babelfy.dto.category;
 
-import java.util.List;
-
 import com.babel.babelfy.model.Category;
 
 import lombok.AllArgsConstructor;

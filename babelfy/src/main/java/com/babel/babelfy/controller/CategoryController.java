@@ -2,7 +2,6 @@ package com.babel.babelfy.controller;
 
 import java.util.List;
 
-import com.babel.babelfy.dto.category.*;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.babel.babelfy.dto.category.*;
 import com.babel.babelfy.model.Song;
 import com.babel.babelfy.repository.SongRepository;
 import lombok.RequiredArgsConstructor;
@@ -61,7 +60,7 @@ public class CategoryService {
                 String color="";
                 Random rnd = new Random();
                 
-                for (int i = 0; i < values.length; i++) {
+                for (int i = 0; i < 6; i++) {
                     color=color+values[rnd.nextInt(values.length-1)+1];
                 }
                 newCategory.setColor(color);

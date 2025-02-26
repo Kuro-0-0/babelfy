@@ -61,7 +61,7 @@ public class SongService {
                 String color="";
                 Random rnd = new Random();
                 
-                for (int i = 0; i < values.length; i++) {
+                for (int i = 0; i < 6; i++) {
                     color=color+values[rnd.nextInt(values.length-1)+1];
                 }
                 newSong.setColor(color);
