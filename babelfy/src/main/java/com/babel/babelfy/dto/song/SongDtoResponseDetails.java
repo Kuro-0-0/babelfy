@@ -23,7 +23,7 @@ public class SongDtoResponseDetails {
         String categoryName;
         long categoryID;
 
-        if (s.getCategory() != null ) {
+        if (s.getCategory() != null) {
             categoryName = s.getCategory().getName();
             categoryID = s.getCategory().getId();
         } else {
@@ -40,3 +40,4 @@ public class SongDtoResponseDetails {
                 .categoryID(categoryID)
                 .build();
     }
+}
