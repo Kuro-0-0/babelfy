@@ -207,14 +207,23 @@ div.PopUpDelete {
     }
 
     #noDelete {
-        color: red
+        color: white;
+        background-color: green;
     }
 
     #yesDelete {
-        color: green;
+        color: white;
+        background-color: red
     }
+
     #yesDelete:hover {
-        color: greenyellow;
+        background-color: white;
+        color: red;
+    }
+
+    #noDelete:hover {
+        color: green;
+        background-color:  white;
     }
 }
 

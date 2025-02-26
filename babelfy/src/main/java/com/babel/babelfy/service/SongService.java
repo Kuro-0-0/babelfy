@@ -107,27 +107,27 @@ public class SongService {
             }
             return response;
 
-        }
+    }
 
-        public ResponseEntity<SongDtoResponseDetails> getDetails ( long id){
+    public ResponseEntity<SongDtoResponseDetails> getDetails(long id) {
 
-            ResponseEntity<SongDtoResponseDetails> response;
+        ResponseEntity<SongDtoResponseDetails> response;
 
-            try {
-                Song s;
-                s = songRepository.findById(id).orElse(null);
+        try {
+            Song s;
+            s = songRepository.findById(id).orElse(null);
 
-                if (s != null) {
-                    response = ResponseEntity.ok().body(SongDtoResponseDetails.songToCSongDTO(s));
-                } else {
-                    response = ResponseEntity.badRequest().body(null);
-                }
-
-            } catch (Exception e) {
-                response = ResponseEntity.internalServerError().body(null);
+            if (s != null) {
+                response = ResponseEntity.ok().body(SongDtoResponseDetails.songToCSongDTO(s));
+            } else {
+                response = ResponseEntity.badRequest().body(null);
             }
-            return response;
+
+        } catch (Exception e) {
+            response = ResponseEntity.internalServerError().body(null);
         }
+        return response;
+    }
 
         @Transactional
         public ResponseEntity<String> update (SongDtoRequestUpdate sDTO){
