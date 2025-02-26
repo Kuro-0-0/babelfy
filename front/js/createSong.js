@@ -29,11 +29,13 @@ function createSong() {
                     paramValue.message = paramValue.message + '. Refering to the album name.'
                     break;
                 case "duration":
+                    paramValue = Math.floor(paramValue)
                     if(paramValue<=0||paramValue==null){
                         paramValue = new Error ('You need to add a valid duration')
                     }
                     break;
                 case "releaseDate":
+                    console.log(paramValue);
                     if(paramValue<=0||paramValue==null){
                         paramValue = new Error ('You need to add a release date')
                     }
@@ -72,7 +74,7 @@ function createSong() {
             })
 
             .then(text => {
-                if (text!="This artist already has a song name like this") {
+                if (text!="This artist already has a song named like this") {
                     estado = 'Success'
                 } else {
                     estado = 'Error'
