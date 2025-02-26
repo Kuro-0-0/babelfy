@@ -78,17 +78,28 @@ async function renderCategories(categories) {
       card.href = 'CategoryDetails.html'
 
       var content = document.createElement('div');
-      content.innerHTML =
-        '<div class="imagen" id=img'+category.id+'>' + '</div>' +
-        '<i onclick="showActionBTN()" class="removeBTN category bi bi-x-square-fill"></i>' +
-        '<p>' + category.name + '</p>'
+
+      div = document.createElement('div')
+      div.classList.add("imagen")
+      div.id = "img"+category.id
+
+      content.append(div)
+
+      if (category.name != "None") {
+        content.innerHTML = content.innerHTML + '<i onclick="showActionBTN()" class="removeBTN category bi bi-x-square-fill"></i>'
+      }
+
+      p = document.createElement('p')
+      p.textContent = category.name
+
+      content.append(p)
 
       card.appendChild(content);
       container.appendChild(card);
       console.log(category);
       
 
-      document.getElementById("img"+category.id).style.backgroundColor = `rgba(${category.color[0]},${category.color[1]},${category.color[2]},0.57)`
+      document.getElementById("img"+category.id).style.backgroundColor = `#` + category.color + '5b';
     });
 
   } else {
