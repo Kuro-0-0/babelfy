@@ -178,7 +178,7 @@ public class SongService {
         try {
             song = songRepository.findById(id).orElse(null);
             if (song != null) {
-                song.setCategory(null);
+                song.setCategory(categoryRepository.findByName("None").getFirst());
                 songRepository.save(song);
                 response = ResponseEntity.ok().body("Category detachment successful");
             } else {

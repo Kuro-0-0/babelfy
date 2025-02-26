@@ -56,16 +56,34 @@ var categoryName;
       var table = document.createElement('table');
       var tbody = document.createElement('tbody');
       table.innerHTML =
-          `<thead>
-          <tr>
-            <th>Name</th>
-            <th>Duration</th>
-            <th>Artist</th>
-            <th>Album</th>
-            <th>Release Date</th>
-            <th></th>
-          </tr>
-          </thead>`
+          ``
+
+          if (category.name != "None") {
+            table.innerHTML = `
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Duration</th>
+                <th>Artist</th>
+                <th>Album</th>
+                <th>Release Date</th>
+                <th></th>
+              </tr>
+            </thead>
+            `
+          } else {
+            table.innerHTML = `
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Duration</th>
+                <th>Artist</th>
+                <th>Album</th>
+                <th>Release Date</th>
+              </tr>
+            </thead>
+            `
+          }
           div.appendChild(table);
           table.appendChild(tbody);
       category.songs.forEach(function (song){
@@ -79,9 +97,12 @@ var categoryName;
           <td>${song.artistName}</td>
           <td>${song.albumName}</td>
           <td>${song.releaseDate}</td>
-          <td><a class="deleteSong" onclick="showActionBTN(${song.id})" title="Delete from category"><i class="bi pointer bi-x-square-fill"></i></a></td>
         `
         
+        if (category.name != "None") {
+          row.innerHTML = row.innerHTML + `<td><a class="deleteSong" onclick="showActionBTN(${song.id})" title="Delete from category"><i class="bi pointer bi-x-square-fill"></i></a></td>`
+        }
+
         tbody.appendChild(row);
       })
     
