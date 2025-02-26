@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 
 import lombok.*;
 
-import java.util.List;
 
 @Entity
 @Data
@@ -20,6 +19,7 @@ public class Category {
     private long id;
     
     private String name;
+    private String color;
 
     @OneToMany(mappedBy = "category")
     private List<Song> songs;

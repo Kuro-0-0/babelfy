@@ -96,6 +96,8 @@ async function renderCategories(categories) {
 
       card.appendChild(content);
       container.appendChild(card);
+      console.log(category);
+      
 
       document.getElementById("img"+category.id).style.backgroundColor = `#` + category.color + '5b';
     });

@@ -4,6 +4,7 @@ import com.babel.babelfy.dto.song.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import com.babel.babelfy.repository.CategoryRepository;
 import jakarta.transaction.Transactional;
@@ -12,10 +13,8 @@ import org.springframework.stereotype.Service;
 
 import com.babel.babelfy.model.Category;
 import com.babel.babelfy.model.Song;
-import com.babel.babelfy.repository.CategoryRepository;
 import com.babel.babelfy.repository.SongRepository;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -58,6 +57,14 @@ public class SongService {
         List<Song> list = songRepository.findByName(newSong.getName());
         boolean isHereArtist = false;
         if (list.isEmpty()) {
+            String values[]= {"A","B","C","D","E","F","0","1","2","3","4","5","6","7","8","9"};
+                String color="";
+                Random rnd = new Random();
+                
+                for (int i = 0; i < 6; i++) {
+                    color=color+values[rnd.nextInt(values.length-1)+1];
+                }
+                newSong.setColor(color);
             songRepository.save(newSong);
             newSong.getCategory().getSongs().add(newSong);
             categoryRepository.save(newSong.getCategory());

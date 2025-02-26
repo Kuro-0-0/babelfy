@@ -40,5 +40,3 @@ public class SongDtoResponseDetails {
                 .categoryID(categoryID)
                 .build();
     }
-
-}

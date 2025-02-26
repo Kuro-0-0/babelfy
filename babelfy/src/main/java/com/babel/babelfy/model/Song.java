@@ -21,6 +21,7 @@ public class Song {
     private String artistName;
     private String albumName;
     private LocalDate releaseDate;
+    private String color;
 
     @ManyToOne
     private Category category;

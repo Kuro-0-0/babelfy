@@ -13,9 +13,10 @@ public class CategoryDtoResponseList {
 
     private long id;
     private String name;
+    private String color;
 
     public static CategoryDtoResponseList categoryToCategoryDTO(Category c) {
-        return new CategoryDtoResponseList(c.getId(), c.getName());
+        return new CategoryDtoResponseList(c.getId(), c.getName(), c.getColor());
     }
 
 }
