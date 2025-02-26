@@ -4,14 +4,11 @@ import com.babel.babelfy.dto.song.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.babel.babelfy.dto.song.SongDtoResponseGetAll;
-import com.babel.babelfy.dto.song.SongDtoRequestCreate;
-
-import com.babel.babelfy.dto.song.SongDtoResponseDetails;
 import com.babel.babelfy.model.Song;
 import com.babel.babelfy.repository.SongRepository;
 
@@ -29,7 +26,10 @@ public class SongService {
         List<Song> list = songRepository.findByName(newSong.getName());
         boolean isHere = false;
         if (list.isEmpty()) {
-
+            Random r = new Random();
+                for (int i = 0; i < 4; i++) {
+                    newSong.getColor().add(r.nextInt(255)+1);
+                }
             songRepository.save(newSong);
             response = "This song was successfully created";
         } else {

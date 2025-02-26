@@ -1,5 +1,7 @@
 package com.babel.babelfy.dto.song;
 
+import java.util.List;
+
 import com.babel.babelfy.model.Song;
 import lombok.Builder;
 import lombok.Data;
@@ -10,11 +12,13 @@ public class SongDtoResponseGetAll {
 
     private long id;
     private String name;
+    private List<Integer> color;
 
     public static SongDtoResponseGetAll songToSongDTO(Song s) {
         return SongDtoResponseGetAll.builder()
                 .id(s.getId())
                 .name(s.getName())
+                .color(s.getColor())
                 .build();
     }
 }

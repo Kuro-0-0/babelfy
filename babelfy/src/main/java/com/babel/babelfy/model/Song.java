@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -21,6 +22,7 @@ public class Song {
     private String artistName;
     private String albumName;
     private LocalDate releaseDate;
+    private List<Integer> color;
 
     public Song(String name, int duration, String artistName, String albumName, LocalDate releaseDate) {
         this.name = name;

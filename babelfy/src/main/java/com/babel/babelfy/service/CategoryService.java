@@ -2,6 +2,7 @@ package com.babel.babelfy.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import lombok.RequiredArgsConstructor;
 
@@ -47,6 +48,10 @@ public class CategoryService {
             List<Category> c = categoryRepository.findByName(cDTO.getName());
             if (c.isEmpty()) {
                 newCategory = CategoryDtoRequestCreate.categoryDTOToCategory(cDTO);
+                Random r = new Random();
+                for (int i = 0; i < 4; i++) {
+                    newCategory.getColor().add(r.nextInt(255)+1);
+                }
                 categoryRepository.save(newCategory);
                 response = ResponseEntity.ok("Category " + cDTO.getName() + " created.");
             } else {
