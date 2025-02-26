@@ -9,7 +9,7 @@ main>section>a {
 main>section>a>div>.imagen {
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
-    background-color: #849cae83;
+    background-color: rgb(132, 156, 174);
     width: 100%;
 }
 
