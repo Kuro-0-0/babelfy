@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Builder
 public class SongDtoResponseDetails {
 
-    
+
     private String name;
     private int duration;
     private String artistName;

@@ -100,7 +100,7 @@ public class CategoryService {
             if (c != null) {
 
                 for (Song s : c.getSongs()) {
-                    s.setCategory(null);
+                    s.setCategory(categoryRepository.findByName("None").getFirst());
                     songRepository.save(s);
                 }
                 categoryRepository.delete(c);
