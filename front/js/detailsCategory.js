@@ -69,15 +69,17 @@ var categoryName;
           div.appendChild(table);
           table.appendChild(tbody);
       category.songs.forEach(function (song){
+        console.log(song);
+        
         var row = document.createElement('tr');
         row.innerHTML = `
           
-          <td>${song.name}</td>
+          <td><a class="pointer" onclick="openSongDetails(${song.id})">${song.name}</a></td>
           <td>${song.duration}</td>
           <td>${song.artistName}</td>
           <td>${song.albumName}</td>
           <td>${song.releaseDate}</td>
-          <td><a href="" title="Delete from category"><i class="bi bi-x-square-fill"></i></a></td>
+          <td><a class="deleteSong" onclick="showActionBTN(${song.id})" title="Delete from category"><i class="bi pointer bi-x-square-fill"></i></a></td>
         `
         
         tbody.appendChild(row);
@@ -96,6 +98,8 @@ var categoryName;
     title.appendChild(pen);
     
   }
+
+  
 
   function showChanger(){
     var container = document.getElementById('updateCategory');
@@ -174,5 +178,61 @@ document.getElementById('createForm').addEventListener('submit', function(event)
   event.preventDefault();
 });
 
+function deleteSong(idSong) {
+  hideActionBTN()
+  fetch("http://localhost:9000/songs/category/" + idSong, options = {method: "DELETE"})
+  .then(data => {
+    showCategoryDetails()
+    if (data.status == ok) {
+      status = "Success"
+    } else {
+      status = "Error"
+    }
+    return data.text()
+  })
+  .then(text => {
+    showPopUp(status,text)
+  })
+  .catch(error => {
+    console.log(error);
+  })
+}
 
+function showActionBTN(idSong) {
+  const deleteCategories = document.getElementById("PopUpDelete");
+  const pointers = document.getElementsByClassName("pointer");
+  
+  document.getElementById("yesDelete").setAttribute("onclick","deleteSong("+idSong+")")
+  globalThis.scrollTo({top:0,left:0, behavior:"smooth"});
+  deleteCategories.style.display = "block";
 
+  for (let i = 0; i < pointers.length; i++) {
+    const element = pointers[i];
+    if (element.nodeName != 'A') {
+      console.log(element);
+      element.classList.add("NotPointer")
+      element.classList.remove("pointer")
+    }
+  }
+
+}
+
+function hideActionBTN() {
+  const NotPointer = document.getElementsByClassName("NotPointer")
+  
+  const deleteCategories = document.getElementById("PopUpDelete");
+  deleteCategories.style.display = "none";
+
+  for (let i = 0; i < NotPointer.length; i++) {
+    const element = NotPointer[i];
+    element.classList.add("pointer")
+    element.classList.remove("NotPointer")
+
+    
+  }
+}
+
+function openSongDetails(id) {
+  localStorage.setItem('idSong',id)
+  window.location.href = 'SongDetails.html'
+}

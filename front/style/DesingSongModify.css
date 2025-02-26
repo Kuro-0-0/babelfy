@@ -56,6 +56,9 @@ div.PopUpUpdate {
         color: red
     }
     #yesDelete {
+        color: green;
+    }
+    #yesDelete:hover {
         color: greenyellow;
     }
 }

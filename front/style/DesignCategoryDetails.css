@@ -176,11 +176,7 @@ div.PopUp{
     transform: translate(-50%,-50%);
 }
 
-
-
-
-
-
-
-
+a.pointer:hover {
+    color: #555B6E;
+}
 
