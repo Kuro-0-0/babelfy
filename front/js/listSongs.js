@@ -85,7 +85,7 @@ async function renderSongs(songs) {
       card.appendChild(content);
       container.appendChild(card);
 
-      document.getElementById("img"+song.id).style.backgroundColor = `rgba(${song.color[0]},${song.color[1]},${song.color[2]},${song.color[3]})`
+      document.getElementById("img"+song.id).style.backgroundColor = `rgba(${song.color[0]},${song.color[1]},${song.color[2]},0.57)`
 
     });
 
