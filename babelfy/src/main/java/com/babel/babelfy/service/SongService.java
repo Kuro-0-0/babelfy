@@ -5,16 +5,17 @@ import com.babel.babelfy.dto.song.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.babel.babelfy.repository.CategoryRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.babel.babelfy.dto.song.SongDtoResponseGetAll;
-import com.babel.babelfy.dto.song.SongDtoRequestCreate;
-
-import com.babel.babelfy.dto.song.SongDtoResponseDetails;
+import com.babel.babelfy.model.Category;
 import com.babel.babelfy.model.Song;
+import com.babel.babelfy.repository.CategoryRepository;
 import com.babel.babelfy.repository.SongRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -22,27 +23,57 @@ import lombok.RequiredArgsConstructor;
 public class SongService {
 
     private final SongRepository songRepository;
+    private final CategoryRepository categoryRepository;
 
+    @Transactional
+    public Song SongDtoToSong(SongDtoRequestCreate songDto){
+        Category c=categoryRepository.findById(songDto.getIdCategory()).orElse(null);
+        return Song.builder()
+                .name(songDto.getName())
+                .duration(songDto.getDuration())
+                .artistName(songDto.getArtistName())
+                .albumName(songDto.getAlbumName())
+                .releaseDate(songDto.getReleaseDate())
+                .category(c)
+                .build();
+    }
+
+    @Transactional
+    public Song songDtoToSong(SongDtoRequestUpdate sDTO) {
+        return Song.builder()
+                .id(sDTO.getId())
+                .name(sDTO.getName())
+                .duration(sDTO.getDuration())
+                .artistName(sDTO.getArtistName())
+                .albumName(sDTO.getArtistName())
+                .releaseDate(sDTO.getReleaseDate())
+                .category(categoryRepository.findById(sDTO.getCategoryId()).orElse(null))
+                .build();
+    }
+
+    @Transactional
     public String add(SongDtoRequestCreate cDTO) {
         String response = "";
-        Song newSong = SongDtoRequestCreate.SongDtoToSong(cDTO);
+        Song newSong = SongDtoToSong(cDTO);
         List<Song> list = songRepository.findByName(newSong.getName());
-        boolean isHere = false;
+        boolean isHereArtist = false;
         if (list.isEmpty()) {
-
             songRepository.save(newSong);
+            newSong.getCategory().getSongs().add(newSong);
+            categoryRepository.save(newSong.getCategory());
             response = "This song was successfully created";
         } else {
 
-            for (int i = 0; i < list.size() && !isHere; i++) {
+            for (int i = 0; i < list.size() && !isHereArtist; i++) {
                 if (list.get(i).getArtistName().equalsIgnoreCase(newSong.getArtistName())) {
-                    isHere = true;
+                    isHereArtist = true;
                 }
             }
-            if (isHere) {
+            if (isHereArtist) {
                 response = "This artist already has a song named like this";
             } else {
                 songRepository.save(newSong);
+                newSong.getCategory().getSongs().add(newSong);
                 response = "This song was successfully created ";
             }
 
@@ -64,17 +95,17 @@ public class SongService {
     }
 
         public ResponseEntity<List<SongDtoResponseGetAll>> getAll() {
-            ResponseEntity<List<SongDtoResponseGetAll>> respuesta;
-            List<SongDtoResponseGetAll> songList = new ArrayList<SongDtoResponseGetAll>();
+            ResponseEntity<List<SongDtoResponseGetAll>> response;
+            List<SongDtoResponseGetAll> songList = new ArrayList<>();
             try {
                 for (Song s : songRepository.findAll()) {
                     songList.add(SongDtoResponseGetAll.songToSongDTO(s));
                 }
-                respuesta = ResponseEntity.ok().body(songList);
+                response = ResponseEntity.ok().body(songList);
             } catch (Exception e) {
-                respuesta = ResponseEntity.internalServerError().body(null);
+                response = ResponseEntity.internalServerError().body(null);
             }
-            return respuesta;
+            return response;
 
         }
 
@@ -98,16 +129,37 @@ public class SongService {
             return response;
         }
 
+        @Transactional
         public ResponseEntity<String> update (SongDtoRequestUpdate sDTO){
-            ResponseEntity<String> response;
+            ResponseEntity<String> response = ResponseEntity.internalServerError().body("Something went wrong while processing the data");
             Song modSong;
             try {
                 modSong = songRepository.findById(sDTO.getId()).orElse(null);
-                System.out.println(sDTO);
+                List<Song> artistSongs;
+                boolean find = false;
                 if (modSong != null) {
-                    modSong = SongDtoRequestUpdate.songDTOtoSong(sDTO);
-                    songRepository.save(modSong);
-                    response = ResponseEntity.ok().body("Song data updated");
+
+                    artistSongs = songRepository.findByArtistName(modSong.getArtistName());
+
+                    if (!artistSongs.isEmpty()) {
+                        for (Song s : artistSongs) {
+                            if (!find && s.getName().equalsIgnoreCase(modSong.getName()) && s.getId() != sDTO.getId()) {
+                                find = true;
+                                response = ResponseEntity.badRequest().body("There is already song of that artist with that name.");
+                            }
+                        }
+
+                        if (!find) {
+                            modSong = songDtoToSong(sDTO);
+                            songRepository.save(modSong);
+                            response = ResponseEntity.ok().body("Song data updated");
+                        }
+
+                    } else {
+                        modSong = songDtoToSong(sDTO);
+                        songRepository.save(modSong);
+                        response = ResponseEntity.ok().body("Song data updated");
+                    }
                 } else {
                     response = ResponseEntity.badRequest().body("That song doesn't exist");
                 }
@@ -117,4 +169,5 @@ public class SongService {
             }
             return response;
         }
-    }
+
+}
