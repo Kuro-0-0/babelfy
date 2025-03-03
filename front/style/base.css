@@ -3,9 +3,17 @@
     src: url(../resources/fonts/Coolvetica\ Rg.otf);
 }
 
+:root{
+    --dark: #221d34;
+    --pink: #90425c;
+    --blue: #4c776d;
+    --light: #e2ead3;
+}
+
+
 body{
     margin: 0px;
-    background-color: #BEE3DB;
+    background-color: var(--light);
     font-family: 'Coolvetica';
 }
 
@@ -20,15 +28,15 @@ a{
 
 header{
     height: 20%;
-    background-image: linear-gradient(0deg, #BEE3DB 31%, #89B0AE 100%);
-    border-bottom: 0.5vh solid #8f98b9;
+    background-color: var(--light);
+    border-bottom: 0.5vh solid var(--dark);
 }
 
 header>h1{
     margin: 0 auto;
     padding-top: 3vh;
     text-align: center;
-    color:#555B6E;
+    color:var(--dark);
     font-size: 4vh;
     cursor: pointer;
 }
@@ -45,17 +53,21 @@ header>nav>ul{
 
 header>nav>ul>a>li{
     font-size: 20px;
-    color:#555B6E;
+    color:var(--dark);
 }
 
 header>nav>ul>a{
     padding: 20px 100px;
 }
+header>nav>ul>a:hover>li{
+   color:var(--light); 
+}
 
 header>nav>ul>a:hover{
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    background-color: #cdefed;
+    background-color: var(--blue);
+    
 }
 
 main{
@@ -66,10 +78,9 @@ main{
 footer{
     width: 100%;
     height: auto;
-    background-color: #555B6E;
+    background-color: var(--dark);
     position: fixed;
     bottom: 0;
-    background-color: #555B6E;
     margin-top: 30px;
 }
 
@@ -77,33 +88,22 @@ button {
     cursor: pointer;
 }
 
-/*
-COLORS
-DARK BLUE: #555B6E
-MEDIUM BLUE: #89B0AE
-LIGHT BLUE: #BEE3DB
-WHITISH BLUE (BASE): #FAF9F9
-PINK: #FFD6BA
-*/
-
 div.PopUp {
     display: none;
-    background-color: #555B6E;
-    border: 5px double #89B0AE;
-    color: #BEE3DB;
+    background-color: var(--dark);
+    border: 5px double var(--blue);
+    color: var(--light);
     position: absolute;
     z-index: 10;
     font-size: 14px;
-    /* min-width: 200px;
-    max-width: 500px; */
     width: 200px;
     padding: 20px;
     padding: 20px;
     button {
-        background-color: #BEE3DB;
+        background-color: var(--light);
         font-family: 'Coolvetica';
-        color: #555B6E;
-        border: 2px solid #89B0AE;
+        color: var(--dark);
+        border: 2px solid var(--pink);
     }
     #TitlePopUp {
         /* red */
@@ -113,8 +113,8 @@ div.PopUp {
         margin: 0px;    
     }
     button:hover {
-        color: #BEE3DB;
-        background-color: #555B6E;
+        color: var(--light);
+        background-color: var(--pink);
     }
 }
 
@@ -126,7 +126,7 @@ footer>p{
     margin: 10px;
     text-align: center;
     padding: 5px;
-    color:#BEE3DB;
+    color:var(--light);
 }
 
 
@@ -135,9 +135,9 @@ button.options {
     height: fit-content;
     font-size: 100%;
     font-weight: bold;
-    color: #BEE3DB;
-    background-color: #6A7C7A;
-    border: 2px solid #8f98b9;
+    color: var(--light);
+    background-color: var(--dark);
+    border: 2px solid var(--blue);
     border-radius: 0.5vh;
     margin: 0 auto;
     margin-top: 1vh;
@@ -145,10 +145,11 @@ button.options {
 }
 
 button.options:hover {
-    color: #BEE3DB;
-    background-color: #555B6E;
+
+    background-color: var(--blue);
     cursor: pointer;
 }
 .pointer {
     cursor: pointer;
 }
+

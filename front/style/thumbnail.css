@@ -1,3 +1,5 @@
+
+
 header {
     h1 {
         cursor: default;
@@ -9,7 +11,7 @@ header {
 
 main {
     h2 {
-        color: #555B6E;
+        color: var(--dark);
         text-align: center;
         cursor: default;
     }
@@ -20,8 +22,8 @@ main {
         text-align: center;
         justify-content: space-around;
         .listContainer { 
-            color: #555B6E;
-            border: 4px double #555B6E;
+            color: var(--dark);
+            border: 4px double var(--dark);
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
             margin: 15px 10px 5px;
@@ -39,10 +41,10 @@ main {
                 
             }
             #rndColorCategories {
-                background-color: #5EBE8B;
+                background-color: var(--blue);
             }
             #rndColorSong {
-                background-color: #AAAEED;
+                background-color: var(--pink);
     
             }
         }
