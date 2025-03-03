@@ -1,4 +1,4 @@
-function updater(confirmed=false,reloading = false) {
+function updater(confirmed = false, reloading = false) {
     ps = document.getElementsByClassName("original-view")
     inputs = document.getElementsByClassName("false-view")
     updateBTN = document.getElementById("updateBtn")
@@ -28,17 +28,17 @@ function updater(confirmed=false,reloading = false) {
         if (updateBTN.textContent == "Cancel") {
 
             showConfirm();
-    
+
         } else {
-    
+
             document.getElementById("submitUpdBtn").style.display = "block"
-    
-    
+
+
             updateBTN.textContent = "Cancel"
             if (inputs.length <= 0) {
-    
+
                 seccion = document.getElementById("sectionDetails")
-    
+
                 seccion.innerHTML = `
             <div id="nameContainer">
                 <div class="dataContainer">
@@ -47,7 +47,7 @@ function updater(confirmed=false,reloading = false) {
                 </div>
             </div>
             ` + seccion.innerHTML
-    
+
                 for (let i = 0; i < ps.length; i++) {
                     const element = ps[i];
                     element.style.display = "none"
@@ -64,27 +64,27 @@ function updater(confirmed=false,reloading = false) {
 
                     input.classList.add("false-view")
                     input.classList.add("dataAPI")
-    
-    
+
+
                     if (element.id == "releaseDate") {
                         input.type = "date"
                     } else if (element.id == "duration") {
                         input.type = "number"
                     } else if (element.id == "categoryName") {
                         getCategoryData()
-                        .then(data => {
-                            for (let i = 0; i < data.length; i++) {
-                                const elementOption = data[i];
-                                option = document.createElement("option")
-                                option.value = elementOption.id
-                                option.textContent = elementOption.name
-                                input.appendChild(option)  
+                            .then(data => {
+                                for (let i = 0; i < data.length; i++) {
+                                    const elementOption = data[i];
+                                    option = document.createElement("option")
+                                    option.value = elementOption.id
+                                    option.textContent = elementOption.name
+                                    input.appendChild(option)
 
-                                if (element.textContent == elementOption.name ) {
-                                    input.value = elementOption.id;
+                                    if (element.textContent == elementOption.name) {
+                                        input.value = elementOption.id;
+                                    }
                                 }
-                            }
-                        })     
+                            })
                     }
 
                     divContainer.appendChild(input)
@@ -110,7 +110,7 @@ function showConfirm() {
         confirmPopUp.style.display = 'none'
         document.getElementById('updateBtn').disabled = false;
     } else {
-        confirmPopUp.style.display =  'flex'
+        confirmPopUp.style.display = 'flex'
         document.getElementById('updateBtn').disabled = true;
     }
 }
@@ -119,7 +119,7 @@ function sendUpdate() {
     try {
 
         inputs = document.getElementsByClassName("dataAPI")
-        
+
         let paramName;
         let paramValue;
         let params = {};
@@ -133,7 +133,7 @@ function sendUpdate() {
             switch (paramName) {
 
                 case "name":
-                    paramValue = checkText(paramValue,true);
+                    paramValue = checkText(paramValue, true);
                     paramValue.message = paramValue.message + '. Refering to the song name.'
                     break;
 
@@ -147,13 +147,13 @@ function sendUpdate() {
                     paramValue.message = paramValue.message + '. Refering to the album name.'
                     break;
                 case "duration":
-                    if(paramValue<=0||paramValue==null){
-                        paramValue = new Error ('You need to add a valid duration')
+                    if (paramValue <= 0 || paramValue == null) {
+                        paramValue = new Error('You need to add a valid duration')
                     }
                     break;
                 case "releaseDate":
-                    if(paramValue<=0||paramValue==null){
-                        paramValue = new Error ('You need to add a release date')
+                    if (paramValue <= 0 || paramValue == null) {
+                        paramValue = new Error('You need to add a release date')
                     }
                     break;
 
@@ -164,18 +164,18 @@ function sendUpdate() {
             if (paramValue instanceof Error) {
                 throw new Error(paramValue.message);
             }
-            
-            params[paramName] = paramValue            
+
+            params[paramName] = paramValue
         }
 
         params["id"] = localStorage.getItem("idSong")
-        
+
         options = {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/JSON', 
+                'Content-Type': 'application/JSON',
             },
-            body: JSON.stringify(params), 
+            body: JSON.stringify(params),
         };
 
         fetch('http://localhost:9000/songs', options)
@@ -184,7 +184,7 @@ function sendUpdate() {
                     case 200:
                         status = 'Success'
                         break;
-                    
+
                     default:
                         status = 'Error'
                         break;
@@ -192,15 +192,15 @@ function sendUpdate() {
                 return response.text();
             })
             .then(text => {
-                updater(true,true)
+                updater(true, true)
                 showSongDetails();
-                showPopUp(status,text)
+                showPopUp(status, text)
             })
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
             });
 
     } catch (error) {
-        showPopUp('Error',error.message)
+        showPopUp('Error', error.message)
     }
 }

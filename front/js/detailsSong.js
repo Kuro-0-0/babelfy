@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function () {
     showSongDetails()
     .then(data => {
         if (data.categoryID == -1) {
-            console.log(data);
             
             categoryName = document.getElementById("categoryName")
             categoryName.classList.remove("pointer")
@@ -51,7 +50,6 @@ function renderSongDetails(song) {
     title = document.getElementById('name')
     title.innerHTML = song.name
     section = document.getElementById('sectionDetails');
-    console.log(song);
 
     section.innerHTML = `
     <div class="usualDataContainer">

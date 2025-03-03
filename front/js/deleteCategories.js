@@ -4,17 +4,17 @@ function deleteCategory() {
     options = {
         method: 'DELETE',
         headers: {
-            'Content-Type': 'application/JSON', 
+            'Content-Type': 'application/JSON',
         },
     };
 
-    fetch('http://localhost:9000/categories/'+localStorage.getItem('idCategory'), options)
+    fetch('http://localhost:9000/categories/' + localStorage.getItem('idCategory'), options)
 
         .then(response => {
             return response
         })
 
-        .then (respuesta => {
+        .then(respuesta => {
             showActionBTN()
             if (respuesta.status == 200) {
                 estado = 'Success'
@@ -25,7 +25,7 @@ function deleteCategory() {
         })
 
         .then(text => {
-            showPopUp(estado,text)
+            showPopUp(estado, text)
             getAllCategories()
         })
 
@@ -37,13 +37,13 @@ function deleteCategory() {
 function showActionBTN() {
     const deleteCategories = document.getElementById("PopUpDelete");
     const deleteBtn = document.querySelector(".removeBTN");
-  
+
     if (deleteCategories.style.display === "block") {
         deleteCategories.style.display = "none";
-        deleteBtn.disabled = false; 
+        deleteBtn.disabled = false;
     } else {
-        globalThis.scrollTo({top:0,left:0, behavior:"smooth"});
+        globalThis.scrollTo({ top: 0, left: 0, behavior: "smooth" });
         deleteCategories.style.display = "block";
-        deleteBtn.disabled = true; 
+        deleteBtn.disabled = true;
     }
-  }
+}

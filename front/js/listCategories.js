@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (container != null) {
 
-        container.addEventListener('mouseover', function (event) {          
+        container.addEventListener('mouseover', function (event) {
           if (event.target && event.target.classList.contains('removeBTN')) {
             const card = event.target.closest('a');
             card.addEventListener('click', preventLink);
@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         container.addEventListener('mouseout', function (event) {
           if (event.target && event.target.classList.contains('removeBTN')) {
-            const card = event.target.closest('a');  
-            card.removeEventListener('click', preventLink); 
+            const card = event.target.closest('a');
+            card.removeEventListener('click', preventLink);
           }
         });
 
@@ -38,7 +38,7 @@ async function getAllCategories(searchValue = '') {
   let customURL = apiUrl;
   let search = false;
 
-  if(searchValue != '') {
+  if (searchValue != '') {
     customURL += '?name=' + searchValue;
     search = true;
   }
@@ -55,21 +55,21 @@ async function getAllCategories(searchValue = '') {
     })
 
     .then(function (categories) {
-      renderCategories(categories,search)
+      renderCategories(categories, search)
 
-      .then(function() {
-        return true;
-      });
+        .then(function () {
+          return true;
+        });
     })
 
     .catch(function (error) {
       console.error('Error al cargar las categorias:', error);
       document.getElementById('main').innerHTML = '<div><h1 class="error"> Error </h1>' +
-      '<p>Something went wrong with the server connection.</p></div>'
+        '<p>Something went wrong with the server connection.</p></div>'
     });
 }
 
-async function renderCategories(categories,search) {
+async function renderCategories(categories, search) {
   var container = document.getElementById('ListSection');
   container.innerHTML = '';
 
@@ -87,7 +87,7 @@ async function renderCategories(categories,search) {
       var content = document.createElement('div');
       div = document.createElement('div')
       div.classList.add("imagen")
-      div.id = "img"+category.id
+      div.id = "img" + category.id
 
       content.append(div)
 
@@ -102,27 +102,27 @@ async function renderCategories(categories,search) {
       card.appendChild(content);
       container.appendChild(card);
 
-      document.getElementById("img"+category.id).style.backgroundColor = `#` + category.color + '5b';
+      document.getElementById("img" + category.id).style.backgroundColor = `#` + category.color + '5b';
     });
 
   } else {
-    if(!search){
+    if (!search) {
       showPopUp('Advise', 'There are no categories, please create a new one.')
-  
+
       list = document.getElementById('ListSection')
       div = document.createElement("div")
       div.innerHTML =
         "<h1 class='error'>Advise</h1>" +
         "<p>There are no categories, please create a new one.</p>"
-        
+
       list.appendChild(div)
-    }else{
+    } else {
       list = document.getElementById('ListSection')
       div = document.createElement("div")
       div.innerHTML =
         "<h1 class='error'>Advise</h1>" +
         "<p>There are no songs with the name you are looking for.</p>"
-        
+
       list.appendChild(div)
     }
   }
@@ -130,6 +130,6 @@ async function renderCategories(categories,search) {
 }
 
 //This gets the search 'button' and waits for it to have something
-document.getElementById("searchInput").addEventListener('input',function() {
+document.getElementById("searchInput").addEventListener('input', function () {
   getAllCategories(this.value)
 })

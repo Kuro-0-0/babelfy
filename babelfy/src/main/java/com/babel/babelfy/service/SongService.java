@@ -25,8 +25,8 @@ public class SongService {
     private final CategoryRepository categoryRepository;
 
     @Transactional
-    public Song SongDtoToSong(SongDtoRequestCreate songDto){
-        Category c=categoryRepository.findById(songDto.getIdCategory()).orElse(null);
+    public Song SongDtoToSong(SongDtoRequestCreate songDto) {
+        Category c = categoryRepository.findById(songDto.getIdCategory()).orElse(null);
         return Song.builder()
                 .name(songDto.getName())
                 .duration(songDto.getDuration())
@@ -57,14 +57,14 @@ public class SongService {
         List<Song> list = songRepository.findByName(newSong.getName());
         boolean isHereArtist = false;
         if (list.isEmpty()) {
-            String values[]= {"A","B","C","D","E","F","0","1","2","3","4","5","6","7","8","9"};
-                String color="";
-                Random rnd = new Random();
-                
-                for (int i = 0; i < 6; i++) {
-                    color=color+values[rnd.nextInt(values.length-1)+1];
-                }
-                newSong.setColor(color);
+            String values[] = {"A", "B", "C", "D", "E", "F", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+            String color = "";
+            Random rnd = new Random();
+
+            for (int i = 0; i < 6; i++) {
+                color = color + values[rnd.nextInt(values.length - 1) + 1];
+            }
+            newSong.setColor(color);
             songRepository.save(newSong);
             newSong.getCategory().getSongs().add(newSong);
             categoryRepository.save(newSong.getCategory());
@@ -101,18 +101,18 @@ public class SongService {
         return response;
     }
 
-        public ResponseEntity<List<SongDtoResponseGetAll>> getAll() {
-            ResponseEntity<List<SongDtoResponseGetAll>> response;
-            List<SongDtoResponseGetAll> songList = new ArrayList<>();
-            try {
-                for (Song s : songRepository.findAll()) {
-                    songList.add(SongDtoResponseGetAll.songToSongDTO(s));
-                }
-                response = ResponseEntity.ok().body(songList);
-            } catch (Exception e) {
-                response = ResponseEntity.internalServerError().body(null);
+    public ResponseEntity<List<SongDtoResponseGetAll>> getAll() {
+        ResponseEntity<List<SongDtoResponseGetAll>> response;
+        List<SongDtoResponseGetAll> songList = new ArrayList<>();
+        try {
+            for (Song s : songRepository.findAll()) {
+                songList.add(SongDtoResponseGetAll.songToSongDTO(s));
             }
-            return response;
+            response = ResponseEntity.ok().body(songList);
+        } catch (Exception e) {
+            response = ResponseEntity.internalServerError().body(null);
+        }
+        return response;
 
     }
 
@@ -136,46 +136,46 @@ public class SongService {
         return response;
     }
 
-        @Transactional
-        public ResponseEntity<String> update (SongDtoRequestUpdate sDTO){
-            ResponseEntity<String> response = ResponseEntity.internalServerError().body("Something went wrong while processing the data");
-            Song modSong;
-            try {
-                modSong = songRepository.findById(sDTO.getId()).orElse(null);
-                List<Song> artistSongs;
-                boolean find = false;
-                if (modSong != null) {
+    @Transactional
+    public ResponseEntity<String> update(SongDtoRequestUpdate sDTO) {
+        ResponseEntity<String> response = ResponseEntity.internalServerError().body("Something went wrong while processing the data");
+        Song modSong;
+        try {
+            modSong = songRepository.findById(sDTO.getId()).orElse(null);
+            List<Song> artistSongs;
+            boolean find = false;
+            if (modSong != null) {
 
-                    artistSongs = songRepository.findByArtistName(modSong.getArtistName());
+                artistSongs = songRepository.findByArtistName(modSong.getArtistName());
 
-                    if (!artistSongs.isEmpty()) {
-                        for (Song s : artistSongs) {
-                            if (!find && s.getName().equalsIgnoreCase(modSong.getName()) && s.getId() != sDTO.getId()) {
-                                find = true;
-                                response = ResponseEntity.badRequest().body("There is already song of that artist with that name.");
-                            }
+                if (!artistSongs.isEmpty()) {
+                    for (Song s : artistSongs) {
+                        if (!find && s.getName().equalsIgnoreCase(modSong.getName()) && s.getId() != sDTO.getId()) {
+                            find = true;
+                            response = ResponseEntity.badRequest().body("There is already song of that artist with that name.");
                         }
+                    }
 
-                        if (!find) {
-                            modSong = songDtoToSong(sDTO);
-                            songRepository.save(modSong);
-                            response = ResponseEntity.ok().body("Song data updated");
-                        }
-
-                    } else {
+                    if (!find) {
                         modSong = songDtoToSong(sDTO);
                         songRepository.save(modSong);
                         response = ResponseEntity.ok().body("Song data updated");
                     }
-                } else {
-                    response = ResponseEntity.badRequest().body("That song doesn't exist");
-                }
 
-            } catch (Exception e) {
-                response = ResponseEntity.internalServerError().body("Something went wrong on the Server side");
+                } else {
+                    modSong = songDtoToSong(sDTO);
+                    songRepository.save(modSong);
+                    response = ResponseEntity.ok().body("Song data updated");
+                }
+            } else {
+                response = ResponseEntity.badRequest().body("That song doesn't exist");
             }
-            return response;
+
+        } catch (Exception e) {
+            response = ResponseEntity.internalServerError().body("Something went wrong on the Server side");
         }
+        return response;
+    }
 
     public ResponseEntity<String> deleteCategory(long id) {
 
@@ -197,7 +197,7 @@ public class SongService {
         }
 
         return response;
-        
+
     }
 
     public ResponseEntity<List<SongDtoResponseGetAll>> getBySearch(String name) {

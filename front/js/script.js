@@ -1,5 +1,5 @@
-function showPopUp(status='Error',text='Error on PopUp loading') {
-    
+function showPopUp(status = 'Error', text = 'Error on PopUp loading') {
+
     popUpTitle = document.getElementById("TitlePopUp");
     document.getElementById("PopUp").style.display = 'block'
     popUpTitle.textContent = status;
@@ -24,14 +24,13 @@ function getCategoryData() {
         method: 'GET',
     };
 
-    return fetch("http://localhost:9000/categories/names",options)
-    .then(data => {
-        console.log(data);
-        return data.json();
-    })
-    .catch(error => {
-        console.log(error);
-    })
+    return fetch("http://localhost:9000/categories/names", options)
+        .then(data => {
+            return data.json();
+        })
+        .catch(error => {
+            console.log(error);
+        })
 }
 
 function hidePopUp() {
@@ -42,9 +41,9 @@ function hidePopUp() {
         const element = actionBTN[i];
         element.disabled = false;
     }
-    
+
 }
-function checkText(textContent,showable = false) {
+function checkText(textContent, showable = false) {
     let maxLength;
 
     if (showable) {
@@ -62,7 +61,7 @@ function checkText(textContent,showable = false) {
 
     try {
         if (textContent.length > maxLength) {
-            throw new Error("The name can't have more than "+maxLength+" characters");
+            throw new Error("The name can't have more than " + maxLength + " characters");
         }
         if (textContent.length < minLength) {
             throw new Error("The name must contain at least one character");
@@ -98,12 +97,11 @@ function getCategoryData() {
         method: 'GET',
     };
 
-    return fetch("http://localhost:9000/categories/names",options)
-    .then(data => {
-        console.log(data);
-        return data.json();
-    })
-    .catch(error => {
-        console.log(error);
-    })
+    return fetch("http://localhost:9000/categories/names", options)
+        .then(data => {
+            return data.json();
+        })
+        .catch(error => {
+            console.log(error);
+        })
 }

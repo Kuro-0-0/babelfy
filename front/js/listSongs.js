@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (container != null) {
 
-        container.addEventListener('mouseover', function (event) {          
+        container.addEventListener('mouseover', function (event) {
           if (event.target && event.target.classList.contains('removeBTN')) {
             const card = event.target.closest('a');
             card.addEventListener('click', preventLink);
@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         container.addEventListener('mouseout', function (event) {
           if (event.target && event.target.classList.contains('removeBTN')) {
-            const card = event.target.closest('a');  
-            card.removeEventListener('click', preventLink); 
+            const card = event.target.closest('a');
+            card.removeEventListener('click', preventLink);
           }
         });
 
@@ -37,7 +37,7 @@ async function getAllSongs(searchValue = '') {
   let customURL = apiUrl;
   let search = false;
 
-  if(searchValue != '') {
+  if (searchValue != '') {
     customURL += '?name=' + searchValue;
     search = true;
   }
@@ -54,11 +54,11 @@ async function getAllSongs(searchValue = '') {
     })
 
     .then(function (songs) {
-      renderSongs(songs,search)
+      renderSongs(songs, search)
 
-      .then(function() {
-        return true;
-      });
+        .then(function () {
+          return true;
+        });
     })
 
     .catch(function (error) {
@@ -67,7 +67,7 @@ async function getAllSongs(searchValue = '') {
     });
 }
 
-async function renderSongs(songs,search) {
+async function renderSongs(songs, search) {
   var container = document.getElementById('ListSection');
   container.innerHTML = '';
 
@@ -85,44 +85,44 @@ async function renderSongs(songs,search) {
 
       var content = document.createElement('div');
       content.innerHTML =
-      '<div class="imagen" id=img'+song.id+'>' + '</div>' +
-      '<i onclick="showActionBTN()" class="removeBTN song bi bi-x-square-fill"></i>' +
+        '<div class="imagen" id=img' + song.id + '>' + '</div>' +
+        '<i onclick="showActionBTN()" class="removeBTN song bi bi-x-square-fill"></i>' +
         '<p>' + song.name + '</p>'
 
       card.appendChild(content);
       container.appendChild(card);
 
-      document.getElementById("img"+song.id).style.backgroundColor = `#` + song.color + '5b';
+      document.getElementById("img" + song.id).style.backgroundColor = `#` + song.color + '5b';
 
     });
 
   } else {
 
     if (!search) {
-      
-    showPopUp('Advise', 'There are no songs, please create a new one.')
 
-    list = document.getElementById('ListSection')
-    div = document.createElement("div")
-    div.innerHTML =
-      "<h1 class='error'>Advise</h1>" +
-      "<p>There are no songs, please create a new one.</p>"
-      
-    list.appendChild(div)
+      showPopUp('Advise', 'There are no songs, please create a new one.')
+
+      list = document.getElementById('ListSection')
+      div = document.createElement("div")
+      div.innerHTML =
+        "<h1 class='error'>Advise</h1>" +
+        "<p>There are no songs, please create a new one.</p>"
+
+      list.appendChild(div)
     } else {
       list = document.getElementById('ListSection')
       div = document.createElement("div")
       div.innerHTML =
         "<h1 class='error'>Advise</h1>" +
         "<p>There are no songs with the name you are looking for.</p>"
-        
+
       list.appendChild(div)
     }
   }
   return true;
 }
 
-document.getElementById("searchInput").addEventListener('input',function() {
+document.getElementById("searchInput").addEventListener('input', function () {
   getAllSongs(this.value)
 })
 

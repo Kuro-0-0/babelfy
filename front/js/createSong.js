@@ -15,7 +15,7 @@ function createSong() {
             switch (paramName) {
 
                 case "name":
-                    paramValue = checkText(paramValue,true);
+                    paramValue = checkText(paramValue, true);
                     paramValue.message = paramValue.message + '. Refering to the song name.'
                     break;
 
@@ -30,14 +30,13 @@ function createSong() {
                     break;
                 case "duration":
                     paramValue = Math.floor(paramValue)
-                    if(paramValue<=0||paramValue==null){
-                        paramValue = new Error ('You need to add a valid duration')
+                    if (paramValue <= 0 || paramValue == null) {
+                        paramValue = new Error('You need to add a valid duration')
                     }
                     break;
                 case "releaseDate":
-                    console.log(paramValue);
-                    if(paramValue<=0||paramValue==null){
-                        paramValue = new Error ('You need to add a release date')
+                    if (paramValue <= 0 || paramValue == null) {
+                        paramValue = new Error('You need to add a release date')
                     }
                     break;
 
@@ -48,7 +47,7 @@ function createSong() {
             if (paramValue instanceof Error) {
                 throw new Error(paramValue.message);
             }
-            
+
             params[paramName] = paramValue
             element.value = ''
         }
@@ -56,9 +55,9 @@ function createSong() {
         options = {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/JSON', 
+                'Content-Type': 'application/JSON',
             },
-            body: JSON.stringify(params), 
+            body: JSON.stringify(params),
         };
 
         fetch('http://localhost:9000/songs', options)
@@ -68,18 +67,18 @@ function createSong() {
                 return response
             })
 
-            .then (respuesta => {
+            .then(respuesta => {
                 showActionBTNcr()
                 return respuesta.text()
             })
 
             .then(text => {
-                if (text!="This artist already has a song named like this") {
+                if (text != "This artist already has a song named like this") {
                     estado = 'Success'
                 } else {
                     estado = 'Error'
                 }
-                showPopUp(estado,text)
+                showPopUp(estado, text)
             })
 
             .catch(error => {
@@ -87,43 +86,42 @@ function createSong() {
             });
 
     } catch (error) {
-        showPopUp('Error',error.message)
+        showPopUp('Error', error.message)
     }
 
 }
 
-function showCategoryOptions(){
+function showCategoryOptions() {
 
     const listoptions = document.getElementById("categoryList");
     getCategoryData()
 
-    .then(data =>{
-        console.log(data)
-    if (data.length > 0 && data){
-        listoptions.textContent = ''
-        data.forEach(function (category) {
-            var option = document.createElement('option');
-            option.value = category.id
-            option.textContent = category.name
-            listoptions.appendChild(option);
+        .then(data => {
+            if (data.length > 0 && data) {
+                listoptions.textContent = ''
+                data.forEach(function (category) {
+                    var option = document.createElement('option');
+                    option.value = category.id
+                    option.textContent = category.name
+                    listoptions.appendChild(option);
+                })
+            }
         })
-    }
-    })
 
-    
+
 }
 
 function showActionBTNcr() {
     const createSong = document.getElementById("createSong");
-    const createBtn = document.getElementById("createBtn");    
+    const createBtn = document.getElementById("createBtn");
 
     if (createSong.style.display === "block") {
         createSong.style.display = "none";
-        createBtn.disabled = false; 
+        createBtn.disabled = false;
     } else {
         document.getElementById('inputName').value = ''
         createSong.style.display = "block";
-        createBtn.disabled = true; 
+        createBtn.disabled = true;
         showCategoryOptions()
     }
 

@@ -40,7 +40,6 @@ var categoryName;
 
 
   function renderCategoryDetails(category) {
-    console.log(category);
     
     //This gets an objects in the html with the Id 'name'
     var title = document.getElementById('name');
@@ -87,7 +86,6 @@ var categoryName;
           div.appendChild(table);
           table.appendChild(tbody);
       category.songs.forEach(function (song){
-        console.log(song);
         
         var row = document.createElement('tr');
         row.innerHTML = `
@@ -230,7 +228,6 @@ function showActionBTN(idSong) {
   for (let i = 0; i < pointers.length; i++) {
     const element = pointers[i];
     if (element.nodeName != 'A') {
-      console.log(element);
       element.classList.add("NotPointer")
       element.classList.remove("pointer")
     }

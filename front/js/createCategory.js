@@ -14,7 +14,7 @@ function createCategory() {
 
             switch (paramName) {
                 case "name":
-                    paramValue = checkText(paramValue,true);
+                    paramValue = checkText(paramValue, true);
                     break;
                 default:
                     break;
@@ -23,7 +23,7 @@ function createCategory() {
             if (paramValue instanceof Error) {
                 throw new Error(paramValue.message);
             }
-            
+
             params[paramName] = paramValue
             element.value = ''
         }
@@ -31,9 +31,9 @@ function createCategory() {
         options = {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/JSON', 
+                'Content-Type': 'application/JSON',
             },
-            body: JSON.stringify(params), 
+            body: JSON.stringify(params),
         };
 
         fetch('http://localhost:9000/categories', options)
@@ -43,7 +43,7 @@ function createCategory() {
                 return response
             })
 
-            .then (respuesta => {
+            .then(respuesta => {
                 showActionBTNcr()
                 if (respuesta.status == 200) {
                     estado = 'Success'
@@ -54,8 +54,8 @@ function createCategory() {
             })
 
             .then(text => {
-                globalThis.scrollTo({top:0,left:0, behavior:"smooth"});
-                showPopUp(estado,text)
+                globalThis.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+                showPopUp(estado, text)
             })
 
             .catch(error => {
@@ -63,22 +63,22 @@ function createCategory() {
             });
 
     } catch (error) {
-        showPopUp('Error',error.message)
+        showPopUp('Error', error.message)
     }
 
 }
 
 function showActionBTNcr() {
     const createCategories = document.getElementById("createCategories");
-    const createBtn = document.getElementById("createBtn");    
+    const createBtn = document.getElementById("createBtn");
 
     if (createCategories.style.display === "block") {
         createCategories.style.display = "none";
-        createBtn.disabled = false; 
+        createBtn.disabled = false;
     } else {
         document.getElementById('inputName').value = ''
         createCategories.style.display = "block";
-        createBtn.disabled = true; 
+        createBtn.disabled = true;
     }
 
 }

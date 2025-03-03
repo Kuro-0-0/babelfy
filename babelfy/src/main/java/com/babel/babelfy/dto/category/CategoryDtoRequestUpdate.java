@@ -14,7 +14,7 @@ public class CategoryDtoRequestUpdate {
     private long id;
     private String name;
 
-    public static Category categoryDTOToCategory(CategoryDtoRequestUpdate c){
+    public static Category categoryDTOToCategory(CategoryDtoRequestUpdate c) {
         return Category.builder()
                 .id(c.getId())
                 .name(c.getName())
