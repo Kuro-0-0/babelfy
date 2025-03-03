@@ -1,6 +1,3 @@
-var songName;
-var categoryName;
-
 if (document.getElementsByClassName("catDetails").length > 0) {
     document.addEventListener('DOMContentLoaded', function () {
         showCategoryDetails();
@@ -598,7 +595,6 @@ function showChanger() {
     var newName;
     if (document.getElementById('updateCategory') == null) {
         container = document.getElementById('updateSong')
-        newName = songName
     } else {
         container = document.getElementById('updateCategory')
         newName = categoryName
