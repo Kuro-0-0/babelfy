@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -33,8 +34,9 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping("")
-    public List<CategoryDtoResponseList> listAll() {
-        return categoryService.listAll();
+    public List<CategoryDtoResponseList> listAll(@RequestParam(required = false) String name) {
+        //This divideGet is to separate the listAll from the search by name 
+        return categoryService.divideGet(name);
     }
 
     @GetMapping("/{id}")

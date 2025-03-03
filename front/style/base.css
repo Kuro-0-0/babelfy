@@ -394,6 +394,12 @@ section#sectionUpdate {
 
 }
 
+@media (max-width: 1060px) {
+    section#sectionUpdate {
+        left: 5%; /* Valor para pantallas con ancho menor o igual a 1060px */
+    }
+}
+
 button.options:hover {
     color: var(--light);
     background-color: var(--dark);
