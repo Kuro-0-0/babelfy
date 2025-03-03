@@ -3,9 +3,35 @@
     src: url(../resources/fonts/Coolvetica\ Rg.otf);
 }
 
+/*
+COLORS
+DARK BLUE: #555B6E
+MEDIUM BLUE: #89B0AE
+LIGHT BLUE: #BEE3DB
+WHITISH BLUE (BASE): #FAF9F9
+PINK: #FFD6BA
+*/
+
+:root {
+    /*! Colors*/
+    /*
+    --dark: #555B6E;
+    --medium: #89B0AE;
+    --light: #BEE3DB;
+    --white: #FAF9F9;
+    --pink: #FFD6BA;
+    */
+
+    --dark: #000500;
+    --medium: #a3a2d8;
+    --light: #dcddf5;
+    --white: #9B9ECE;
+
+}
+
 body{
     margin: 0px;
-    background-color: #BEE3DB;
+    background-color: var(--light);
     font-family: 'Coolvetica';
 }
 
@@ -20,15 +46,15 @@ a{
 
 header{
     height: 20%;
-    background-image: linear-gradient(0deg, #BEE3DB 31%, #89B0AE 100%);
-    border-bottom: 0.5vh solid #8f98b9;
+    background-image: linear-gradient(0deg, var(--light) 31%, var(--medium) 100%);
+    border-bottom: 0.5vh solid var(--dark);
 }
 
 header>h1{
     margin: 0 auto;
     padding-top: 3vh;
     text-align: center;
-    color:#555B6E;
+    color:var(--dark);
     font-size: 4vh;
     cursor: pointer;
 }
@@ -45,7 +71,7 @@ header>nav>ul{
 
 header>nav>ul>a>li{
     font-size: 20px;
-    color:#555B6E;
+    color:var(--dark);
 }
 
 header>nav>ul>a{
@@ -55,8 +81,8 @@ header>nav>ul>a{
 header>nav>ul>a:hover{
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    background-color: #cdefed;
-}
+    background-color: var(--light);
+    filter: brightness(1.2); /* Incrementa la luminosidad */}
 
 main{
     margin: 30px 15% 100px;
@@ -66,31 +92,23 @@ main{
 footer{
     width: 100%;
     height: auto;
-    background-color: #555B6E;
+    background-color: var(--dark);
     position: fixed;
     bottom: 0;
-    background-color: #555B6E;
+    background-color: var(--dark);
     margin-top: 30px;
+    z-index: 10;
 }
 
 button {
     cursor: pointer;
 }
 
-/*
-COLORS
-DARK BLUE: #555B6E
-MEDIUM BLUE: #89B0AE
-LIGHT BLUE: #BEE3DB
-WHITISH BLUE (BASE): #FAF9F9
-PINK: #FFD6BA
-*/
-
 div.PopUp {
     display: none;
-    background-color: #555B6E;
-    border: 5px double #89B0AE;
-    color: #BEE3DB;
+    background-color: var(--dark);
+    border: 5px double var(--medium);
+    color: var(--light);
     position: absolute;
     z-index: 10;
     font-size: 14px;
@@ -100,10 +118,10 @@ div.PopUp {
     padding: 20px;
     padding: 20px;
     button {
-        background-color: #BEE3DB;
+        background-color: var(--light);
         font-family: 'Coolvetica';
-        color: #555B6E;
-        border: 2px solid #89B0AE;
+        color: var(--dark);
+        border: 2px solid var(--medium);
     }
     #TitlePopUp {
         /* red */
@@ -113,8 +131,8 @@ div.PopUp {
         margin: 0px;    
     }
     button:hover {
-        color: #BEE3DB;
-        background-color: #555B6E;
+        color: var(--light);
+        background-color: var(--dark);
     }
 }
 
@@ -126,7 +144,7 @@ footer>p{
     margin: 10px;
     text-align: center;
     padding: 5px;
-    color:#BEE3DB;
+    color:var(--light);
 }
 
 
@@ -135,9 +153,10 @@ button.options {
     height: fit-content;
     font-size: 100%;
     font-weight: bold;
-    color: #BEE3DB;
-    background-color: #6A7C7A;
-    border: 2px solid #8f98b9;
+    color: var(--light);
+    background-color: var(--dark);
+    filter: brightness(1);
+    border: 2px solid var(--light);
     border-radius: 0.5vh;
     margin: 0 auto;
     margin-top: 1vh;
@@ -145,10 +164,675 @@ button.options {
 }
 
 button.options:hover {
-    color: #BEE3DB;
-    background-color: #555B6E;
+    color: var(--light);
+    background-color: var(--dark);
+    filter: brightness(1.2);
     cursor: pointer;
 }
 .pointer {
     cursor: pointer;
+}
+
+/** Category Details*/
+main.catDetails{
+    text-align: center;
+}
+
+header>h1{
+    text-transform: uppercase;
+}
+main.catDetails>section>div>table>thead>tr>th{
+    text-transform: uppercase;
+    padding: 15px;
+    background-color: var(--dark);
+    color:var(--light);
+}
+
+main.catDetails>section>div>table>tbody>tr:hover{
+    background-color: var(--light);
+    filter: brightness(1.2);
+}
+
+main.catDetails>section>div>table>tbody>tr>td{
+    padding: 12px;
+}
+h1>button>i{
+    color:var(--dark);
+    cursor: pointer;
+}
+h1>button{
+    background-color: transparent;
+    border-width: 0px;
+    transform: scale(1.7);
+}
+main.catDetails>section{
+    width: 100%;
+}
+main.catDetails>section>div>table{
+    margin: 50px auto 0px;
+    border: 1px solid var(--dark);
+    border-collapse: collapse;
+    width: 90%;
+}
+main.catDetails>section>div>table>thead>tr>th:first-child,main.catDetails>section>div>table>tbody>tr>td:first-child{
+    padding-right: 80px;
+    padding-left: 15px;
+}
+
+main.catDetails>section>div>table>tbody>tr>td:first-child{
+    min-width: 100px;
+}
+
+
+div.updater {
+    display: none;
+    position: absolute;
+    right:2%;
+    width: fit-content;
+    border: 3px var(--dark) solid;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: var(--medium);
+    margin: 5vh auto 0;
+    height: fit-content;
+
+    
+    h3 {
+        text-align: center;
+        padding-right: 1vh;
+        color: var(--dark);
+        font-size: 2.5vh;
+        font-weight: bold;
+        letter-spacing: 0.8px;
+        margin-bottom: 5px;
+    }
+
+    i {
+        color: var(--dark);
+        position: absolute;
+        right: 10px;
+        cursor: pointer;
+    }
+    form#createForm {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+            input {
+                color: var(--white);
+                background-color: var(--dark);
+                border-radius: 0.4vh;
+                padding: 0.5vh;
+                width: 20vh;
+                margin-bottom: 6px;
+            }
+            input::placeholder{
+                font-size: 1.5vh;
+                color: var(--white)a0;
+            }
+            button {
+                width: fit-content;
+                height: fit-content;
+                font-size: 100%;
+                font-weight: bold;
+                color: var(--light);
+                background-color: var(--dark);
+                filter: brightness(1);
+                border: 2px solid var(--light);
+                border-radius: 0.5vh;
+                margin: 0 auto;
+                margin-top: 1vh;
+                padding: 0.5vh 1.2vh;
+            }
+            
+            button:hover {
+                color: var(--light);
+                background-color: var(--dark);
+                filter: brightness(1.2);
+                cursor: pointer;
+            }
+        }
+    }
+
+main.catDetails {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    height: fit-content !important;
+
+    section.sectionDetails {
+        display: flex;
+        flex-wrap: wrap;
+        text-align: center;
+        justify-content: center;
+        color: var(--dark);
+        border: 5px double var(--dark);
+        .dataContainer {
+            margin: 0px 20px 10px;
+        }
+    }
+
+    section.deleteSection {
+        width: 20%;
+        margin: 0 auto;
+        position: absolute;
+        left: 0;
+    }
+
+    button.dlCategory-btn {
+        margin: 30px 10px 5px;
+        width: 5vw;
+        height: 5vh;
+        left: 0;
+        font-family: Coolvetica;
+        background-color: var(--medium);
+        color: var(--dark);
+        border: 4px double var(--medium);
+        border-radius: 9px;
+        font-size: 2.5vh;
+        color: var(--medium);
+        background-color: var(--dark);
+    }
+    a {
+        position: relative;
+        i.remove {
+            position: absolute;
+            margin: 10px;
+            right: 0;
+        }
+    }
+
+    button.dlCategory-btn:hover {
+        background-color: var(--medium);
+        color: var(--dark);
+        border: 4px double var(--dark);
+        box-shadow: 1px 2px 32px 7px rgb(253, 255, 255);
+    }
+}
+
+div.PopUp{
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%,-50%);
+}
+
+a.pointer:hover {
+    color: var(--dark);
+}
+
+/** Song details*/
+
+main.songDetails {
+    text-align: center;
+
+    section#sectionDetails {
+        display: flex;
+        flex-wrap: wrap;
+        text-align: center;
+        flex-direction: column;
+        justify-content: center;
+        width: fit-content;
+        margin: 0 auto;
+        color: var(--dark);
+        border: 5px double var(--dark);
+    
+        .usualDataContainer {
+            display: flex;
+            .dataContainer {
+                margin: 0px 20px 10px;
+            }
+        }
+    
+    }
+}
+
+
+
+section#sectionUpdate {
+
+    position: absolute;
+    left: 10%;
+
+}
+
+button.options:hover {
+    color: var(--light);
+    background-color: var(--dark);
+    cursor: pointer;
+}
+
+header>div>h1{
+    margin: 0 auto;
+    padding-top: 3vh;
+    text-align: center;
+    color:var(--dark);
+    font-size: 4vh;
+    cursor: pointer;
+}
+
+div.PopUp {
+    text-align: center;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.btn-container {
+    margin: 0 auto;
+}
+
+a.categoryHover:hover {
+    color: black;
+}
+
+/** Modify Song*/
+input, select {
+    color: var(--white);
+    background-color: var(--dark);
+    border-radius: 0.4vh;
+    padding: 0.5vh;
+    width: 20vh;
+}
+input::placeholder{
+    font-size: 1.5vh;
+    color: var(--white)a0;
+}
+
+input.title-input {
+    margin-top: 3vh;
+    margin: 0 auto;
+}
+
+button.sbt-upSong-btn {
+    display: none;
+    margin-top: 40px !important;
+}
+
+#nameContainer {
+    justify-content: center;
+}
+
+div.PopUpUpdate {
+    display: none;
+    flex-direction: column;
+    background-color: var(--dark);
+    border: 5px double var(--medium);
+    color: var(--light);
+    position: absolute;
+    z-index: 10;
+    font-size: 14px;
+    width: 200px;
+    padding: 20px;
+    button {
+        background-color: var(--light);
+        font-family: 'Coolvetica';
+        color: var(--dark);
+        border: 2px solid var(--medium);
+    }
+    #TitlePopUp {
+        /* red */
+        color: red; 
+        font-size: 25px;
+        padding: 0px;
+        margin: 0px;    
+    }
+    button:hover {
+        color: var(--light);
+        background-color: var(--dark);
+    }
+    #noDelete {
+        color: white;
+        background-color: green;
+    }
+
+    #yesDelete {
+        color: white;
+        background-color: red
+    }
+
+    #yesDelete:hover {
+        background-color: white;
+        color: red;
+    }
+
+    #noDelete:hover {
+        color: green;
+        background-color:  white;
+    }
+}
+
+.removeBTN::before  {
+    z-index: 2;
+    position: absolute;
+    right: 10px;
+    margin-right: 5px;
+    margin-top: 12px;
+    color: var(--dark);
+    height: 16px;
+}
+
+.removeBTN:hover::before {
+    box-shadow: 1px 2px 32px 7px rgb(253, 255, 255);
+
+}
+
+/** List*/
+
+main.list>section>a {
+    border: 4px double var(--dark);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    margin: 15px 10px 5px;
+    width: 200px;
+}
+
+main.list>section>a>div>.imagen {
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    background-color: #849cae5b; /*! No se modifica, es el color de imagen por defecto.*/
+    width: 100%;
+}
+
+main.list>section>a>div>p {
+    color: var(--dark);
+}
+
+main.list>section>a:hover {
+    box-shadow: 1px 2px 32px 7px rgb(253, 255, 255);
+}
+
+main.list {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    height: fit-content !important;
+
+    section.ListSection {
+        display: flex;
+        flex-wrap: wrap;
+        text-align: center;
+        justify-content: center;
+    }
+
+    section.createSection, section.asideSection {
+        width: 20%;
+        margin: 0 auto;
+        position: absolute;
+    }
+
+    section.asideSection {
+        right: 0;
+    }
+
+    input#searchInput {
+        margin-top: 20px;
+        height: 30px;
+        font-size: 15px;
+    }
+
+    section.createSection {
+        left: 0;
+    }
+
+    a {
+        position: relative;
+
+        i.remove {
+            position: absolute;
+            margin: 10px;
+            right: 0;
+        }
+    }
+
+    button.crCategory-btn {
+        margin: 30px 10px 5px;
+        max-width: 100px;
+        height: 5vh;
+        left: 0;
+        font-family: Coolvetica;
+        border: 4px double var(--medium);
+        border-radius: 9px;
+        font-size: 2.5vh;
+        color: var(--medium);
+        background-color: var(--dark);
+    }
+
+    button.crCategory-btn:hover {
+        background-color: var(--medium);
+        color: var(--dark);
+        border: 4px double var(--dark);
+        box-shadow: 1px 2px 32px 7px rgb(253, 255, 255);
+    }
+}
+
+main.list {
+    section {
+        a.song {
+            height: 100px;
+
+            div {
+                .imagen {
+                    height: 60px;
+                }
+
+                p {
+                    margin-top: 10px;
+
+                }
+            }
+        }
+
+        a.category {
+            height: 200px;
+
+            div {
+                .imagen {
+                    height: 150px
+                }
+            }
+
+        }
+    }
+}
+
+
+.form.category {
+    left: 15%;
+}
+
+.form.song {
+    z-index: 4;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+}
+
+div.form {
+    display: none;
+    width: fit-content;
+    border: 3px var(--dark) solid;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: var(--medium);
+    margin: 5vh auto 0;
+    height: fit-content;
+    z-index: 1;
+
+    position: absolute;
+
+
+    i {
+        color: var(--dark);
+        position: absolute;
+        right: 10px;
+        cursor: pointer;
+    }
+
+    div.option {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+
+        div.input-container {
+            padding: 1vh 0px;
+            display: flex;
+            flex-direction: column;
+            width: fit-content;
+            margin: 0 auto;
+
+            label.input-name {
+                text-align: center;
+                padding-right: 1vh;
+                color: var(--dark);
+                font-size: 2.5vh;
+                font-weight: bold;
+                letter-spacing: 0.8px;
+                margin-bottom: 5px;
+            }
+
+            input ,select{
+                color: var(--white);
+                background-color: var(--dark);
+                border-radius: 0.4vh;
+                padding: 0.5vh;
+                width: 20vh;
+            }
+
+            input::placeholder {
+                font-size: 1.5vh;
+                color: var(--white)a0;
+
+            }
+        }
+    }
+}
+
+div.PopUpDelete {
+    display: none;
+    background-color: var(--dark);
+    border: 5px double var(--medium);
+    color: var(--light);
+    position: absolute;
+    z-index: 10;
+    font-size: 14px;
+    width: 200px;
+    padding: 20px;
+
+    button {
+        background-color: var(--light);
+        font-family: 'Coolvetica';
+        color: var(--dark);
+        border: 2px solid var(--medium);
+    }
+
+    #TitlePopUp {
+        /* red */
+        color: red;
+        font-size: 25px;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    button:hover {
+        color: var(--light);
+        background-color: var(--dark);
+    }
+
+    #noDelete {
+        color: white;
+        background-color: green;
+    }
+
+    #yesDelete {
+        color: white;
+        background-color: red
+    }
+
+    #yesDelete:hover {
+        background-color: white;
+        color: red;
+    }
+
+    #noDelete:hover {
+        color: green;
+        background-color:  white;
+    }
+}
+
+.removeBTN::before {
+    z-index: 2;
+    position: absolute;
+    right: 10px;
+    margin-right: 5px;
+    color: var(--dark);
+    height: 16px;
+}
+
+.removeBTN:hover::before {
+    box-shadow: 1px 2px 32px 7px rgb(253, 255, 255);
+}
+
+.category.removeBTN::before {
+    margin-top: 18px;
+}
+
+.song.removeBTN::before {
+    margin-top: 12px;
+}
+
+/** Thumbnail */
+div.thumbnail{
+
+    header {
+        h1 {
+            cursor: default;
+            padding-top: 5vh;
+            font-size: 5vh;
+        }
+        height: 15%;
+    }
+    
+    main {
+        h2 {
+            color: var(--dark);
+            text-align: center;
+            cursor: default;
+        }
+        .containersContainer {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            text-align: center;
+            justify-content: space-around;
+            .listContainer { 
+                color: var(--dark);
+                border: 4px double var(--dark);
+                border-top-left-radius: 20px;
+                border-top-right-radius: 20px;
+                margin: 15px 10px 5px;
+                width: 50%;
+                height: 100%;
+                h3 {
+                    font-size: 25px;
+                }
+                .thumbColor {
+                    border-top-left-radius: 20px;
+                    border-top-right-radius: 20px;
+                    width: 90%;
+                    height: 80%;
+                    margin: 20px auto;
+                    
+                }
+                #thumbColorCategories {
+                    background-color: #5EBE8B;
+                }
+                #thumbColorSong {
+                    background-color: #AAAEED;
+        
+                }
+            }
+        }
+        .listContainer:hover {
+            box-shadow: 1px 2px 32px 7px rgb(253, 255, 255);
+        }
+    }
 }
