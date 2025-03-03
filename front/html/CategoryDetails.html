@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Category details</title>
-    
-    <link rel="stylesheet" href="../style/base.css">
+
+    <link rel="stylesheet" href="../style/style.css">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
@@ -17,14 +17,18 @@
 
         <nav>
             <ul>
-                <a href="SongLists.html"><li>Songs</li></a>
-                <a href="CategoriesList.html"><li>Categories</li></a>
+                <a href="SongList.html">
+                    <li>Songs</li>
+                </a>
+                <a href="CategoryList.html">
+                    <li>Categories</li>
+                </a>
             </ul>
         </nav>
     </header>
 
     <main class="catDetails" id="main">
-        
+
         <div id="PopUp" class="PopUp">
             <h1 id="TitlePopUp">SUCCESS</h1>
             <p id="textPopUp"></p>
@@ -38,20 +42,20 @@
             <button id="yesDelete">YES</button>
         </div>
 
-        
+
         <section id="sectionDetails">
 
             <div class="updater" id="updateCategory">
                 <i class="bi bi-x-circle-fill quit" onclick="showChanger()"></i>
                 <h3>Change Name</h3>
-                
+
                 <form id="createForm">
                     <input type="text" placeholder="Write here" id="newName">
                     <button onclick="changeName()">Update</button>
                 </form>
             </div>
 
-             <div id="songsTable">
+            <div id="songsTable">
             </div>
         </section>
 
@@ -61,9 +65,8 @@
         <p>Copyright <i class="bi bi-c-circle"></i> 2025 Babelfy Inc. All rights reserved.</p>
     </footer>
 
-    <script src="../js/detailsCategory.js"></script>
     <script src="../js/script.js"></script>
-            
+
 </body>
 
 </html>

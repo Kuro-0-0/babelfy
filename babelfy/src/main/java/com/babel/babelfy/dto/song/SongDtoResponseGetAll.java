@@ -13,7 +13,7 @@ public class SongDtoResponseGetAll {
     private String color;
 
     public static SongDtoResponseGetAll songToSongDTO(Song s) {
-        
+
         return SongDtoResponseGetAll.builder()
                 .id(s.getId())
                 .name(s.getName())

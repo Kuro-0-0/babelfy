@@ -43,21 +43,21 @@ public class CategoryService {
         return list;
     }
 
-    public List<CategoryDtoResponseList> getBySearch(String name){
+    public List<CategoryDtoResponseList> getBySearch(String name) {
 
         List<Category> categoryList;
         List<CategoryDtoResponseList> CategoryDTOList = new ArrayList<>();
 
-            categoryList = categoryRepository.findBySpecificName(name);
+        categoryList = categoryRepository.findBySpecificName(name);
 
-            for (Category c : categoryList) {
-                CategoryDTOList.add(CategoryDtoResponseList.categoryToCategoryDTO(c));
-            }
+        for (Category c : categoryList) {
+            CategoryDTOList.add(CategoryDtoResponseList.categoryToCategoryDTO(c));
+        }
 
         return CategoryDTOList;
     }
 
-    public List<CategoryDtoResponseList> divideGet(String name){
+    public List<CategoryDtoResponseList> divideGet(String name) {
         if (name == null) {
             return listAll();
         } else {
@@ -79,44 +79,44 @@ public class CategoryService {
             List<Category> c = categoryRepository.findByName(cDTO.getName());
             if (c.isEmpty()) {
                 newCategory = CategoryDtoRequestCreate.categoryDtoToCategory(cDTO);
-                String values[]= {"A","B","C","D","E","F","0","1","2","3","4","5","6","7","8","9"};
-                String color="";
+                String values[] = {"A", "B", "C", "D", "E", "F", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+                String color = "";
                 Random rnd = new Random();
-                
+
                 for (int i = 0; i < 6; i++) {
-                    color=color+values[rnd.nextInt(values.length-1)+1];
+                    color = color + values[rnd.nextInt(values.length - 1) + 1];
                 }
                 newCategory.setColor(color);
                 categoryRepository.save(newCategory);
                 response = ResponseEntity.ok("Category " + cDTO.getName() + " created.");
             } else {
                 response = ResponseEntity.badRequest().body
-                ("You can't create this category because there is already one with that name.");
+                        ("You can't create this category because there is already one with that name.");
             }
         } catch (Exception e) {
             System.out.println(e);
             response = ResponseEntity.internalServerError().body
-            ("Something went wrong while creating the category");
+                    ("Something went wrong while creating the category");
         }
 
         return response;
     }
 
-    public String change(CategoryDtoRequestUpdate request){
+    public String change(CategoryDtoRequestUpdate request) {
         String response;
-        Category c=CategoryDtoRequestUpdate.categoryDTOToCategory(request);
-        Category old=categoryRepository.findById(c.getId()).orElse(null);
-        List<Category> list= categoryRepository.findByName(c.getName());
+        Category c = CategoryDtoRequestUpdate.categoryDTOToCategory(request);
+        Category old = categoryRepository.findById(c.getId()).orElse(null);
+        List<Category> list = categoryRepository.findByName(c.getName());
 
-        if(list.isEmpty()){
-            if(old!=null){
+        if (list.isEmpty()) {
+            if (old != null) {
                 categoryRepository.save(c);
-                response="Changes made successfully";
-            }else{
-                response="You can't make this change because this category does not exist";
+                response = "Changes made successfully";
+            } else {
+                response = "You can't make this change because this category does not exist";
             }
-        } else{
-            response="You can't make this change because this name is already in use";
+        } else {
+            response = "You can't make this change because this name is already in use";
         }
 
         return response;
@@ -139,13 +139,12 @@ public class CategoryService {
                 response = ResponseEntity.ok("Category " + c.getName() + " deleted");
             } else {
                 response = ResponseEntity.badRequest().body
-                ("The category you are trying to delete don't exist");
+                        ("The category you are trying to delete don't exist");
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
             response = ResponseEntity.internalServerError().body
-            ("Something went wrong while deleting the category");
+                    ("Something went wrong while deleting the category");
         }
 
         return response;
@@ -168,7 +167,7 @@ public class CategoryService {
             }
 
         } catch (Exception e) {
-            response  = ResponseEntity.internalServerError().body(null);
+            response = ResponseEntity.internalServerError().body(null);
         }
         return response;
     }

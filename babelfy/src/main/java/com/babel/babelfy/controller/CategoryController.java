@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
-
 @RequestMapping("/categories")
 @RestController
 @RequiredArgsConstructor
@@ -43,19 +42,19 @@ public class CategoryController {
     public CategoryDtoResponseDetails show(@PathVariable long id) {
         return categoryService.showDetails(id);
     }
-    
+
     @PostMapping("")
     public ResponseEntity<String> create(@RequestBody CategoryDtoRequestCreate cDTO) {
         return categoryService.add(cDTO);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable long id){
+    public ResponseEntity<String> delete(@PathVariable long id) {
         return categoryService.delete(id);
     }
 
     @PutMapping("")
-    public String change(@RequestBody CategoryDtoRequestUpdate request){
+    public String change(@RequestBody CategoryDtoRequestUpdate request) {
         return categoryService.change(request);
     }
 
