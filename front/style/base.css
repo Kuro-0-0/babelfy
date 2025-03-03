@@ -77,9 +77,6 @@ header>nav>ul>a>li{
 header>nav>ul>a{
     padding: 20px 100px;
 }
-header>nav>ul>a:hover>li{
-   color:var(--light); 
-}
 
 header>nav>ul>a:hover{
     border-top-left-radius: 10px;
@@ -115,6 +112,8 @@ div.PopUp {
     position: absolute;
     z-index: 10;
     font-size: 14px;
+    /* min-width: 200px;
+    max-width: 500px; */
     width: 200px;
     padding: 20px;
     padding: 20px;
