@@ -163,7 +163,7 @@ button.options {
     color: var(--light);
     background-color: var(--dark);
     filter: brightness(1);
-    border: 2px solid var(--light);
+    border: 2px solid var(--medium);
     border-radius: 0.5vh;
     margin: 0 auto;
     margin-top: 1vh;
@@ -422,12 +422,6 @@ section#sectionUpdate {
         left: 5%;
         /* Valor para pantallas con ancho menor o igual a 1060px */
     }
-}
-
-button.options:hover {
-    color: var(--light);
-    background-color: var(--dark);
-    cursor: pointer;
 }
 
 header>div>h1 {
