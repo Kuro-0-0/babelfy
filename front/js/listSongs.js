@@ -32,10 +32,17 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-async function getAllSongs() {
+async function getAllSongs(searchValue = '') {
   const apiUrl = 'http://localhost:9000/songs';
+  let customURL = apiUrl;
+  let search = false;
 
-  fetch(apiUrl)
+  if(searchValue != '') {
+    customURL += '?name=' + searchValue;
+    search = true;
+  }
+
+  fetch(customURL)
 
     .then(function (response) {
 
@@ -47,7 +54,7 @@ async function getAllSongs() {
     })
 
     .then(function (songs) {
-      renderSongs(songs)
+      renderSongs(songs,search)
 
       .then(function() {
         return true;
@@ -60,7 +67,7 @@ async function getAllSongs() {
     });
 }
 
-async function renderSongs(songs) {
+async function renderSongs(songs,search) {
   var container = document.getElementById('ListSection');
   container.innerHTML = '';
 
@@ -90,6 +97,9 @@ async function renderSongs(songs) {
     });
 
   } else {
+
+    if (!search) {
+      
     showPopUp('Advise', 'There are no songs, please create a new one.')
 
     list = document.getElementById('ListSection')
@@ -99,8 +109,21 @@ async function renderSongs(songs) {
       "<p>There are no songs, please create a new one.</p>"
       
     list.appendChild(div)
+    } else {
+      list = document.getElementById('ListSection')
+      div = document.createElement("div")
+      div.innerHTML =
+        "<h1 class='error'>Advise</h1>" +
+        "<p>There are no songs with the name you are looking for.</p>"
+        
+      list.appendChild(div)
+    }
   }
   return true;
 }
+
+document.getElementById("searchInput").addEventListener('input',function() {
+  getAllSongs(this.value)
+})
 
 
