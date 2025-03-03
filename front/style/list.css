@@ -34,10 +34,23 @@ main {
         justify-content: center;
     }
 
-    section.createSection {
+    section.createSection, section.asideSection {
         width: 20%;
         margin: 0 auto;
         position: absolute;
+    }
+
+    section.asideSection {
+        right: 0;
+    }
+
+    input#searchInput {
+        margin-top: 20px;
+        height: 30px;
+        font-size: 15px;
+    }
+
+    section.createSection {
         left: 0;
     }
 

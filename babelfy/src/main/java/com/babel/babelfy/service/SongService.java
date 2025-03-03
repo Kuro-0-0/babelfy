@@ -199,4 +199,36 @@ public class SongService {
         return response;
 
     }
+
+    public ResponseEntity<List<SongDtoResponseGetAll>> getBySearch(String name) {
+
+        ResponseEntity<List<SongDtoResponseGetAll>> response;
+        List<Song> songList;
+        List<SongDtoResponseGetAll> songDTOList = new ArrayList<>();
+        try {
+
+            songList = songRepository.findBySpecificName(name);
+
+            for (Song s : songList) {
+                songDTOList.add(SongDtoResponseGetAll.songToSongDTO(s));
+            }
+
+            response = ResponseEntity.ok().body(songDTOList);
+
+        } catch (Exception e) {
+            System.out.println(e);
+            response = ResponseEntity.internalServerError().body(null);
+        }
+
+        return response;
+
+    }
+
+    public ResponseEntity<List<SongDtoResponseGetAll>> divideGet(String name) {
+        if (name == null) {
+            return getAll();
+        } else {
+            return getBySearch(name);
+        }
+    }
 }
