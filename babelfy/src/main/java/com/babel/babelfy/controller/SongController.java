@@ -21,8 +21,8 @@ public class SongController {
     private final SongService songService;
 
     @GetMapping
-    public ResponseEntity<List<SongDtoResponseGetAll>> getAll() {
-        return songService.getAll();
+    public ResponseEntity<List<SongDtoResponseGetAll>> getAll(@RequestParam(required = false) String name) {
+        return songService.divideGet(name);
     }
 
     @GetMapping("/{id}")

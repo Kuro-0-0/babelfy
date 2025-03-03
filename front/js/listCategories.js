@@ -31,11 +31,19 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 });
 
-
-async function getAllCategories() {
+async function getAllCategories(searchValue = '') {
   const apiUrl = 'http://localhost:9000/categories';
 
-  fetch(apiUrl)
+  //This variable is created because apiUrl is a const so it cant be changed
+  let customURL = apiUrl;
+  let search = false;
+
+  if(searchValue != '') {
+    customURL += '?name=' + searchValue;
+    search = true;
+  }
+
+  fetch(customURL)
 
     .then(function (response) {
 
@@ -47,7 +55,7 @@ async function getAllCategories() {
     })
 
     .then(function (categories) {
-      renderCategories(categories)
+      renderCategories(categories,search)
 
       .then(function() {
         return true;
@@ -61,7 +69,7 @@ async function getAllCategories() {
     });
 }
 
-async function renderCategories(categories) {
+async function renderCategories(categories,search) {
   var container = document.getElementById('ListSection');
   container.innerHTML = '';
 
@@ -76,9 +84,7 @@ async function renderCategories(categories) {
       }
 
       card.href = 'CategoryDetails.html'
-
       var content = document.createElement('div');
-
       div = document.createElement('div')
       div.classList.add("imagen")
       div.id = "img"+category.id
@@ -93,27 +99,37 @@ async function renderCategories(categories) {
       p.textContent = category.name
 
       content.append(p)
-
       card.appendChild(content);
       container.appendChild(card);
-      console.log(category);
-      
 
       document.getElementById("img"+category.id).style.backgroundColor = `#` + category.color + '5b';
     });
 
   } else {
-    showPopUp('Advise', 'There are no categories, please create a new one.')
-
-    list = document.getElementById('ListSection')
-    div = document.createElement("div")
-    div.innerHTML =
-      "<h1 class='error'>Advise</h1>" +
-      "<p>There are no categories, please create a new one.</p>"
-      
-    list.appendChild(div)
+    if(!search){
+      showPopUp('Advise', 'There are no categories, please create a new one.')
+  
+      list = document.getElementById('ListSection')
+      div = document.createElement("div")
+      div.innerHTML =
+        "<h1 class='error'>Advise</h1>" +
+        "<p>There are no categories, please create a new one.</p>"
+        
+      list.appendChild(div)
+    }else{
+      list = document.getElementById('ListSection')
+      div = document.createElement("div")
+      div.innerHTML =
+        "<h1 class='error'>Advise</h1>" +
+        "<p>There are no songs with the name you are looking for.</p>"
+        
+      list.appendChild(div)
+    }
   }
   return true;
 }
 
-
+//This gets the search 'button' and waits for it to have something
+document.getElementById("searchInput").addEventListener('input',function() {
+  getAllCategories(this.value)
+})

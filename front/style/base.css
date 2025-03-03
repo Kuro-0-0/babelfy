@@ -394,6 +394,12 @@ section#sectionUpdate {
 
 }
 
+@media (max-width: 1060px) {
+    section#sectionUpdate {
+        left: 5%; /* Valor para pantallas con ancho menor o igual a 1060px */
+    }
+}
+
 button.options:hover {
     color: var(--light);
     background-color: var(--dark);
@@ -590,7 +596,7 @@ main.list {
         left: 0;
         font-family: Coolvetica;
         border: 4px double var(--medium);
-        border-radius: 9px;
+        border-radius: 16%;
         font-size: 2.5vh;
         color: var(--medium);
         background-color: var(--dark);

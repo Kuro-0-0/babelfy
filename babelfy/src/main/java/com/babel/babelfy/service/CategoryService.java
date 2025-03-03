@@ -20,6 +20,7 @@ import com.babel.babelfy.dto.category.CategoryDtoRequestCreate;
 import com.babel.babelfy.dto.category.CategoryDtoResponseDetails;
 import com.babel.babelfy.dto.category.CategoryDtoResponseGetIDName;
 import com.babel.babelfy.dto.category.CategoryDtoResponseList;
+import com.babel.babelfy.dto.song.SongDtoResponseGetAll;
 import com.babel.babelfy.dto.category.CategoryDtoRequestUpdate;
 
 @Service
@@ -40,6 +41,28 @@ public class CategoryService {
         }
 
         return list;
+    }
+
+    public List<CategoryDtoResponseList> getBySearch(String name){
+
+        List<Category> categoryList;
+        List<CategoryDtoResponseList> CategoryDTOList = new ArrayList<>();
+
+            categoryList = categoryRepository.findBySpecificName(name);
+
+            for (Category c : categoryList) {
+                CategoryDTOList.add(CategoryDtoResponseList.categoryToCategoryDTO(c));
+            }
+
+        return CategoryDTOList;
+    }
+
+    public List<CategoryDtoResponseList> divideGet(String name){
+        if (name == null) {
+            return listAll();
+        } else {
+            return getBySearch(name);
+        }
     }
 
     @Transactional
