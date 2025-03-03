@@ -594,7 +594,7 @@ function renderCategoryDetails(category) {
 }
 
 function showChanger() {
-    var container; 
+    var container;
     var newName;
     if (document.getElementById('updateCategory') == null) {
         container = document.getElementById('updateSong')
