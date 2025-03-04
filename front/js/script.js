@@ -248,29 +248,97 @@ function createCategory() {
 
 }
 
+
+function createArtist() {
+    try {
+
+        inputs = document.getElementsByClassName("dataAPI createArtist")
+        let paramName;
+        let paramValue;
+        let params = {};
+        let options;
+
+        for (let index = 0; index < inputs.length; index++) {
+            let element = inputs[index];
+            paramName = element.name;
+            paramValue = element.value;
+
+            switch (paramName) {
+                case "name":
+                    paramValue = checkText(paramValue, true);
+                    break;
+                default:
+                    break;
+            }
+
+            if (paramValue instanceof Error) {
+                throw new Error(paramValue.message);
+            }
+
+            params[paramName] = paramValue
+            element.value = ''
+        }
+
+        options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/JSON',
+            },
+            body: JSON.stringify(params),
+        };
+
+        fetch('http://localhost:9000/artists', options)
+
+            .then(response => {
+                //getAllArtits()
+                return response
+            })
+
+            .then(respuesta => {
+                showActionBTNcr()
+                if (respuesta.status == 200) {
+                    estado = 'Success'
+                } else {
+                    estado = 'Error'
+                }
+                return respuesta.text()
+            })
+
+            .then(text => {
+                globalThis.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+                showPopUp(estado, text)
+            })
+
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+
+    } catch (error) {
+        showPopUp('Error', error.message)
+    }
+
+}
+
+
 function showActionBTNcr() {
-    const createCategories = document.getElementById("createCategories");
-    const createSong = document.getElementById("createSong");
+
+    const createForm = document.getElementsByClassName("formCreate")
     const createBtn = document.getElementById("createBtn");
 
-    if (createCategories == null) {
-        if (createSong.style.display === "block") {
-            createSong.style.display = "none";
+    for (let i = 0; i < createForm.length; i++) {
+        const element = createForm[i];
+        if (element.style.display === "block") {
+            element.style.display = "none";
             createBtn.disabled = false;
         } else {
             document.getElementById('inputName').value = ''
-            createSong.style.display = "block";
+            element.style.display = "block";
             createBtn.disabled = true;
-            showCategoryOptions()
-        }
-    } else {
-        if (createCategories.style.display === "block") {
-            createCategories.style.display = "none";
-            createBtn.disabled = false;
-        } else {
-            document.getElementById('inputName').value = ''
-            createCategories.style.display = "block";
-            createBtn.disabled = true;
+            
+            if (element.id == "createSong") {
+                showCategoryOptions()
+            }
+
         }
     }
 }
