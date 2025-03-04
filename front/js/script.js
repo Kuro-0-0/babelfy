@@ -579,6 +579,11 @@ function deleteSong(idSong = '') {
 
 }
 
+function openArtistDetails(id) {
+    localStorage.setItem("idArtist", id)
+    window.location.href = "ArtistDetails.html"
+}
+
 function renderArtistDetails(artist) {
 
     //This gets an objects in the html with the Id 'name'
@@ -600,6 +605,7 @@ function renderArtistDetails(artist) {
             <thead>
               <tr>
                 <th>Name</th>
+                <th>Category</th>
                 <th>Duration</th>
                 <th>Other Artists</th>
                 <th>Album</th>
@@ -616,13 +622,13 @@ function renderArtistDetails(artist) {
             row.innerHTML = `
           
           <td><a class="pointer" onclick="openSongDetails(${song.id})">${song.name}</a></td>
+          <td><a class="pointer" onclick="openCategoryDetails(${song.categoryId})">${song.categoryName}</a></td>
           <td>${song.duration}</td>
           <td>${song.artistName}</td>
           <td>${song.albumName}</td>
           <td>${song.releaseDate}</td>
         `
-
-            if (category.name != "None") {
+            if (artist.name != "None") {
                 row.innerHTML = row.innerHTML + `<td><a class="deleteSong" onclick="showActionBTN(${song.id})" title="Delete from category"><i class="bi pointer bi-x-square-fill"></i></a></td>`
             }
 
@@ -630,9 +636,8 @@ function renderArtistDetails(artist) {
         })
 
     }
-    //This 'category.name' is from the .json that we got from before
-    categoryName = category.name;
-    title.innerHTML = categoryName + "  ";
+    artistName = artist.name;
+    title.innerHTML = artistName + "  ";
     var pen = document.createElement('i');
     pen.classList = 'bi bi-pencil-fill';
     pen.id = 'clickForShowing';
@@ -641,6 +646,36 @@ function renderArtistDetails(artist) {
     //This links the objects, saying that, whats in (), is inside of the other one
     title.appendChild(pen);
 
+}
+
+function showArtistDetails() {
+
+    //This is the endPoint, it uses the saved Id to show the category
+    const apiUrl = 'http://localhost:9000/artists/' + localStorage.getItem('idArtist');
+
+    //Then this calls the 'API' from the categoryController that brings that method
+    fetch(apiUrl)
+
+        .then(function (response) {
+            if (!response.ok) {
+                //This error is thrown so that (if an error occurs) gets to the .catch
+                throw new Error('Error en la respuesta de la API: ' + response.statusText);
+            }
+            //This is .json because the render function needs it to be in this format
+            return response.json();
+        })
+
+        .then(function (artist) {
+            renderArtistDetails(artist);
+        })
+
+        //This .catch is here to show through the console any errors that could appear 
+        .catch(function (error) {
+            console.error('Error al cargar la info del artista', error);
+
+            //This also shows that there was an error but through the html
+            document.getElementById('sectionDetails').innerHTML = '<div><h1 class="error">Error</h1><p>Something went wrong with the server connection.</p></div>';
+        });
 }
 
 function renderCategoryDetails(category) {
