@@ -118,7 +118,7 @@ if (document.getElementsByClassName("list Artist").length > 0) {
             })
     });
     document.getElementById("searchInput").addEventListener('input', function () {
-        getAllCategories(this.value)
+        getAllArtists(this.value)
     })
 }
 
@@ -317,12 +317,10 @@ function createArtist() {
         };
 
         fetch('http://localhost:9000/artists', options)
-
             .then(response => {
-                getAllArtits()
+                getAllArtists()
                 return response
             })
-
             .then(respuesta => {
                 showActionBTNcr()
                 if (respuesta.status == 200) {
@@ -1266,7 +1264,67 @@ async function renderCategories(categories, search) {
             div = document.createElement("div")
             div.innerHTML =
                 "<h1 class='error'>Advise</h1>" +
-                "<p>There are no songs with the name you are looking for.</p>"
+                "<p>There are no categories with the name you are looking for.</p>"
+
+            list.appendChild(div)
+        }
+    }
+    return true;
+}
+
+async function renderArtists(artists, search) {
+    var container = document.getElementById('ListSection');
+    container.innerHTML = '';
+
+    if (artists.length > 0 && artists) {
+
+        artists.forEach(function (artist) {
+            var card = document.createElement('a');
+            card.classList.add('artist')
+
+            card.onclick = function () {
+                localStorage.setItem('idArtist', artist.id);
+            }
+
+            card.href = 'ArtistDetails.html'
+            var content = document.createElement('div');
+            div = document.createElement('div')
+            div.classList.add("imagen")
+            div.id = "img" + artist.id
+
+            content.append(div)
+
+            if (artist.name != "None") {
+                content.innerHTML = content.innerHTML + '<i onclick="showActionBTN()" class="removeBTN artist bi bi-x-square-fill"></i>'
+            }
+
+            p = document.createElement('p')
+            p.textContent = artist.name
+
+            content.append(p)
+            card.appendChild(content);
+            container.appendChild(card);
+
+            document.getElementById("img" + artist.id).style.backgroundColor = `#` + artist.color + '5b';
+        });
+
+    } else {
+        if (!search) {
+            showPopUp('Advise', 'There are no artists, please create a new one.')
+
+            list = document.getElementById('ListSection')
+            div = document.createElement("div")
+            div.innerHTML =
+                "<h1 class='error'>Advise</h1>" +
+                "<p>There are no artists, please create a new one.</p>"
+
+            list.appendChild(div)
+        } else {
+            list = document.getElementById('ListSection')
+            div = document.createElement("div")
+            div.innerHTML =
+                "<h1 class='error'>Advise</h1>" +
+                "<p>There are no artists with the name you are looking for.</p>"
 
             list.appendChild(div)
         }
