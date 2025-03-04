@@ -511,6 +511,70 @@ function deleteSong(idSong = '') {
 
 }
 
+function renderArtistDetails(artist) {
+
+    //This gets an objects in the html with the Id 'name'
+    var title = document.getElementById('name');
+    var div = document.getElementById('songsTable');
+
+    if (category.songs.length <= 0) {
+        div.innerHTML = ''
+        div.innerHTML =
+            "<h1 class='error'>Comment</h1>" +
+            "<p>This artist does not have any song</p>"
+    } else {
+        div.innerHTML = ''
+        var table = document.createElement('table');
+        var tbody = document.createElement('tbody');
+        table.innerHTML =
+            ``
+        table.innerHTML = `
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Duration</th>
+                <th>Other Artists</th>
+                <th>Album</th>
+                <th>Release Date</th>
+                <th></th>
+              </tr>
+            </thead>
+        `
+        div.appendChild(table);
+        table.appendChild(tbody);
+        artist.songs.forEach(function (song) {
+
+            var row = document.createElement('tr');
+            row.innerHTML = `
+          
+          <td><a class="pointer" onclick="openSongDetails(${song.id})">${song.name}</a></td>
+          <td>${song.duration}</td>
+          <td>${song.artistName}</td>
+          <td>${song.albumName}</td>
+          <td>${song.releaseDate}</td>
+        `
+
+            if (category.name != "None") {
+                row.innerHTML = row.innerHTML + `<td><a class="deleteSong" onclick="showActionBTN(${song.id})" title="Delete from category"><i class="bi pointer bi-x-square-fill"></i></a></td>`
+            }
+
+            tbody.appendChild(row);
+        })
+
+    }
+    //This 'category.name' is from the .json that we got from before
+    categoryName = category.name;
+    title.innerHTML = categoryName + "  ";
+    var pen = document.createElement('i');
+    pen.classList = 'bi bi-pencil-fill';
+    pen.id = 'clickForShowing';
+    pen.onclick = showChanger;
+
+    //This links the objects, saying that, whats in (), is inside of the other one
+    title.appendChild(pen);
+
+}
+
 function renderCategoryDetails(category) {
 
     //This gets an objects in the html with the Id 'name'
