@@ -615,7 +615,7 @@ main.list {
         }
     }
 
-    button.crCategory-btn {
+    button.create-btn {
         margin: 30px 10px 5px;
         max-width: 100px;
         height: 5vh;
@@ -628,7 +628,7 @@ main.list {
         background-color: var(--dark);
     }
 
-    button.crCategory-btn:hover {
+    button.create-btn:hover {
         background-color: var(--medium);
         color: var(--dark);
         border: 4px double var(--dark);
@@ -667,7 +667,7 @@ main.list {
 }
 
 
-.form.category {
+.form, .form:not(.song)  {
     left: 15%;
 }
 
@@ -867,7 +867,9 @@ div.thumbnail {
 
                 #thumbColorSong {
                     background-color: #AAAEED;
-
+                }
+                #thumbColorArtists {
+                    background-color: #995ACF;
                 }
             }
         }
