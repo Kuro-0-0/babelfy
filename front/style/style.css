@@ -638,7 +638,7 @@ main.list {
 
 main.list {
     section {
-        a.song {
+        a.song, a.artist {
             height: 100px;
 
             div {

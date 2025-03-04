@@ -1,14 +1,14 @@
 package com.babel.babelfy.service;
 
 import com.babel.babelfy.dto.artist.ArtistDtoRequestCreate;
-import com.babel.babelfy.dto.artist.ArtistDtoRequestCreate;
-import com.babel.babelfy.model.Artist;
+import com.babel.babelfy.dto.artist.ArtistDtoResponseGetAll;
 import com.babel.babelfy.model.Artist;
 import com.babel.babelfy.repository.ArtistRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -46,6 +46,52 @@ public class ArtistService {
                     ("Something went wrong while creating the artist");
         }
 
+        return response;
+
+    }
+
+    public ResponseEntity<List<ArtistDtoResponseGetAll>> getBySearch(String name) {
+
+        ResponseEntity<List<ArtistDtoResponseGetAll>>  response;
+        List<Artist> artistList;
+        List<ArtistDtoResponseGetAll> artistDTOList = new ArrayList<>();
+        try {
+
+            artistList = artistRepository.findBySpecificName(name);
+
+            for (Artist a : artistList) {
+                artistDTOList.add(ArtistDtoResponseGetAll.artistToArtistDTO(a));
+            }
+
+            response = ResponseEntity.ok().body(artistDTOList);
+
+        } catch (Exception e) {
+            System.out.println(e);
+            response = ResponseEntity.internalServerError().body(null);
+        }
+
+        return response;
+
+    }
+
+    public ResponseEntity<List<ArtistDtoResponseGetAll>>  divideGet(String name) {
+        if (name == null) {
+            return getAll();
+        } else {
+            return getBySearch(name);
+        }
+    }
+    public ResponseEntity<List<ArtistDtoResponseGetAll>>  getAll() {
+        ResponseEntity<List<ArtistDtoResponseGetAll>> response;
+        List<ArtistDtoResponseGetAll> songList = new ArrayList<>();
+        try {
+            for (Artist a : artistRepository.findAll()) {
+                songList.add(ArtistDtoResponseGetAll.artistToArtistDTO(a));
+            }
+            response = ResponseEntity.ok().body(songList);
+        } catch (Exception e) {
+            response = ResponseEntity.internalServerError().body(null);
+        }
         return response;
 
     }

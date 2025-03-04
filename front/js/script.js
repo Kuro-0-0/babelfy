@@ -4,6 +4,7 @@ if (document.getElementsByClassName("catDetails").length > 0) {
     });
 }
 
+
 if (document.getElementsByClassName("songDetails").length > 0) {
     document.addEventListener('DOMContentLoaded', function () {
         showSongDetails()
@@ -90,6 +91,34 @@ if (document.getElementsByClassName("list Category").length > 0) {
     });
     document.getElementById("searchInput").addEventListener('input', function () {
         getAllCategories(this.value)
+    })
+}
+
+if (document.getElementsByClassName("list Artist").length > 0) {
+
+    document.addEventListener('DOMContentLoaded', function () {
+        getAllArtists()
+            .then(function () {
+                let container = document.getElementById('ListSection')
+                if (container != null) {
+                    container.addEventListener('mouseover', function (event) {
+                        if (event.target && event.target.classList.contains('removeBTN')) {
+                            const card = event.target.closest('a');
+                            card.addEventListener('click', preventLink);
+                        }
+                    });
+                    container.addEventListener('mouseout', function (event) {
+                        if (event.target && event.target.classList.contains('removeBTN')) {
+                            const card = event.target.closest('a');
+                            card.removeEventListener('click', preventLink);
+                        }
+                    });
+
+                }
+            })
+    });
+    document.getElementById("searchInput").addEventListener('input', function () {
+        getAllArtists(this.value)
     })
 }
 
@@ -288,12 +317,10 @@ function createArtist() {
         };
 
         fetch('http://localhost:9000/artists', options)
-
             .then(response => {
-                //getAllArtits()
+                getAllArtists()
                 return response
             })
-
             .then(respuesta => {
                 showActionBTNcr()
                 if (respuesta.status == 200) {
@@ -1112,6 +1139,44 @@ async function getAllCategories(searchValue = '') {
         });
 }
 
+async function getAllArtists(searchValue = '') {
+    const apiUrl = 'http://localhost:9000/artists';
+
+    //This variable is created because apiUrl is a const so it cant be changed
+    let customURL = apiUrl;
+    let search = false;
+
+    if (searchValue != '') {
+        customURL += '?name=' + searchValue;
+        search = true;
+    }
+
+    fetch(customURL)
+
+        .then(function (response) {
+
+            if (!response.ok) {
+                throw new Error('Error en la respuesta de la API: ' + response.statusText);
+            }
+
+            return response.json();
+        })
+
+        .then(function (artists) {
+            renderArtists(artists, search)
+
+                .then(function () {
+                    return true;
+                });
+        })
+
+        .catch(function (error) {
+            console.error('Error al cargar las categorias:', error);
+            document.getElementById('main').innerHTML = '<div><h1 class="error"> Error </h1>' +
+                '<p>Something went wrong with the server connection.</p></div>'
+        });
+}
+
 async function getAllSongs(searchValue = '') {
     const apiUrl = 'http://localhost:9000/songs';
     let customURL = apiUrl;
@@ -1199,7 +1264,67 @@ async function renderCategories(categories, search) {
             div = document.createElement("div")
             div.innerHTML =
                 "<h1 class='error'>Advise</h1>" +
-                "<p>There are no songs with the name you are looking for.</p>"
+                "<p>There are no categories with the name you are looking for.</p>"
+
+            list.appendChild(div)
+        }
+    }
+    return true;
+}
+
+async function renderArtists(artists, search) {
+    var container = document.getElementById('ListSection');
+    container.innerHTML = '';
+
+    if (artists.length > 0 && artists) {
+
+        artists.forEach(function (artist) {
+            var card = document.createElement('a');
+            card.classList.add('artist')
+
+            card.onclick = function () {
+                localStorage.setItem('idArtist', artist.id);
+            }
+
+            card.href = 'ArtistDetails.html'
+            var content = document.createElement('div');
+            div = document.createElement('div')
+            div.classList.add("imagen")
+            div.id = "img" + artist.id
+
+            content.append(div)
+
+            if (artist.name != "None") {
+                content.innerHTML = content.innerHTML + '<i onclick="showActionBTN()" class="removeBTN artist bi bi-x-square-fill"></i>'
+            }
+
+            p = document.createElement('p')
+            p.textContent = artist.name
+
+            content.append(p)
+            card.appendChild(content);
+            container.appendChild(card);
+
+            document.getElementById("img" + artist.id).style.backgroundColor = `#` + artist.color + '5b';
+        });
+
+    } else {
+        if (!search) {
+            showPopUp('Advise', 'There are no artists, please create a new one.')
+
+            list = document.getElementById('ListSection')
+            div = document.createElement("div")
+            div.innerHTML =
+                "<h1 class='error'>Advise</h1>" +
+                "<p>There are no artists, please create a new one.</p>"
+
+            list.appendChild(div)
+        } else {
+            list = document.getElementById('ListSection')
+            div = document.createElement("div")
+            div.innerHTML =
+                "<h1 class='error'>Advise</h1>" +
+                "<p>There are no artists with the name you are looking for.</p>"
 
             list.appendChild(div)
         }
