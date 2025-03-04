@@ -101,21 +101,6 @@ public class SongService {
         return response;
     }
 
-    public ResponseEntity<List<SongDtoResponseGetAll>> getAll() {
-        ResponseEntity<List<SongDtoResponseGetAll>> response;
-        List<SongDtoResponseGetAll> songList = new ArrayList<>();
-        try {
-            for (Song s : songRepository.findAll()) {
-                songList.add(SongDtoResponseGetAll.songToSongDTO(s));
-            }
-            response = ResponseEntity.ok().body(songList);
-        } catch (Exception e) {
-            response = ResponseEntity.internalServerError().body(null);
-        }
-        return response;
-
-    }
-
     public ResponseEntity<SongDtoResponseDetails> getDetails(long id) {
 
         ResponseEntity<SongDtoResponseDetails> response;
@@ -230,5 +215,19 @@ public class SongService {
         } else {
             return getBySearch(name);
         }
+    }
+    public ResponseEntity<List<SongDtoResponseGetAll>> getAll() {
+        ResponseEntity<List<SongDtoResponseGetAll>> response;
+        List<SongDtoResponseGetAll> songList = new ArrayList<>();
+        try {
+            for (Song s : songRepository.findAll()) {
+                songList.add(SongDtoResponseGetAll.songToSongDTO(s));
+            }
+            response = ResponseEntity.ok().body(songList);
+        } catch (Exception e) {
+            response = ResponseEntity.internalServerError().body(null);
+        }
+        return response;
+
     }
 }

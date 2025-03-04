@@ -19,6 +19,6 @@ public class Artist {
     private String name;
     private String color;
 
-//    @ManyToMany()
+ //    @ManyToMany()
 //    private List<Song> songList;
 }
