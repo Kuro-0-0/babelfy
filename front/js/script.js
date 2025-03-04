@@ -4,6 +4,7 @@ if (document.getElementsByClassName("catDetails").length > 0) {
     });
 }
 
+
 if (document.getElementsByClassName("songDetails").length > 0) {
     document.addEventListener('DOMContentLoaded', function () {
         showSongDetails()
@@ -69,6 +70,34 @@ if (document.getElementsByClassName("list Category").length > 0) {
 
     document.addEventListener('DOMContentLoaded', function () {
         getAllCategories()
+            .then(function () {
+                let container = document.getElementById('ListSection')
+                if (container != null) {
+                    container.addEventListener('mouseover', function (event) {
+                        if (event.target && event.target.classList.contains('removeBTN')) {
+                            const card = event.target.closest('a');
+                            card.addEventListener('click', preventLink);
+                        }
+                    });
+                    container.addEventListener('mouseout', function (event) {
+                        if (event.target && event.target.classList.contains('removeBTN')) {
+                            const card = event.target.closest('a');
+                            card.removeEventListener('click', preventLink);
+                        }
+                    });
+
+                }
+            })
+    });
+    document.getElementById("searchInput").addEventListener('input', function () {
+        getAllCategories(this.value)
+    })
+}
+
+if (document.getElementsByClassName("list Artist").length > 0) {
+
+    document.addEventListener('DOMContentLoaded', function () {
+        getAllArtists()
             .then(function () {
                 let container = document.getElementById('ListSection')
                 if (container != null) {
@@ -290,7 +319,7 @@ function createArtist() {
         fetch('http://localhost:9000/artists', options)
 
             .then(response => {
-                //getAllArtits()
+                getAllArtits()
                 return response
             })
 
@@ -1099,6 +1128,44 @@ async function getAllCategories(searchValue = '') {
 
         .then(function (categories) {
             renderCategories(categories, search)
+
+                .then(function () {
+                    return true;
+                });
+        })
+
+        .catch(function (error) {
+            console.error('Error al cargar las categorias:', error);
+            document.getElementById('main').innerHTML = '<div><h1 class="error"> Error </h1>' +
+                '<p>Something went wrong with the server connection.</p></div>'
+        });
+}
+
+async function getAllArtists(searchValue = '') {
+    const apiUrl = 'http://localhost:9000/artists';
+
+    //This variable is created because apiUrl is a const so it cant be changed
+    let customURL = apiUrl;
+    let search = false;
+
+    if (searchValue != '') {
+        customURL += '?name=' + searchValue;
+        search = true;
+    }
+
+    fetch(customURL)
+
+        .then(function (response) {
+
+            if (!response.ok) {
+                throw new Error('Error en la respuesta de la API: ' + response.statusText);
+            }
+
+            return response.json();
+        })
+
+        .then(function (artists) {
+            renderArtists(artists, search)
 
                 .then(function () {
                     return true;
