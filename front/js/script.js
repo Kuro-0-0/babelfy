@@ -658,8 +658,6 @@ function deleteSong(idSong = '') {
 
     if (idSong == '') {
         URL = URL + localStorage.getItem('idSong');
-        let options;
-
         fetch(URL, options)
             .then(response => {
                 showActionBTN()
