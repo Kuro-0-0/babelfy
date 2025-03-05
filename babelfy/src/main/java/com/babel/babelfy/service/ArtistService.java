@@ -89,12 +89,8 @@ public class ArtistService {
 
     @Transactional
     public ArtistDtoResponseDetails showDetails(long id) {
-        System.out.println("pepito");
         Artist c = artistRepository.findById(id).orElse(null);
-        System.out.println(c);
-        ArtistDtoResponseDetails artifoes= ArtistDtoResponseDetails.artistToArtistDTO(c);
-        System.out.println(artifoes);
-        return artifoes;
+        return ArtistDtoResponseDetails.artistToArtistDTO(c);
     }
 
     public ResponseEntity<List<ArtistDtoResponseGetAll>>  getAll() {
