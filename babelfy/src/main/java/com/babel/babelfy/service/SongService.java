@@ -52,13 +52,13 @@ public class SongService {
     }
 
     @Transactional
-    public Song songDtoToSong(SongDtoRequestUpdate sDTO, String color) {
+    public Song songDtoToSong(SongDtoRequestUpdate sDTO, Song song) {
         return Song.builder()
                 .id(sDTO.getId())
-                .color(color)
+                .color(song.getColor())
                 .name(sDTO.getName())
+                .artists(song.getArtists())
                 .duration(sDTO.getDuration())
-                .artists(sDTO.getArtistList())
                 .albumName(sDTO.getAlbumName())
                 .releaseDate(sDTO.getReleaseDate())
                 .category(categoryRepository.findById(sDTO.getCategoryId()).orElse(null))
@@ -127,6 +127,7 @@ public class SongService {
         return response;
     }
 
+    @Transactional
     public ResponseEntity<SongDtoResponseDetails> getDetails(long id) {
 
         ResponseEntity<SongDtoResponseDetails> response;
@@ -142,6 +143,7 @@ public class SongService {
             }
 
         } catch (Exception e) {
+            System.out.println(e);
             response = ResponseEntity.internalServerError().body(null);
         }
         return response;
@@ -171,13 +173,13 @@ public class SongService {
                     }
 
                     if (!find) {
-                        modSong = songDtoToSong(sDTO, modSong.getColor());
+                        modSong = songDtoToSong(sDTO, modSong);
                         songRepository.save(modSong);
                         response = ResponseEntity.ok().body("Song data updated");
                     }
 
                 } else {
-                    modSong = songDtoToSong(sDTO, modSong.getColor());
+                    modSong = songDtoToSong(sDTO, modSong);
                     songRepository.save(modSong);
                     response = ResponseEntity.ok().body("Song data updated");
                 }

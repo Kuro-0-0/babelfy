@@ -934,3 +934,7 @@ div.thumbnail {
         }
     }
 }
+
+p#artistName {
+    max-width: 180px;
+}
