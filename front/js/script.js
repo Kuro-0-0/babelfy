@@ -668,7 +668,7 @@ function renderArtistDetails(artist) {
     //This links the objects, saying that, whats in (), is inside of the other one
     title.appendChild(pen);
     
-    /*var div = document.getElementById('songsTable');
+    var div = document.getElementById('songsTable');
 
     if (artist.songs.length <= 0) {
         div.innerHTML = ''
@@ -702,21 +702,35 @@ function renderArtistDetails(artist) {
           
           <td><a class="pointer" onclick="openSongDetails(${song.id})">${song.name}</a></td>
           <td><a class="pointer" onclick="openCategoryDetails(${song.categoryId})">${song.categoryName}</a></td>
-          <td>${song.duration}</td>
-          <td>${song.artistName}</td>
+          <td>${song.duration}</td>`
+          if(song.artists.lenght>1){
+            var names='';
+            var counter=0;
+            song.artists.forEach(function (otherArtist){
+                if(otherArtist.name != artist.name&&counter==1){
+                    names=names + otherArtist.name
+                    counter++;
+                }else if (otherArtist.name != artist.name){
+                    names=names +', '+ otherArtist.name
+                }
+                
+            })
+            row.innerHTML = row.innerHTML + `<td id="otherArtists">${names}</td>
+            <`
+          }else{
+            row.innerHTML = row.innerHTML + `<td>No other artist</td>`
+          }
+          row.innerHTML = row.innerHTML +`
           <td>${song.albumName}</td>
           <td>${song.releaseDate}</td>
+          <td><a class="deleteSong" onclick="showActionBTN(${song.id})" title="Delete from category"><i class="bi pointer bi-x-square-fill"></i></a></td>
         `
-            if (artist.name != "None") {
-                row.innerHTML = row.innerHTML + `<td><a class="deleteSong" onclick="showActionBTN(${song.id})" title="Delete from category"><i class="bi pointer bi-x-square-fill"></i></a></td>`
-            }
-
             tbody.appendChild(row);
         })
         div.appendChild(table);
         table.appendChild(tbody);
     }
-*/
+
 
 }
 
