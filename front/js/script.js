@@ -491,6 +491,42 @@ function showCategoryOptions() {
 
 }
 
+function deleteArtist() {
+    let options;
+
+    options = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/JSON',
+        },
+    };
+
+    fetch('http://localhost:9000/artists/' + localStorage.getItem('idArtist'), options)
+
+        .then(response => {
+            return response
+        })
+
+        .then(respuesta => {
+            showActionBTN()
+            if (respuesta.status == 200) {
+                estado = 'Success'
+            } else {
+                estado = 'Error'
+            }
+            return respuesta.text()
+        })
+
+        .then(text => {
+            showPopUp(estado, text)
+            getAllArtists()
+        })
+
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
+
 function deleteCategory() {
     let options;
 
