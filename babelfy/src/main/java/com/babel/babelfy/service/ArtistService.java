@@ -1,13 +1,8 @@
 package com.babel.babelfy.service;
 
-import com.babel.babelfy.dto.artist.ArtistDtoRequestCreate;
-import com.babel.babelfy.dto.artist.ArtistDtoRequestUpdate;
-import com.babel.babelfy.dto.artist.ArtistDtoResponseDetails;
-import com.babel.babelfy.dto.artist.ArtistDtoResponseGetAll;
-import com.babel.babelfy.dto.category.CategoryDtoRequestUpdate;
-import com.babel.babelfy.dto.category.CategoryDtoResponseDetails;
+import com.babel.babelfy.dto.artist.*;
+import com.babel.babelfy.dto.category.CategoryDtoResponseGetIDName;
 import com.babel.babelfy.model.Artist;
-import com.babel.babelfy.model.Category;
 import com.babel.babelfy.repository.ArtistRepository;
 
 import jakarta.transaction.Transactional;
@@ -129,7 +124,7 @@ public class ArtistService {
         List<Artist> list = artistRepository.findByName(a.getName());
         try {
             if (old != null) {
-                if (list.isEmpty()) {
+                if (list.isEmpty() || old.getName().equals(a.getName())) {
                         a.setColor(old.getColor());
                         artistRepository.save(a);
                         response = ResponseEntity.ok().body("Changes made successfully");
@@ -147,4 +142,25 @@ public class ArtistService {
 
     }
 
+    public ResponseEntity<List<ArtistDtoResponseGetIDName>> getIDName() {
+        ResponseEntity<List<ArtistDtoResponseGetIDName>> response;
+        List<ArtistDtoResponseGetIDName> artistDtoResponseGetIDNameList = new ArrayList<>();
+        List<Artist> artistList = new ArrayList<>();
+        try {
+
+            artistList = artistRepository.findAll();
+            if (!artistList.isEmpty()) {
+                for (Artist a : artistList) {
+                    artistDtoResponseGetIDNameList.add(ArtistDtoResponseGetIDName.artistToArtistDTO(a));
+                }
+                response = ResponseEntity.ok().body(artistDtoResponseGetIDNameList);
+            } else {
+                response = ResponseEntity.badRequest().body(null);
+            }
+
+        } catch (Exception e) {
+            response = ResponseEntity.internalServerError().body(null);
+        }
+        return response;
+    }
 }

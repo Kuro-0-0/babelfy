@@ -1,6 +1,7 @@
 package com.babel.babelfy.dto.song;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.babel.babelfy.model.Song;
 
@@ -11,7 +12,7 @@ public class SongDtoRequestCreate {
 
     private String name;
     private int duration;
-    private String artistName;
+    private List<Long> artistId;
     private String albumName;
     private LocalDate releaseDate;
     private long idCategory;

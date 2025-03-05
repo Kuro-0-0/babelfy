@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -19,6 +21,6 @@ public class Artist {
     private String name;
     private String color;
 
- //    @ManyToMany()
-//    private List<Song> songList;
+    @ManyToMany(mappedBy = "artists")
+    private List<Song> songList;
 }
