@@ -1,10 +1,12 @@
 package com.babel.babelfy.dto.song;
 
+import com.babel.babelfy.model.Artist;
 import com.babel.babelfy.model.Song;
 import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Builder
@@ -13,7 +15,7 @@ public class SongDtoResponseDetails {
 
     private String name;
     private int duration;
-    private String artistName;
+    private List<Artist> artistList;
     private String albumName;
     private LocalDate releaseDate;
     private String categoryName;
@@ -33,7 +35,7 @@ public class SongDtoResponseDetails {
         return SongDtoResponseDetails.builder()
                 .name(s.getName())
                 .duration(s.getDuration())
-                .artistName(s.getArtistName())
+                .artistList(s.getArtists())
                 .albumName(s.getAlbumName())
                 .releaseDate(s.getReleaseDate())
                 .categoryName(categoryName)

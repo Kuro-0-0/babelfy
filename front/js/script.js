@@ -372,6 +372,7 @@ function showActionBTNcr() {
             
             if (element.id == "createSong") {
                 showCategoryOptions()
+                showArtistOptions()
             }
 
         }
@@ -387,6 +388,8 @@ function createSong() {
         let params = {};
         let options;
 
+        let artists = [];
+
         for (let index = 0; index < inputs.length; index++) {
             let element = inputs[index];
             paramName = element.name;
@@ -399,9 +402,22 @@ function createSong() {
                     paramValue.message = paramValue.message + '. Refering to the song name.'
                     break;
 
-                case "artistName":
-                    paramValue = checkText(paramValue);
-                    paramValue.message = paramValue.message + '. Refering to the artist name.'
+                case "artistId":
+
+                    checkboxes = document.getElementById('checkboxes')
+
+                    for (let i = 0; i < checkboxes.children.length; i++) {
+                        const child = checkboxes.children[i].children[0];
+                        if (child.checked) {
+                            artists.push(child.value)
+                        }
+                    }
+
+                    paramValue = artists;
+                    if (paramValue.length == 0) {
+                        paramValue = new Error('None artist is selected')
+                        paramValue.message = paramValue.message + '. Refering to the artists.'
+                    }
                     break;
 
                 case "albumName":
@@ -432,7 +448,11 @@ function createSong() {
             }
 
             params[paramName] = paramValue
-            element.value = ''
+            
+            if (element.id != 'inputArtist') {
+                element.value = ''
+            }
+            
         }
 
         options = {
@@ -487,6 +507,36 @@ function showCategoryOptions() {
                     option.value = category.id
                     option.textContent = category.name
                     listoptions.appendChild(option);
+                })
+            }
+        })
+
+
+}
+
+function showArtistOptions() {
+
+    const listoptions = document.getElementById("checkboxes");
+    getArtistData()
+        .then(data => {
+            if (data.length > 0 && data) {
+                listoptions.textContent = ''
+                data.forEach(function (artist) {
+                    console.log(artist);
+                    
+                    var label = document.createElement('label')
+                    var input = document.createElement('input')
+
+                    label.for = 'input-'+artist.id
+                    input.id = 'input-'+artist.id
+                    input.classList.add("artistCheckbox")
+                    input.type = 'checkbox'
+                    input.value = artist.id
+                    
+                    label.appendChild(input)
+                    label.innerHTML = label.innerHTML + artist.name
+                    listoptions.appendChild(label)
+
                 })
             }
         })
@@ -608,8 +658,6 @@ function deleteSong(idSong = '') {
 
     if (idSong == '') {
         URL = URL + localStorage.getItem('idSong');
-        let options;
-
         fetch(URL, options)
             .then(response => {
                 showActionBTN()
@@ -1319,6 +1367,20 @@ async function getCategoryData() {
         })
 }
 
+async function getArtistData() {
+    options = {
+        method: 'GET',
+    };
+
+    return fetch("http://localhost:9000/artists/names", options)
+        .then(data => {
+            return data.json();
+        })
+        .catch(error => {
+            console.log(error);
+        })
+}
+
 async function getAllCategories(searchValue = '') {
     const apiUrl = 'http://localhost:9000/categories';
 
@@ -1603,4 +1665,16 @@ async function renderSongs(songs, search) {
         }
     }
     return true;
+}
+
+var expanded = false;
+function showCheckboxes() {
+    var checkboxes = document.getElementById("checkboxes");
+    if (!expanded) {
+        checkboxes.style.display = "block";
+        expanded = true;
+    } else {
+        checkboxes.style.display = "none";
+        expanded = false;
+    }
 }

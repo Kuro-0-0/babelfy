@@ -71,18 +71,35 @@
                     <label class="input-name" for="selectCategory">Category</label>
                     <select class="dataAPI createSong" id="categoryList" name="selectCategory">
                     </select>
-
                 </div>
+
                 <div class="input-container">
                     <label class="input-name" for="inputDuration">Duration</label>
                     <input class="dataAPI createSong" id="inputDuration" name="duration" type="number" min="1"
                         placeholder="Insert the duration here">
                 </div>
-                <div class="input-container">
-                    <label class="input-name" for="inputArtist">Artist</label>
-                    <input class="dataAPI createSong" id="inputArtist" name="artistName" type="text"
-                        placeholder="Write the artist of this song">
+
+                <div class="input-container multiselect">
+                    <div class="selectBox" onclick="showCheckboxes()">
+                        <label class="input-name" for="inputArtist">Artist</label>
+                        <select class="dataAPI createSong" id="inputArtist" name="artistId" type="text"
+                            placeholder="Select the artists of this song">
+                            <option value="null" id="optionSelected">Select an option</option>
+                        </select>
+                        <div class="overSelect"></div>
+                    </div>
+                    <div id="checkboxes">
+                            <label for="one">
+                            <input class="artistCheckbox" type="checkbox" id="one"/> First checkbox </label>
+
+                            <label for="two">
+                            <input class="artistCheckbox" type="checkbox" id="two"/> Second checkbox </label>
+                        
+                            <label for="three">
+                            <input class="artistCheckbox" type="checkbox" id="three"/> Third checkbox </label>
+                    </div>
                 </div>
+
                 <div class="input-container">
                     <label class="input-name" for="inputAlbumName">Album</label>
                     <input class="dataAPI createSong" id="inputAlbumName" name="albumName" type="text"

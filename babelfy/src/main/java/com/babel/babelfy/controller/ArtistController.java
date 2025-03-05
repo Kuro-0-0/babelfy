@@ -1,10 +1,8 @@
 package com.babel.babelfy.controller;
 
-import com.babel.babelfy.dto.artist.ArtistDtoRequestCreate;
-import com.babel.babelfy.dto.artist.ArtistDtoRequestUpdate;
-import com.babel.babelfy.dto.artist.ArtistDtoResponseDetails;
-import com.babel.babelfy.dto.artist.ArtistDtoResponseGetAll;
+import com.babel.babelfy.dto.artist.*;
 import com.babel.babelfy.dto.category.CategoryDtoRequestUpdate;
+import com.babel.babelfy.dto.category.CategoryDtoResponseGetIDName;
 import com.babel.babelfy.service.ArtistService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +40,11 @@ public class ArtistController {
     @DeleteMapping("/{id}")
     public String delete(@PathVariable long id) {
         return artistService.delete(id);
+    }
+
+    @GetMapping("/names")
+    public ResponseEntity<List<ArtistDtoResponseGetIDName>> getIDName() {
+        return artistService.getIDName();
     }
 
 
