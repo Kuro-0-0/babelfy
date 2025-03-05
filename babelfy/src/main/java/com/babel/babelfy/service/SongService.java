@@ -38,9 +38,10 @@ public class SongService {
     }
 
     @Transactional
-    public Song songDtoToSong(SongDtoRequestUpdate sDTO) {
+    public Song songDtoToSong(SongDtoRequestUpdate sDTO, String color) {
         return Song.builder()
                 .id(sDTO.getId())
+                .color(color)
                 .name(sDTO.getName())
                 .duration(sDTO.getDuration())
                 .artistName(sDTO.getArtistName())
@@ -142,13 +143,13 @@ public class SongService {
                     }
 
                     if (!find) {
-                        modSong = songDtoToSong(sDTO);
+                        modSong = songDtoToSong(sDTO, modSong.getColor());
                         songRepository.save(modSong);
                         response = ResponseEntity.ok().body("Song data updated");
                     }
 
                 } else {
-                    modSong = songDtoToSong(sDTO);
+                    modSong = songDtoToSong(sDTO, modSong.getColor());
                     songRepository.save(modSong);
                     response = ResponseEntity.ok().body("Song data updated");
                 }

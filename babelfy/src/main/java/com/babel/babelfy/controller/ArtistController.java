@@ -1,8 +1,10 @@
 package com.babel.babelfy.controller;
 
 import com.babel.babelfy.dto.artist.ArtistDtoRequestCreate;
+import com.babel.babelfy.dto.artist.ArtistDtoRequestUpdate;
 import com.babel.babelfy.dto.artist.ArtistDtoResponseDetails;
 import com.babel.babelfy.dto.artist.ArtistDtoResponseGetAll;
+import com.babel.babelfy.dto.category.CategoryDtoRequestUpdate;
 import com.babel.babelfy.service.ArtistService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,11 @@ public class ArtistController {
     @GetMapping("")
     public ResponseEntity<List<ArtistDtoResponseGetAll>> listAll(@RequestParam(required = false) String name) {
         return artistService.divideGet(name);
+    }
+
+    @PutMapping("")
+    public ResponseEntity<String> change(@RequestBody ArtistDtoRequestUpdate request) {
+        return artistService.modify(request);
     }
 
     @GetMapping("/{id}")

@@ -32,7 +32,23 @@
 
     <main class="artistDetails" id="main">
 
+        <div id="PopUp" class="PopUp">
+            <h1 id="TitlePopUp">SUCCESS</h1>
+            <p id="textPopUp"></p>
+            <button onclick="hidePopUp()">OK</button>
+        </div>
+
+
         <section id="sectionDetails">
+            <div class="updater" id="updateArtist">
+                <i class="bi bi-x-circle-fill quit" onclick="showChanger()"></i>
+                <h3>Change Name</h3>
+
+                <form id="createForm">
+                    <input type="text" placeholder="Write here" id="newName">
+                    <button onclick="modifyArtist()">Update</button>
+                </form>
+            </div>
             <div id="songsTable">
             
             <!-- This is an example table of songs because we don't have songs yet -->

@@ -47,3 +47,9 @@ INSERT INTO song (id, name, duration, artist_name, album_name, release_date, cat
 INSERT INTO song (id, name, duration, artist_name, album_name, release_date, category_id, color) VALUES (38, 'All of Me', 4, 'John Legend', 'Love in the Future', '2013-08-12', 0, 'D1C7E2');
 INSERT INTO song (id, name, duration, artist_name, album_name, release_date, category_id, color) VALUES (39, 'Bad Guy', 3, 'Billie Eilish', 'When We All Fall Asl', '2019-03-29', 0, 'A2F9C7');
 INSERT INTO song (id, name, duration, artist_name, album_name, release_date, category_id, color) VALUES (40, 'Someone Like Yo', 5, 'Adele', '21', '2011-01-24', 0, 'B4E1D6');
+
+INSERT INTO artist (id, name, color) VALUES (0, 'Michael Jackson', 'FFD700');
+INSERT INTO artist (id, name, color) VALUES (1, 'Beyonce', '8A2BE2');
+INSERT INTO artist (id, name, color) VALUES (2, 'The Beatles', '800000');
+INSERT INTO artist (id, name, color) VALUES (3, 'Shakira', 'FF69B4');
+INSERT INTO artist (id, name, color) VALUES (4, 'Eminem', '00CED1'); 
