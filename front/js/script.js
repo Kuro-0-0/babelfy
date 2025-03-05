@@ -1,3 +1,6 @@
+var categoryName
+var artistName
+
 if (document.getElementsByClassName("catDetails").length > 0) {
     document.addEventListener('DOMContentLoaded', function () {
         showCategoryDetails();
@@ -793,11 +796,14 @@ function renderCategoryDetails(category) {
 function showChanger() {
     var container;
     var newName;
-    if (document.getElementById('updateCategory') == null) {
+    if (document.getElementById('updateSong') != null) {
         container = document.getElementById('updateSong')
-    } else {
+    } else if (document.getElementById('updateCategory') != null){
         container = document.getElementById('updateCategory')
         newName = categoryName
+    } else {
+        container = document.getElementById('updateArtist')
+        newName = artistName
     }
 
     if (container.style.display == 'block') {
@@ -862,6 +868,64 @@ function changeName() {
 
                 console.error('Error al cargar la categoria', error);
                 document.getElementById('main').innerHTML = '<p>Error al cargar la categoria.</p>';
+            });
+
+    } catch (error) {
+        showPopUp('Error', error.message)
+    }
+}
+
+function changeName() {
+    try {
+
+        var submitter = document.getElementById('newName');
+        var artistId = localStorage.getItem('idArtist');
+        const apiUrlChange = 'http://localhost:9000/artists';
+        var nameValue = checkText(submitter.value);
+
+        //This could be an error because the checkText function could return one
+        if (nameValue instanceof Error) {
+            throw new Error(nameValue.message)
+        }
+
+        //This options are needed to 'send back' the changes
+        options = {
+            method: "put",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'id': id,
+                'name': submitter.value
+            })
+        }
+        fetch(apiUrlChange, options)
+
+            .then(function (response) {
+
+                //This 'ok' means that the status is a 200
+                if (response.ok) {
+                    estado = 'Message'
+                    showArtistDetails();
+                } else {
+                    estado = 'Error'
+                }
+                return response.text()
+            })
+
+            .then(text => {
+                //Calling again this function makes it disappear (revert the show)
+                showChanger();
+
+                showPopUp(estado, text)
+                var popupTitle = document.getElementById('TitlePopUp');
+                popupTitle.style.color = '#cdefed';
+            })
+
+            .catch(function (error) {
+
+                console.error('Error al cargar el artista', error);
+                document.getElementById('main').innerHTML = '<p>Error loading the artist.</p>';
             });
 
     } catch (error) {
