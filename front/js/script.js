@@ -4,7 +4,6 @@ if (document.getElementsByClassName("catDetails").length > 0) {
     });
 }
 
-
 if (document.getElementsByClassName("songDetails").length > 0) {
     document.addEventListener('DOMContentLoaded', function () {
         showSongDetails()
@@ -18,6 +17,12 @@ if (document.getElementsByClassName("songDetails").length > 0) {
                 }
             })
 
+    });
+}
+
+if (document.getElementsByClassName("artistDetails").length > 0) {
+    document.addEventListener('DOMContentLoaded', function () {
+        showArtistDetails();
     });
 }
 
@@ -612,12 +617,21 @@ function openArtistDetails(id) {
 }
 
 function renderArtistDetails(artist) {
-
-    //This gets an objects in the html with the Id 'name'
+    console.log(artist)
     var title = document.getElementById('name');
-    var div = document.getElementById('songsTable');
+    artistName = artist.name;
+    title.innerHTML = artistName + "  ";
+    var pen = document.createElement('i');
+    pen.classList = 'bi bi-pencil-fill';
+    pen.id = 'clickForShowing';
+    pen.onclick = showChanger;
 
-    if (category.songs.length <= 0) {
+    //This links the objects, saying that, whats in (), is inside of the other one
+    title.appendChild(pen);
+    
+    /*var div = document.getElementById('songsTable');
+
+    if (artist.songs.length <= 0) {
         div.innerHTML = ''
         div.innerHTML =
             "<h1 class='error'>Comment</h1>" +
@@ -641,8 +655,7 @@ function renderArtistDetails(artist) {
               </tr>
             </thead>
         `
-        div.appendChild(table);
-        table.appendChild(tbody);
+        
         artist.songs.forEach(function (song) {
 
             var row = document.createElement('tr');
@@ -661,22 +674,15 @@ function renderArtistDetails(artist) {
 
             tbody.appendChild(row);
         })
-
+        div.appendChild(table);
+        table.appendChild(tbody);
     }
-    artistName = artist.name;
-    title.innerHTML = artistName + "  ";
-    var pen = document.createElement('i');
-    pen.classList = 'bi bi-pencil-fill';
-    pen.id = 'clickForShowing';
-    pen.onclick = showChanger;
-
-    //This links the objects, saying that, whats in (), is inside of the other one
-    title.appendChild(pen);
+*/
 
 }
 
 function showArtistDetails() {
-
+    console.log("fuaeefuibe")
     //This is the endPoint, it uses the saved Id to show the category
     const apiUrl = 'http://localhost:9000/artists/' + localStorage.getItem('idArtist');
 

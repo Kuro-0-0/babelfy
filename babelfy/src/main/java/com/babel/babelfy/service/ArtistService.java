@@ -1,9 +1,14 @@
 package com.babel.babelfy.service;
 
 import com.babel.babelfy.dto.artist.ArtistDtoRequestCreate;
+import com.babel.babelfy.dto.artist.ArtistDtoResponseDetails;
 import com.babel.babelfy.dto.artist.ArtistDtoResponseGetAll;
+import com.babel.babelfy.dto.category.CategoryDtoResponseDetails;
 import com.babel.babelfy.model.Artist;
+import com.babel.babelfy.model.Category;
 import com.babel.babelfy.repository.ArtistRepository;
+
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -81,6 +86,17 @@ public class ArtistService {
             return getBySearch(name);
         }
     }
+
+    @Transactional
+    public ArtistDtoResponseDetails showDetails(long id) {
+        System.out.println("pepito");
+        Artist c = artistRepository.findById(id).orElse(null);
+        System.out.println(c);
+        ArtistDtoResponseDetails artifoes= ArtistDtoResponseDetails.artistToArtistDTO(c);
+        System.out.println(artifoes);
+        return artifoes;
+    }
+
     public ResponseEntity<List<ArtistDtoResponseGetAll>>  getAll() {
         ResponseEntity<List<ArtistDtoResponseGetAll>> response;
         List<ArtistDtoResponseGetAll> songList = new ArrayList<>();
