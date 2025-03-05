@@ -1,8 +1,10 @@
 package com.babel.babelfy.service;
 
 import com.babel.babelfy.dto.artist.ArtistDtoRequestCreate;
+import com.babel.babelfy.dto.artist.ArtistDtoRequestUpdate;
 import com.babel.babelfy.dto.artist.ArtistDtoResponseDetails;
 import com.babel.babelfy.dto.artist.ArtistDtoResponseGetAll;
+import com.babel.babelfy.dto.category.CategoryDtoRequestUpdate;
 import com.babel.babelfy.dto.category.CategoryDtoResponseDetails;
 import com.babel.babelfy.model.Artist;
 import com.babel.babelfy.model.Category;
@@ -119,4 +121,30 @@ public class ArtistService {
         }
         return response;
     }
+
+    public ResponseEntity<String> modify(ArtistDtoRequestUpdate request) {
+        ResponseEntity<String> response;
+        Artist a = ArtistDtoRequestUpdate.artistDTOToArtist(request);
+        Artist old = artistRepository.findById(a.getId()).orElse(null);
+        List<Artist> list = artistRepository.findByName(a.getName());
+        try {
+            if (old != null) {
+                if (list.isEmpty()) {
+                        a.setColor(old.getColor());
+                        artistRepository.save(a);
+                        response = ResponseEntity.ok().body("Changes made successfully");
+                } else {
+                    response = ResponseEntity.badRequest().body("You can't make this change because this name is already in use");
+                }
+            } else {
+                response = ResponseEntity.badRequest().body("You can't make this change because this Artist does not exist");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            response = ResponseEntity.internalServerError().body("Something went wrong while updating the artist.");
+        }
+        return response;
+
+    }
+
 }

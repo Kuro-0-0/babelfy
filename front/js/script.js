@@ -857,7 +857,6 @@ function changeName() {
     try {
 
         var submitter = document.getElementById('newName');
-        var categoryId = localStorage.getItem('idCategory');
         const apiUrlChange = 'http://localhost:9000/categories';
         var nameValue = checkText(submitter.value);
 
@@ -911,11 +910,11 @@ function changeName() {
     }
 }
 
-function changeName() {
+function modifyArtist() {
     try {
 
         var submitter = document.getElementById('newName');
-        var artistId = localStorage.getItem('idArtist');
+        var id = localStorage.getItem('idArtist');
         const apiUrlChange = 'http://localhost:9000/artists';
         var nameValue = checkText(submitter.value);
 

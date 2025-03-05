@@ -107,18 +107,17 @@ public class CategoryService {
         Category c = CategoryDtoRequestUpdate.categoryDTOToCategory(request);
         Category old = categoryRepository.findById(c.getId()).orElse(null);
         List<Category> list = categoryRepository.findByName(c.getName());
-
-        if (list.isEmpty()) {
-            if (old != null) {
+        if (old != null) {
+            if (list.isEmpty() || old.getName().equals(c.getName())) {
+                c.setColor(old.getColor());
                 categoryRepository.save(c);
                 response = "Changes made successfully";
             } else {
-                response = "You can't make this change because this category does not exist";
+                response = "You can't make this change because this name is already in use";
             }
         } else {
-            response = "You can't make this change because this name is already in use";
+            response = "You can't make this change because this category does not exist";
         }
-
         return response;
     }
 

@@ -52,4 +52,4 @@ INSERT INTO artist (id, name, color) VALUES (0, 'Michael Jackson', 'FFD700');
 INSERT INTO artist (id, name, color) VALUES (1, 'Beyonce', '8A2BE2');
 INSERT INTO artist (id, name, color) VALUES (2, 'The Beatles', '800000');
 INSERT INTO artist (id, name, color) VALUES (3, 'Shakira', 'FF69B4');
-INSERT INTO artist (id, name, color) VALUES (4, 'Eminem', '00CED1');
+INSERT INTO artist (id, name, color) VALUES (4, 'Eminem', '00CED1'); 

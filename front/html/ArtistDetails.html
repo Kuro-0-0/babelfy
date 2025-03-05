@@ -32,6 +32,13 @@
 
     <main class="artistDetails" id="main">
 
+        <div id="PopUp" class="PopUp">
+            <h1 id="TitlePopUp">SUCCESS</h1>
+            <p id="textPopUp"></p>
+            <button onclick="hidePopUp()">OK</button>
+        </div>
+
+
         <section id="sectionDetails">
             <div class="updater" id="updateArtist">
                 <i class="bi bi-x-circle-fill quit" onclick="showChanger()"></i>
@@ -39,7 +46,7 @@
 
                 <form id="createForm">
                     <input type="text" placeholder="Write here" id="newName">
-                    <button onclick="changeName()">Update</button>
+                    <button onclick="modifyArtist()">Update</button>
                 </form>
             </div>
             <div id="songsTable">
