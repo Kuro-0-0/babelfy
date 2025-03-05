@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.babel.babelfy.model.Artist;
+import com.babel.babelfy.repository.ArtistRepository;
 import com.babel.babelfy.repository.CategoryRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
@@ -23,14 +25,26 @@ public class SongService {
 
     private final SongRepository songRepository;
     private final CategoryRepository categoryRepository;
+    private final ArtistRepository artistRepository;
 
     @Transactional
     public Song SongDtoToSong(SongDtoRequestCreate songDto) {
         Category c = categoryRepository.findById(songDto.getIdCategory()).orElse(null);
+
+        List <Artist> artistList = new ArrayList<>();
+
+        for (long i : songDto.getArtistId()) {
+            Artist a;
+            a = artistRepository.findById(i).orElse(null);
+            if (a != null) {
+                artistList.add(a);
+            }
+        }
+
         return Song.builder()
                 .name(songDto.getName())
                 .duration(songDto.getDuration())
-                .artistName(songDto.getArtistName())
+                .artists(artistList)
                 .albumName(songDto.getAlbumName())
                 .releaseDate(songDto.getReleaseDate())
                 .category(c)
@@ -44,8 +58,8 @@ public class SongService {
                 .color(color)
                 .name(sDTO.getName())
                 .duration(sDTO.getDuration())
-                .artistName(sDTO.getArtistName())
-                .albumName(sDTO.getArtistName())
+                .artists(sDTO.getArtistList())
+                .albumName(sDTO.getAlbumName())
                 .releaseDate(sDTO.getReleaseDate())
                 .category(categoryRepository.findById(sDTO.getCategoryId()).orElse(null))
                 .build();
@@ -56,6 +70,8 @@ public class SongService {
         String response = "";
         Song newSong = SongDtoToSong(cDTO);
         List<Song> list = songRepository.findByName(newSong.getName());
+        List<Artist> artistList = new ArrayList<>();
+        List<Song> artistSongs = new ArrayList<>();
         boolean isHereArtist = false;
         if (list.isEmpty()) {
             String values[] = {"A", "B", "C", "D", "E", "F", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
@@ -72,11 +88,20 @@ public class SongService {
             response = "This song was successfully created";
         } else {
 
-            for (int i = 0; i < list.size() && !isHereArtist; i++) {
-                if (list.get(i).getArtistName().equalsIgnoreCase(newSong.getArtistName())) {
+            for (int i = 0; i < list.size(); i++) {
+                artistList.addAll(list.get(i).getArtists());
+            }
+
+            for (int i = 0; i < artistList.size(); i++) {
+                artistSongs.addAll(artistList.get(i).getSongList());
+            }
+
+            for (int i = 0; i < artistSongs.size() && !isHereArtist; i++) {
+                if (artistSongs.get(i).getName().equalsIgnoreCase(newSong.getName())) {
                     isHereArtist = true;
                 }
             }
+
             if (isHereArtist) {
                 response = "This artist already has a song named like this";
             } else {
@@ -128,11 +153,14 @@ public class SongService {
         Song modSong;
         try {
             modSong = songRepository.findById(sDTO.getId()).orElse(null);
-            List<Song> artistSongs;
+            List<Song> artistSongs = new ArrayList<>();
             boolean find = false;
             if (modSong != null) {
 
-                artistSongs = songRepository.findByArtistName(modSong.getArtistName());
+                for (Artist a :modSong.getArtists()) {
+                    List<Song> songs = a.getSongList();
+                    artistSongs.addAll(songs);
+                }
 
                 if (!artistSongs.isEmpty()) {
                     for (Song s : artistSongs) {
