@@ -182,7 +182,7 @@ button.options:hover {
 }
 
 /** Category Details*/
-main.catDetails {
+main.catDetails,main.artistDetails {
     text-align: center;
 }
 
@@ -190,19 +190,19 @@ header>h1 {
     text-transform: uppercase;
 }
 
-main.catDetails>section>div>table>thead>tr>th {
+main.catDetails>section>div>table>thead>tr>th,main.artistDetails>section>div>table>thead>tr>th {
     text-transform: uppercase;
     padding: 15px;
     background-color: var(--dark);
     color: var(--light);
 }
 
-main.catDetails>section>div>table>tbody>tr:hover {
+main.catDetails>section>div>table>tbody>tr:hover, main.artistDetails>section>div>table>tbody>tr:hover {
     background-color: var(--light);
     filter: brightness(1.2);
 }
 
-main.catDetails>section>div>table>tbody>tr>td {
+main.catDetails>section>div>table>tbody>tr>td, main.artistDetails>section>div>table>tbody>tr>td {
     padding: 12px;
 }
 
@@ -217,11 +217,11 @@ h1>button {
     transform: scale(1.7);
 }
 
-main.catDetails>section {
+main.catDetails>section, main.artistDetails>section {
     width: 100%;
 }
 
-main.catDetails>section>div>table {
+main.catDetails>section>div>table, main.artistDetails>section>div>table {
     margin: 50px auto 0px;
     border: 1px solid var(--dark);
     border-collapse: collapse;
@@ -229,12 +229,15 @@ main.catDetails>section>div>table {
 }
 
 main.catDetails>section>div>table>thead>tr>th:first-child,
-main.catDetails>section>div>table>tbody>tr>td:first-child {
+main.catDetails>section>div>table>tbody>tr>td:first-child, 
+main.artistDetails>section>div>table>thead>tr>th:first-child,
+main.artistDetails>section>div>table>tbody>tr>td:first-child {
     padding-right: 80px;
     padding-left: 15px;
 }
 
-main.catDetails>section>div>table>tbody>tr>td:first-child {
+main.catDetails>section>div>table>tbody>tr>td:first-child, 
+main.artistDetails>section>div>table>tbody>tr>td:first-child {
     min-width: 100px;
 }
 
@@ -312,7 +315,7 @@ div.updater {
     }
 }
 
-main.catDetails {
+main.catDetails, main.artistDetails {
     display: flex;
     text-align: center;
     justify-content: center;
