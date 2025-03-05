@@ -107,4 +107,16 @@ public class ArtistService {
         return response;
 
     }
+
+    public String delete(long id) {
+        Artist a = artistRepository.findById(id).orElse(null);
+        String response = "";
+        if (a != null) {
+            artistRepository.delete(a);
+            response = "This artist was successfully deleted ";
+        } else {
+            response = "There is not an artist with such id";
+        }
+        return response;
+    }
 }
