@@ -32,7 +32,10 @@ public class ArtistController {
         return artistService.add(aDTO);
     }
 
-    
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable long id) {
+        return artistService.delete(id);
+    }
 
 
 }

@@ -216,6 +216,7 @@ public class SongService {
             return getBySearch(name);
         }
     }
+    
     public ResponseEntity<List<SongDtoResponseGetAll>> getAll() {
         ResponseEntity<List<SongDtoResponseGetAll>> response;
         List<SongDtoResponseGetAll> songList = new ArrayList<>();
