@@ -731,9 +731,10 @@ function renderArtistDetails(artist) {
     //This links the objects, saying that, whats in (), is inside of the other one
     title.appendChild(pen);
     
-    /*var div = document.getElementById('songsTable');
+    var div = document.getElementById('songsTable');
+    console.log(artist.songs)
+    if (artist.songs.length<= 0) {
 
-    if (artist.songs.length <= 0) {
         div.innerHTML = ''
         div.innerHTML =
             "<h1 class='error'>Comment</h1>" +
@@ -750,36 +751,69 @@ function renderArtistDetails(artist) {
                 <th>Name</th>
                 <th>Category</th>
                 <th>Duration</th>
-                <th>Other Artists</th>
-                <th>Album</th>
                 <th>Release Date</th>
+                <th>Album</th>
+                <th>Other Artists</th>
                 <th></th>
               </tr>
             </thead>
         `
         
         artist.songs.forEach(function (song) {
-
+console.log(song)
             var row = document.createElement('tr');
+            var artistsLink = document.createElement('td');
+            console.log(song.id)
             row.innerHTML = `
           
           <td><a class="pointer" onclick="openSongDetails(${song.id})">${song.name}</a></td>
-          <td><a class="pointer" onclick="openCategoryDetails(${song.categoryId})">${song.categoryName}</a></td>
+          <td><a class="pointer" onclick="openCategoryDetails(${song.categoryID})">${song.categoryName}</a></td>
           <td>${song.duration}</td>
-          <td>${song.artistName}</td>
-          <td>${song.albumName}</td>
           <td>${song.releaseDate}</td>
-        `
-            if (artist.name != "None") {
-                row.innerHTML = row.innerHTML + `<td><a class="deleteSong" onclick="showActionBTN(${song.id})" title="Delete from category"><i class="bi pointer bi-x-square-fill"></i></a></td>`
+          <td>${song.albumName}</td>`
+          if(song.artistList.length>1){
+            var names='';
+            var counter=0;
+
+            for (let i = 0; i < song.artistList.length; i++) {
+                console.log(song.artistsID[i])
+                console.log(song.artistList[i])
+                if(song.artistList[i] != artist.name&&counter<1){
+                    artistsLink.innerHTML=`<a class="pointer" onclick="openArtistDetails(${song.artistsID[i]})">${song.artistList[i]}</a>`
+                    counter++;
+                }else{
+                    artistsLink.innerHTML= artistsLink.innerHTML +', '+ `<a class="pointer" onclick="openArtistDetails(${song.artistsID[i]})">${song.artistList[i]}</a>`
+                }
+                
             }
 
+
+
+
+
+            /*song.artistList.forEach(function (otherArtist){
+                if(otherArtist.name != artist.name&&counter>1){
+                    artistsLink.innerHTML =`<a class="pointer" onclick="openCategoryDetails(${otherArtist.categoryID})">${song.categoryName}</a>`
+                    names=names + otherArtist.name
+                    counter++;
+                }else if (otherArtist.name != artist.name){
+                    names=names +', '+ otherArtist.name
+                }
+                
+            })*/
+            row.innerHTML = row.innerHTML + `<td id="otherArtists">${artistsLink.innerHTML}</td>
+            <td></td>
+            `
+          }else{
+            row.innerHTML = row.innerHTML + `<td>No other artist</td>
+            <td><a class="deleteSong" onclick="showActionBTN(${song.id})" title="Delete from category"><i class="bi pointer bi-x-square-fill"></i></a></td>`
+          }
             tbody.appendChild(row);
         })
         div.appendChild(table);
         table.appendChild(tbody);
     }
-*/
+
 
 }
 

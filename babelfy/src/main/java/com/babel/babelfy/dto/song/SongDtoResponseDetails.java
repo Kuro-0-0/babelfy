@@ -15,9 +15,10 @@ public class SongDtoResponseDetails {
 
 
     private String name;
+    private long id;
     private int duration;
     private List<String> artistList;
-    private List<Long> artistIDlist;
+    private List<Long> artistsIDList;
     private String albumName;
     private LocalDate releaseDate;
     private String categoryName;
@@ -27,7 +28,7 @@ public class SongDtoResponseDetails {
         String categoryName;
         long categoryID;
         List<String> artistList = new ArrayList<>();
-        List<Long> artistIDlist = new ArrayList<>();
+        List<Long> artistsIDList= new ArrayList<>();
 
         if (s.getCategory() != null) {
             categoryName = s.getCategory().getName();
@@ -39,14 +40,15 @@ public class SongDtoResponseDetails {
 
         for (Artist a : s.getArtists()) {
             artistList.add(a.getName());
-            artistIDlist.add(a.getId());
+            artistsIDList.add(a.getId());
         }
 
         return SongDtoResponseDetails.builder()
                 .name(s.getName())
+                .id(s.getId())
                 .duration(s.getDuration())
                 .artistList(artistList)
-                .artistIDlist(artistIDlist)
+                .artistsIDList(artistsIDList)
                 .albumName(s.getAlbumName())
                 .releaseDate(s.getReleaseDate())
                 .categoryName(categoryName)

@@ -108,8 +108,16 @@ public class ArtistService {
         Artist a = artistRepository.findById(id).orElse(null);
         String response = "";
         if (a != null) {
-            artistRepository.delete(a);
-            response = "This artist was successfully deleted ";
+
+            for (int i = 0; i < a.getSongList().size(); i++) {
+                if(a.getSongList().get(i).getArtists().size()>1){
+                    response = "This artist cannot be deleted because it has at least one song with another artist. You have to delete these songs to be able to delete this artist";
+                }else{
+                    artistRepository.delete(a);
+                response = "This artist was successfully deleted ";
+                }
+            }
+            
         } else {
             response = "There is not an artist with such id";
         }
