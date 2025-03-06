@@ -1,139 +1,273 @@
 INSERT INTO category (id, name, color) VALUES (0, 'None', 'A1B2C3');
-INSERT INTO category (id, name, color) VALUES (1, 'Rock', 'F5E4D1');
-INSERT INTO category (id, name, color) VALUES (2, 'Pop', 'D9C1F7');
-INSERT INTO category (id, name, color) VALUES (3, 'Jazz', 'B8A9D4');
-INSERT INTO category (id, name, color) VALUES (4, 'HipHop', '2E9B8F');
-INSERT INTO category (id, name, color) VALUES (7, 'Reggaeton', 'C4A1F0');
-INSERT INTO category (id, name, color) VALUES (8, 'Blues', '9C76D2');
 
-INSERT INTO artist (id, name, color) VALUES (0, 'Michael Jackson', 'FFD700');
-INSERT INTO artist (id, name, color) VALUES (1, 'Beyonce', '8A2BE2');
-INSERT INTO artist (id, name, color) VALUES (2, 'The Beatles', '800000');
-INSERT INTO artist (id, name, color) VALUES (3, 'Shakira', 'FF69B4');
-INSERT INTO artist (id, name, color) VALUES (4, 'Eminem', '00CED1');
-INSERT INTO artist (id, name, color) VALUES (5, 'Miles Davis', 'FF8C00');
-INSERT INTO artist (id, name, color) VALUES (6, 'Luis Fonsi', '00BFFF');
-INSERT INTO artist (id, name, color) VALUES (7, 'Marc Anthony', '8B008B');
+INSERT INTO category (id, name, color) VALUES (1, 'Rock', 'FF5733');
+INSERT INTO category (id, name, color) VALUES (2, 'Pop', 'C70039');
+INSERT INTO category (id, name, color) VALUES (3, 'Jazz', '900C3F');
+INSERT INTO category (id, name, color) VALUES (4, 'Classical', '581845');
+INSERT INTO category (id, name, color) VALUES (5, 'Hip-Hop', '1C1C1C');
+INSERT INTO category (id, name, color) VALUES (6, 'Blues', '00008B');
+INSERT INTO category (id, name, color) VALUES (7, 'Reggae', '32CD32');
+INSERT INTO category (id, name, color) VALUES (8, 'Country', 'F4A300');
+INSERT INTO category (id, name, color) VALUES (9, 'Metal', '800000');
+INSERT INTO category (id, name, color) VALUES (10, 'Electronic', 'A9A9A9');
+INSERT INTO category (id, name, color) VALUES (11, 'Hip-Hop Collab', 'F30A43');
 
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (8, '1971-11-08', 1, 6, 'Led Zeppelin IV', 'A3B6C9', 'Stairway to Hea');
+INSERT INTO artist (id, name, color) VALUES (1, 'Led Zeppeli', 'D4AC0D');
+INSERT INTO artist (id, name, color) VALUES (2, 'MJ', 'FFD700');
+INSERT INTO artist (id, name, color) VALUES (3, 'Armstrong', 'FF6347');
+INSERT INTO artist (id, name, color) VALUES (4, 'Beethoven', '8A2BE2');
+INSERT INTO artist (id, name, color) VALUES (5, 'Kendrick Lamar', '808080');
+INSERT INTO artist (id, name, color) VALUES (6, 'Muddy W', '8B4513');
+INSERT INTO artist (id, name, color) VALUES (7, 'Bob Marley', 'FFD700');
+INSERT INTO artist (id, name, color) VALUES (8, 'Johnny C', '800000');
+INSERT INTO artist (id, name, color) VALUES (9, 'Daft Punk', 'A9A9A9');
+INSERT INTO artist (id, name, color) VALUES (10, 'Tupac', '1C1C1C');
+INSERT INTO artist (id, name, color) VALUES (11, 'Dr. Dre', '1C1C1C');
+INSERT INTO artist (id, name, color) VALUES (12, 'Snoop Dogg', '1C1C1C');
+INSERT INTO artist (id, name, color) VALUES (13, 'Eminem', '1C1C1C');
+INSERT INTO artist (id, name, color) VALUES (14, 'Jay-Z', '1C1C1C');
 
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (8, '1971-11-08', 1, 1, 'Led Zepp IV', 'A3B6C9', 'Stairway');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (1, 1);
+
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1975-02-15', 1, 2, 'Phys Graff', 'C4C4C4', 'Kashmir');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (1, 2);
+
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (7, '1970-03-21', 1, 3, 'Led Zepp II', 'D1E0E0', 'Whole Lotta');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (1, 3);
+
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1969-08-30', 1, 4, 'Led Zepp I', 'A3B6C9', 'Good Times');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (1, 4);
+
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1973-03-01', 1, 5, 'House Holy', 'E9D8A6', 'Song Same');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (1, 5);
+
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1982-11-30', 2, 6, 'Thriller', 'FFD700', 'Billie J');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (2, 6);
 
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1976-12-08', 1, 7, 'Hotel California', 'D7E2A5', 'Hotel Californi');
-
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (4, '1982-11-30', 2, 7, 'Thriller', 'FFD700', 'Beat It');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (2, 7);
 
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1987-07-21', 1, 8, 'Appetite for Destr', 'F4C1D2', 'Sweet Child O M');
-
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1987-08-16', 2, 8, 'Bad', 'A3B6C9', 'Smooth C');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (2, 8);
 
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (4, '1980-07-25', 1, 9, 'Back in Black', 'E5D4B1', 'Back in Black');
-
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1991-11-13', 2, 9, 'Dangerous', 'FFD700', 'Black W');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (2, 9);
 
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1991-07-29', 1, 10, 'Metallica', 'D2A3C4', 'Enter Sandman');
-
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1988-05-16', 2, 10, 'Bad', 'FFD700', 'Way Feel');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (2, 10);
 
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (4, '2014-11-10', 2, 11, 'Uptown Special', 'F1E3D4', 'Uptown Funk');
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1927-07-01', 3, 11, 'Louis W.C. Handy', '8B4513', 'St. Louis');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (3, 11);
 
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (0, 11),
-       (1, 11);
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (4, '1938-04-25', 3, 12, 'Best of Louis', 'A52A2A', 'What World');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (3, 12);
 
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (4, '2014-08-18', 2, 12, '1989', 'A6F9C3', 'Shake It Off');
-
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (1, 12);
-
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (4, '2010-11-29', 2, 13, '21', 'B2D5F1', 'Rolling in the D');
-
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1929-01-01', 3, 13, 'Complete Hot Five', 'D2691E', 'West End');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (3, 13);
 
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (3, '2019-11-29', 2, 14, 'After Hours', 'D1F8C7', 'Blinding Ligh');
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1930-05-25', 3, 14, 'Louis All-Stars', '8B4513', 'La Vie');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (3, 14);
 
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (4, 14);
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1932-05-01', 3, 15, 'Best Louis', 'A52A2A', 'Saints March');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (3, 15);
 
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (4, '2013-11-21', 2, 15, 'G I R L', 'A9C4F0', 'Happy');
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (10, '1824-05-07', 4, 16, 'Symphony 9', '8A2BE2', 'Ode Joy');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (4, 16);
 
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (0, 15);
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (9, '1808-12-22', 4, 17, 'Symphony 5', '7B68EE', 'Symphony');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (4, 17);
 
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1959-12-01', 3, 16, 'Time Out', 'C3D2A1', 'Take Five');
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (8, '1799-01-01', 4, 18, 'Piano 14', '7B68EE', 'Moonlight');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (4, 18);
 
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (5, 16);
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (8, '1817-04-01', 4, 19, 'Piano 8', '8A2BE2', 'Pathétique');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (4, 19);
 
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (9, '1959-08-17', 3, 17, 'Kind of Blue', 'F7A2C5', 'So What');
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (7, '1801-12-01', 4, 20, 'Piano Concerto 5', '8A2BE2', 'Emperor');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (4, 20);
 
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (5, 17);
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (4, '2012-10-22', 5, 21, 'good kid', '1C1C1C', 'Swimming');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (5, 21);
 
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (3, '1967-10-01', 3, 18, 'What a Wonderful Wo', 'B5F8A2', 'What a Wond');
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '2015-03-23', 5, 22, 'To Pimp a', '1C1C1C', 'King Kunta');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (5, 22);
 
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (5, 18);
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '2012-10-22', 5, 23, 'good kid', '1C1C1C', 'Bitch Vibe');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (5, 23);
 
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (3, '1965-10-01', 3, 19, 'I Put a Spell on Yo', 'E2C7F1', 'Feeling Good');
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '2017-04-14', 5, 24, 'DAMN.', '1C1C1C', 'HUMBLE.');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (5, 24);
 
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (5, 19);
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '2015-03-23', 5, 25, 'To Pimp a', '1C1C1C', 'Alright');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (5, 25);
 
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1959-06-01', 3, 20, 'Cannonball Adderley Q', 'D9B1F6', 'Autumn Leaves');
-
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (5, 20);
-
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '2002-10-28', 4, 21, '8 Mile Soundtrack', 'C3A4F8', 'Lose Yourself');
-
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (4, 21);
-
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '2018-08-03', 4, 22, 'Astroworld', 'F7A3C9', 'Sicko Mode');
-
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (4, 22);
-
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (3, '2017-03-30', 4, 23, 'DAMN.', 'A4C1F5', 'HUMBLE.');
-
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (4, 23);
-
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (4, '2018-02-16', 4, 24, 'Scary Hours', 'D6F1A2', 'Gods Plan');
-
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (4, 24);
-
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (2, '2019-12-03', 4, 25, '7', 'C2B9F7', 'Old Town Roa');
-
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (4, 25);
-
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (4, '2017-01-13', 7, 26, 'Vida', 'F5C2A9', 'Despacito');
-
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1950-09-15', 6, 26, 'Muddy Waters', '8B4513', 'Hoochie Coochie');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (6, 26);
 
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (4, '2018-09-28', 7, 27, 'Carte Blanche', 'C8B1E2', 'Taki Taki');
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1954-11-10', 6, 27, 'Muddy Waters', '8B4513', 'I Can\'t Be Satisfied');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (6, 27);
 
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (3, 27);
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (7, '1941-01-01', 6, 28, 'Robert Johnson', 'A52A2A', 'Cross Road Blues');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (6, 28);
 
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (4, '2019-04-30', 7, 28, 'El Disco Duro', 'B1F2C5', 'Baila Baila B');
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1936-05-01', 6, 29, 'B.B. King', '8B4513', 'Three O\'Clock Blues');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (6, 29);
 
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (3, 28);
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1951-09-09', 6, 30, 'Howlin\' Wolf', '8B4513', 'Smokestack Lightnin\'');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (6, 30);
 
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (4, '2013-07-23', 7, 29, '3.0', 'F1E4B2', 'Vivir Mi Vida');
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1973-04-23', 7, 31, 'Bob Marley', 'FFD700', 'No Woman No Cry');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (7, 31);
 
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (7, 29);
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1977-10-02', 7, 32, 'Bob Marley', 'FFD700', 'Buffalo Soldier');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (7, 32);
 
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (3, '2020-11-20', 7, 30, 'El ultimo Tour', 'A3D5F9', 'Dakiti');
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (4, '1973-04-23', 7, 33, 'Peter Tosh', 'FFD700', 'Legalize It');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (7, 33);
 
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (4, 30);
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1977-09-11', 7, 34, 'Jimmy Cliff', 'FFD700', 'The Harder They');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (7, 34);
 
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1969-11-06', 8, 31, 'Completely Well', 'B2E4F1', 'Thrill is Gone');
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1977-10-02', 7, 35, 'The Wailers', 'FFD700', 'Get Up Stand Up');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (7, 35);
 
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (5, 31);
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (3, '1969-01-01', 8, 36, 'Johnny Cash', 'F4A300', 'Ring of Fire');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (8, 36);
 
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1947-01-01', 8, 32, 'T-Bone Blues', 'D3A7F6', 'Stormy Monday');
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (4, '1964-05-01', 8, 37, 'Hank Williams', 'F4A300', 'Your Cheatin\' Heart');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (8, 37);
 
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (5, 32);
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1970-06-15', 8, 38, 'Dolly Parton', 'F4A300', 'Jolene');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (8, 38);
 
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (4, '1983-06-13', 8, 33, 'Texas Flood', 'A1F9C4', 'Pride and Joy');
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (4, '1975-03-03', 8, 39, 'Willie Nelson', 'F4A300', 'Blue Eyes Crying');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (8, 39);
 
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (5, 33);
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1990-11-10', 8, 40, 'Garth Brooks', 'F4A300', 'Friends in Low Places');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (8, 40);
 
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (4, '1962-06-01', 8, 34, 'The Best of John Le', 'B6E3D9', 'Boom Boom');
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1986-09-22', 9, 41, 'Metallica', '800000', 'Master of Puppets');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (9, 41);
 
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (5, 34);
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1981-06-25', 9, 42, 'Black Sabbath', '800000', 'Paranoid');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (9, 42);
 
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (4, '1954-02-01', 8, 35, 'Muddy Waters: The A', 'F2B8D1', 'Hoochie Man');
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (7, '1992-08-02', 9, 43, 'Iron Maiden', '800000', 'Fear of the Dark');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (9, 43);
 
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (5, 35);
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1991-09-24', 9, 44, 'Megadeth', '800000', 'Symphony of Destruction');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (9, 44);
 
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1988-09-29', 9, 45, 'Judas Priest', '800000', 'Hell Bent for Leather');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (9, 45);
 
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1997-03-05', 10, 46, 'Daft Punk', 'A9A9A9', 'Around the World');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (9, 46);
+
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '2000-11-13', 10, 47, 'The Chemical', 'A9A9A9', 'Block Rockin\' Beats');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (9, 47);
+
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '2005-07-15', 10, 48, 'Justice', 'A9A9A9', 'D.A.N.C.E.');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (9, 48);
+
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (4, '2004-09-10', 10, 49, 'Moby', 'A9A9A9', 'Dance');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (9, 49);
+
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '2011-06-07', 10, 50, 'Deadmau5', 'A9A9A9', 'Ghosts N Stuff');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (9, 50);
+
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1992-02-16', 5, 51, '2Pacalypse Now', '1C1C1C', 'Brenda\'s Got A Baby');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (10, 51);
+
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1996-03-12', 5, 52, 'All Eyez On Me', '1C1C1C', 'California Love');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (10, 52);
+
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (4, '1995-02-21', 5, 53, 'Me Against The World', '1C1C1C', 'Dear Mama');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (10, 53);
+
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1997-02-13', 5, 54, 'The Don Killuminati', '1C1C1C', 'Hail Mary');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (10, 54);
+
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1996-02-13', 5, 55, 'All Eyez On Me', '1C1C1C', 'Ambitionz Az A Rida');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (10, 55);
+
+-- Canción 1: Tupac + Dr. Dre
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1996-03-12', 11, 56, 'All Eyez On Me', 'FFD700', '2 of Amerikaz Most');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (10, 56), (11, 56);
+
+-- Canción 2: Snoop Dogg + Dr. Dre + Tupac
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1992-02-16', 11, 57, 'Doggystyle', 'FFD700', 'Nuthin\' But A G Thang');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (12, 57), (11, 57), (10, 57);
+
+-- Canción 3: Eminem + Dr. Dre
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '2002-12-08', 11, 58, 'The Eminem Show', 'FFD700', 'Forgot About Dre');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (13, 58), (11, 58);
+
+-- Canción 4: Jay-Z + Eminem
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '2001-03-20', 11, 59, 'The Blueprint', 'FFD700', 'Renegade');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (14, 59), (13, 59);
+
+-- Canción 5: Kendrick Lamar + Snoop Dogg
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '2015-03-03', 11, 60, 'To Pimp A Butterfly', 'FFD700', 'Institutionalized');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (5,60), (12, 60);
+
+-- Canción 6: Tupac + Dr. Dre + Snoop Dogg
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1996-06-04', 11, 61, 'All Eyez On Me', 'FFD700', 'California Love (Remix)');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (10, 61), (11, 61), (12, 61);
+
+-- Canción 7: Jay-Z + Kanye West
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '2011-11-21', 11, 62, 'Watch The Throne', 'FFD700', 'Ni**as In Paris');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (14, 62), (13, 62);
+
+-- Canción 8: Kendrick Lamar + Jay-Z + Eminem
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (7, '2015-06-01', 11, 63, 'The Big Three', 'FFD700', 'Worldwide Cypher');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (5,63), (14, 63), (13, 63);
+
+-- Canción 9: Snoop Dogg + Dr. Dre + Eminem
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1999-11-12', 11, 64, 'The Marshall Mathers LP', 'FFD700', 'Forgot About Dre (Remix)');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (12, 64), (11, 64), (13, 64);
+
+-- Canción 10: Snoop Dogg + Tupac
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1995-10-31', 11, 65, 'All Eyez On Me', 'FFD700', '2 of Amerikaz Most');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (12, 65), (10, 65);
+
+-- Canción 11: Jay-Z + Kanye West + Snoop Dogg
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '2011-11-21', 11, 66, 'Watch The Throne', 'FFD700', 'Otis');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (14, 66), (13, 66), (12, 66);
+
+-- Canción 12: Dr. Dre + Kendrick Lamar + Snoop Dogg
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '2015-03-03', 11, 67, 'Compton', 'FFD700', 'Deep Water');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (11, 67), (5,67), (12, 67);
+
+-- Canción 13: Eminem + Dr. Dre + Snoop Dogg + Kendrick Lamar
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (7, '2015-06-01', 11, 68, 'The Cypher', 'FFD700', 'Welcome To The Rap Game');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (13, 68), (11, 68), (12, 68), (5,68);
+
+-- Canción 14: Snoop Dogg + Jay-Z
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (4, '2002-03-12', 11, 69, 'The Blueprint 2', 'FFD700', 'Blueprint (Remix)');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (12, 69), (14, 69);
+
+-- Canción 15: Kendrick Lamar + Dr. Dre + Jay-Z
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '2015-09-21', 11, 70, 'To Pimp A Blueprint', 'FFD700', 'King\'s Story');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (5,70), (11, 70), (14, 70);
+
+-- Canción 16: Tupac + Snoop Dogg + Jay-Z
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1996-03-12', 11, 71, 'All Eyez On Me', 'FFD700', 'Thug Love');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (10, 71), (12, 71), (14, 71);
+
+-- Canción 17: Eminem + Kendrick Lamar + Snoop Dogg
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '2015-07-05', 11, 72, 'Legacy', 'FFD700', 'Bad Influence');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (13, 72), (5,72), (12, 72);
+
+-- Canción 18: Dr. Dre + Jay-Z
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '2001-10-16', 11, 73, '2001', 'FFD700', 'Still D.R.E.');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (11, 73), (14, 73);
+
+-- Canción 19: Tupac + Dr. Dre + Snoop Dogg + Jay-Z
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1997-02-13', 11, 74, 'The Final Round', 'FFD700', 'Rap Revolution');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (10, 74), (11, 74), (12, 74), (14, 74);
+
+-- Canción 20: Kendrick Lamar + Dr. Dre + Eminem + Jay-Z
+INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (7, '2016-10-10', 11, 75, 'The Cypher II', 'FFD700', 'Rap Battle Royal');
+INSERT INTO song_artists (artists_id, song_list_id) VALUES (5,75), (11, 75), (13, 75), (14, 75);

@@ -37,6 +37,11 @@ body {
 
 a {
     text-decoration: none;
+    color: var(--dark);
+}
+
+a:hover {
+    color: var(--medium);
 }
 
 #container {
@@ -378,10 +383,6 @@ div.PopUp {
     left: 50%;
     top: 20%;
     transform: translate(-50%, -50%);
-}
-
-a.pointer:hover {
-    color: var(--dark);
 }
 
 /** Song details*/
@@ -952,4 +953,3 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 input[type="date"]::-webkit-calendar-picker-indicator:hover {
     cursor: pointer;
 }
-

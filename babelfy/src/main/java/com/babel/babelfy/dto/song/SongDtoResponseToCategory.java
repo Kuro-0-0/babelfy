@@ -18,15 +18,19 @@ public class SongDtoResponseToCategory {
     private String name;
     private int duration;
     private List<String> artistList;
+    private List<Long> artistsID;
     private String albumName;
     private LocalDate releaseDate;
 
     public static SongDtoResponseToCategory songToCSongDTO(Song s) {
 
         List<String> artistList = new ArrayList<>();
+        List<Long> artistsID= new ArrayList<>();
+
 
         for (Artist a : s.getArtists()) {
             artistList.add(a.getName());
+            artistsID.add(a.getId());
         }
 
         return SongDtoResponseToCategory.builder()
@@ -34,6 +38,7 @@ public class SongDtoResponseToCategory {
                 .name(s.getName())
                 .duration(s.getDuration())
                 .artistList(artistList)
+                .artistsID(artistsID)
                 .albumName(s.getAlbumName())
                 .releaseDate(s.getReleaseDate())
                 .build();
