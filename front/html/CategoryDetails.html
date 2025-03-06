@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Category details</title>
+
+    <link rel="stylesheet" href="../style/style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+
+    <header>
+        <h1 id="name"></h1>
+
+        <nav>
+            <ul>
+                <a href="SongList.html">
+                    <li>Songs</li>
+                </a>
+                <a href="CategoryList.html">
+                    <li>Categories</li>
+                </a>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="catDetails" id="main">
+
+        <div id="PopUp" class="PopUp">
+            <h1 id="TitlePopUp">SUCCESS</h1>
+            <p id="textPopUp"></p>
+            <button onclick="hidePopUp()">OK</button>
+        </div>
+
+        <div id="PopUpDelete" class="PopUpDelete">
+            <h1 id="TitlePopUp">REMOVE</h1>
+            <p id="textPopUp">Are you sure you want to delete this song from the category?</p>
+            <button id="noDelete" onclick="hideActionBTN()">NO</button>
+            <button id="yesDelete">YES</button>
+        </div>
+
+
+        <section id="sectionDetails">
+
+            <div class="updater" id="updateCategory">
+                <i class="bi bi-x-circle-fill quit" onclick="showChanger()"></i>
+                <h3>Change Name</h3>
+
+                <form id="createForm">
+                    <input type="text" placeholder="Write here" id="newName">
+                    <button onclick="changeName()">Update</button>
+                </form>
+            </div>
+
+            <div id="songsTable">
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Copyright <i class="bi bi-c-circle"></i> 2025 Babelfy Inc. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+
+</body>
+
+</html>

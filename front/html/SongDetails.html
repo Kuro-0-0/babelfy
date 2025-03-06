@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Song details</title>
+    <link rel="stylesheet" href="../style/style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+
+    <header>
+        <div>
+            <h1 id="name"></h1>
+        </div>
+        <nav>
+            <ul>
+                <a href="SongList.html">
+                    <li>Songs</li>
+                </a>
+                <a href="CategoryList.html">
+                    <li>Categories</li>
+                </a>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="PopUp" class="PopUp">
+        <h1 id="TitlePopUp">SUCCESS</h1>
+        <p id="textPopUp"></p>
+        <button onclick="hidePopUp()">OK</button>
+    </div>
+    <div id="PopUpUpdate" class="PopUpUpdate PopUp">
+        <h1 id="TitlePopUp">CANCEL</h1>
+        <p id="textPopUpUpdate">Are you sure you want to cancel the changes? they will be lost.</p>
+        <div class="btn-container">
+            <button id="noDelete" onclick="showConfirm()">NO</button>
+            <button id="yesDelete" onclick="updater(true)">YES</button>
+        </div>
+    </div>
+    <main class="songDetails" id="main">
+
+
+        <section id="sectionUpdate">
+            <button type="" id="updateBtn" onclick="updater()" class="upSong-btn options">
+                Update
+            </button>
+        </section>
+        <section id="sectionDetails">
+
+        </section>
+        <button type="" id="submitUpdBtn" onclick="sendUpdate()" class="sbt-upSong-btn options">
+            Submit
+        </button>
+
+
+
+    </main>
+
+    <footer>
+        <p>Copyright <i class="bi bi-c-circle"></i> 2025 Babelfy Inc. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+
+
+</body>
+
+</html>
