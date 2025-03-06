@@ -944,3 +944,12 @@ div.thumbnail {
 p#artistName {
     max-width: 180px;
 }
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-color: var(--medium);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    cursor: pointer;
+}
+

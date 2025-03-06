@@ -285,6 +285,23 @@ function createCategory() {
 
 }
 
+function checkBoxChange() {
+    checkboxes = document.getElementById('checkboxes')
+    var alguno = false;
+
+    for (let i = 0; i < checkboxes.children.length; i++) {
+        const child = checkboxes.children[i].children[0];
+        if (child.checked) {
+            alguno = true
+            document.getElementById('optionSelected').textContent = 'Option/s selected'
+        }
+        if (!alguno) {
+            document.getElementById('optionSelected').textContent = 'Select an option'
+        }
+    }
+    
+}
+
 
 function createArtist() {
     try {
@@ -522,13 +539,12 @@ function showArtistOptions() {
             if (data.length > 0 && data) {
                 listoptions.textContent = ''
                 data.forEach(function (artist) {
-                    console.log(artist);
-                    
                     var label = document.createElement('label')
                     var input = document.createElement('input')
 
                     label.for = 'input-'+artist.id
                     input.id = 'input-'+artist.id
+                    input.setAttribute('onclick',`checkBoxChange()`)
                     input.classList.add("artistCheckbox")
                     input.type = 'checkbox'
                     input.value = artist.id
@@ -536,7 +552,6 @@ function showArtistOptions() {
                     label.appendChild(input)
                     label.innerHTML = label.innerHTML + artist.name
                     listoptions.appendChild(label)
-
                 })
             }
         })
