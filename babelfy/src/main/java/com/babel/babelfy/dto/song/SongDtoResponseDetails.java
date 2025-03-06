@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -15,7 +16,7 @@ public class SongDtoResponseDetails {
 
     private String name;
     private int duration;
-    private List<Artist> artistList;
+    private List<String> artistList;
     private String albumName;
     private LocalDate releaseDate;
     private String categoryName;
@@ -24,6 +25,7 @@ public class SongDtoResponseDetails {
     public static SongDtoResponseDetails songToCSongDTO(Song s) {
         String categoryName;
         long categoryID;
+        List<String> artistList = new ArrayList<>();
 
         if (s.getCategory() != null) {
             categoryName = s.getCategory().getName();
@@ -32,10 +34,15 @@ public class SongDtoResponseDetails {
             categoryName = "None";
             categoryID = -1;
         }
+
+        for (Artist a : s.getArtists()) {
+            artistList.add(a.getName());
+        }
+
         return SongDtoResponseDetails.builder()
                 .name(s.getName())
                 .duration(s.getDuration())
-                .artistList(s.getArtists())
+                .artistList(artistList)
                 .albumName(s.getAlbumName())
                 .releaseDate(s.getReleaseDate())
                 .categoryName(categoryName)

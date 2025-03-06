@@ -14,7 +14,6 @@ public class SongDtoRequestUpdate {
     private long id;
     private String name;
     private int duration;
-    private List<Artist> artistList;
     private String albumName;
     private LocalDate releaseDate;
     private long categoryId;
