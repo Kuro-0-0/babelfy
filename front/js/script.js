@@ -314,9 +314,7 @@ function createSong() {
                         paramValue = new Error('The duration of the song cant be more than 30 mins')
                     }
                     break;
-                case "releaseDate":
-                    console.log(paramValue);
-                    
+                case "releaseDate":                    
                     if (paramValue <= 0 || paramValue == null) {
                         paramValue = new Error('You need to add a release date')
                     }
@@ -626,7 +624,7 @@ function changeName() {
         var submitter = document.getElementById('newName');
         var categoryId = localStorage.getItem('idCategory');
         const apiUrlChange = 'http://localhost:9000/categories';
-        var nameValue = checkText(submitter.value);
+        var nameValue = checkText(submitter.value,true);
 
         if (nameValue == "None" || nameValue == "none" ) {
             throw new Error("You cant rename a category to None, please change the name.");
@@ -839,7 +837,7 @@ function updater(confirmed = false, reloading = false) {
                 for (let i = 0; i < inputs.length; i++) {
                     const element = inputs[i];
                     element.style.display = "block"
-                    element.value = ps[i].textContent
+                    element.value = ps[i].textContent                    
                     ps[i].style.display = "none"
                 }
                 document.getElementById("nameContainer").style.display = "flex"

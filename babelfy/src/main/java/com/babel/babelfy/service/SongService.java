@@ -44,7 +44,7 @@ public class SongService {
                 .name(sDTO.getName())
                 .duration(sDTO.getDuration())
                 .artistName(sDTO.getArtistName())
-                .albumName(sDTO.getArtistName())
+                .albumName(sDTO.getAlbumName())
                 .releaseDate(sDTO.getReleaseDate())
                 .category(categoryRepository.findById(sDTO.getCategoryId()).orElse(null))
                 .build();
