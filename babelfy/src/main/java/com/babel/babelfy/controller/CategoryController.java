@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import com.babel.babelfy.dto.category.CategoryDtoRequestUpdate;
 import com.babel.babelfy.dto.category.CategoryDtoRequestCreate;
 import com.babel.babelfy.dto.category.CategoryDtoResponseDetails;
-import com.babel.babelfy.dto.category.CategoryDtoResponseGetIDName;
+import com.babel.babelfy.dto.category.CategoryDtoResponseGetValueSelector;
 import com.babel.babelfy.dto.category.CategoryDtoResponseList;
 import com.babel.babelfy.service.CategoryService;
 
@@ -59,7 +59,7 @@ public class CategoryController {
     }
 
     @GetMapping("/names")
-    public ResponseEntity<List<CategoryDtoResponseGetIDName>> getIDName() {
+    public ResponseEntity<List<CategoryDtoResponseGetValueSelector>> getIDName() {
         return categoryService.getIDName();
     }
 }
