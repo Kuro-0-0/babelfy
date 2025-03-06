@@ -1100,7 +1100,7 @@ function renderSongDetails(song) {
 
             let artistA = document.createElement('a')
             artistA.innerHTML = artist;
-            artistA.setAttribute('onclick', `goToArtist('${song.artistIDlist[i]}')`)
+            artistA.setAttribute('onclick', `goToArtist('${song.artistsID[i]}')`)
             artistA.href = 'ArtistDetails.html'
             artistA.classList.add("pointer")
             artistA.classList.add("Artist")
