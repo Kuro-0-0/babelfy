@@ -41,9 +41,8 @@ public class ArtistController {
     }
 
     @GetMapping("/names")
-    public ResponseEntity<List<ArtistDtoResponseGetIDName>> getIDName() {
-        return artistService.getIDName();
+    public ResponseEntity<List<ArtistDtoResponseGetValueSelector>> getValueSelector() {
+        return artistService.getValueSelector();
     }
-
 
 }

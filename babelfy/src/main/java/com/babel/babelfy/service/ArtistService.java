@@ -150,18 +150,18 @@ public class ArtistService {
 
     }
 
-    public ResponseEntity<List<ArtistDtoResponseGetIDName>> getIDName() {
-        ResponseEntity<List<ArtistDtoResponseGetIDName>> response;
-        List<ArtistDtoResponseGetIDName> artistDtoResponseGetIDNameList = new ArrayList<>();
+    public ResponseEntity<List<ArtistDtoResponseGetValueSelector>> getValueSelector() {
+        ResponseEntity<List<ArtistDtoResponseGetValueSelector>> response;
+        List<ArtistDtoResponseGetValueSelector> artistDtoResponseGetValueSelectorList = new ArrayList<>();
         List<Artist> artistList = new ArrayList<>();
         try {
 
             artistList = artistRepository.findAll();
             if (!artistList.isEmpty()) {
                 for (Artist a : artistList) {
-                    artistDtoResponseGetIDNameList.add(ArtistDtoResponseGetIDName.artistToArtistDTO(a));
+                    artistDtoResponseGetValueSelectorList.add(ArtistDtoResponseGetValueSelector.artistToArtistDTO(a));
                 }
-                response = ResponseEntity.ok().body(artistDtoResponseGetIDNameList);
+                response = ResponseEntity.ok().body(artistDtoResponseGetValueSelectorList);
             } else {
                 response = ResponseEntity.badRequest().body(null);
             }
