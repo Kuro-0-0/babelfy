@@ -188,6 +188,7 @@ main.catDetails {
 
 header>h1 {
     text-transform: uppercase;
+    width: fit-content;
 }
 
 main.catDetails>section>div>table>thead>tr>th {
