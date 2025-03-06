@@ -145,7 +145,7 @@ function showPopUp(status = 'Error', text = 'Error on PopUp loading') {
     } else {
         popUpTitle.style.color = 'red'
     }
-    
+
     document.getElementById("textPopUp").textContent = text;
     actionBTN = document.getElementsByClassName('action-btn')
 
@@ -446,6 +446,9 @@ function createSong() {
                     if (paramValue <= 0 || paramValue == null) {
                         paramValue = new Error('You need to add a valid duration')
                     }
+                    if (paramValue > 30) {
+                        paramValue = new Error('The duration of the song cant be more than 30 mins')
+                    }
                     break;
                 case "releaseDate":
                     if (paramValue <= 0 || paramValue == null) {
@@ -578,7 +581,7 @@ function deleteArtist() {
         .then(respuesta => {
             showActionBTN()
             console.log(respuesta.status);
-            
+
             if (respuesta.status == 200) {
                 estado = 'Success'
             } else {
@@ -678,6 +681,7 @@ function deleteSong(idSong = '') {
 
     if (idSong == '') {
         URL = URL + localStorage.getItem('idSong');
+
         fetch(URL, options)
             .then(response => {
                 showActionBTN()
@@ -714,7 +718,7 @@ function deleteSong(idSong = '') {
                 })
                 .catch(error => {
                     console.error('There was a problem with the fetch operation:', error);
-                });        
+                });
         } else {
         URL = URL + "category/" + idSong;
         hideActionBTN()
@@ -736,7 +740,7 @@ function deleteSong(idSong = '') {
             })
         }
 
-        
+
     }
 
 }
@@ -789,7 +793,7 @@ function renderArtistDetails(artist) {
             var row = document.createElement('tr');
             var artistsLink = document.createElement('td');
             row.innerHTML = `
-          
+
           <td><a class="pointer" onclick="openSongDetails(${song.id})">${song.name}</a></td>
           <td><a class="pointer" onclick="openCategoryDetails(${song.categoryID})">${song.categoryName}</a></td>
           <td>${song.duration}</td>
@@ -841,7 +845,7 @@ function showArtistDetails() {
             renderArtistDetails(artist);
         })
 
-        //This .catch is here to show through the console any errors that could appear 
+        //This .catch is here to show through the console any errors that could appear
         .catch(function (error) {
             console.error('Error al cargar la info del artista', error);
 
@@ -937,14 +941,19 @@ function renderCategoryDetails(category) {
     }
     //This 'category.name' is from the .json that we got from before
     categoryName = category.name;
-    title.innerHTML = categoryName + "  ";
-    var pen = document.createElement('i');
-    pen.classList = 'bi bi-pencil-fill';
-    pen.id = 'clickForShowing';
-    pen.onclick = showChanger;
+    if (category.name != "None") {
+        title.innerHTML = categoryName + "  ";
+        var pen = document.createElement('i');
+        pen.classList = 'bi bi-pencil-fill';
+        pen.id = 'clickForShowing';
+        pen.onclick = showChanger;
+        title.appendChild(pen);
+    } else {
+        title.innerHTML = categoryName
+    }
+
 
     //This links the objects, saying that, whats in (), is inside of the other one
-    title.appendChild(pen);
 
 }
 
@@ -977,7 +986,11 @@ function changeName() {
 
         var submitter = document.getElementById('newName');
         const apiUrlChange = 'http://localhost:9000/categories';
-        var nameValue = checkText(submitter.value);
+        var nameValue = checkText(submitter.value,true);
+
+        if (nameValue == "None" || nameValue == "none" ) {
+            throw new Error("You cant rename a category to None, please change the name.");
+        }
 
         //This could be an error because the checkText function could return one
         if (nameValue instanceof Error) {
@@ -992,7 +1005,7 @@ function changeName() {
             },
             body: JSON.stringify({
                 'id': localStorage.getItem('idCategory'),
-                'name': submitter.value
+                'name': nameValue
             })
         }
         fetch(apiUrlChange, options)
@@ -1242,27 +1255,31 @@ function updater(confirmed = false, reloading = false) {
                         input.classList.add("dataAPI")
 
 
-                        if (element.id == "releaseDate") {
-                            input.type = "date"
-                        } else if (element.id == "duration") {
-                            input.type = "number"
-                        } else if (element.id == "categoryName") {
-                            getCategoryData()
-                                .then(data => {
-                                    for (let i = 0; i < data.length; i++) {
-                                        const elementOption = data[i];
-                                        option = document.createElement("option")
-                                        option.value = elementOption.id
-                                        option.textContent = elementOption.name
-                                        input.appendChild(option)
-                                        if (element.textContent == elementOption.name) {
-                                            input.value = elementOption.id;
-                                        }
+                    if (element.id == "releaseDate") {
+                        input.type = "date";
+                        const today = new Date().toISOString().split('T')[0];
+                        input.max = today;
+
+                    } else if (element.id == "duration") {
+                        input.type = "number"
+                    } else if (element.id == "categoryName") {
+                        getCategoryData()
+                            .then(data => {
+                                for (let i = 0; i < data.length; i++) {
+                                    const elementOption = data[i];
+                                    option = document.createElement("option")
+                                    option.value = elementOption.id
+                                    option.textContent = elementOption.name
+                                    input.appendChild(option)
+
+                                    if (element.textContent == elementOption.name) {
+                                        input.value = elementOption.id;
                                     }
-                                })
-                        }
-                        divContainer.appendChild(input)
+                                }
+                            })
                     }
+
+                    divContainer.appendChild(input)
                 }
             } else {
                 for (let i = 0; i < inputs.length; i++) {
