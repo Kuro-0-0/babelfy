@@ -2,7 +2,9 @@ package com.babel.babelfy.service;
 
 import com.babel.babelfy.dto.artist.*;
 import com.babel.babelfy.model.Artist;
+import com.babel.babelfy.model.Song;
 import com.babel.babelfy.repository.ArtistRepository;
+import com.babel.babelfy.repository.SongRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ import java.util.Random;
 public class ArtistService {
 
     private final ArtistRepository artistRepository;
+    private final SongRepository songRepository;
 
     public ResponseEntity<String> add(ArtistDtoRequestCreate aDTO) {
         ResponseEntity<String> response;
@@ -104,22 +107,38 @@ public class ArtistService {
 
     }
 
+    @Transactional
     public String delete(long id) {
         Artist a = artistRepository.findById(id).orElse(null);
+        List<Artist> otherArtists = new ArrayList<>();
+        boolean other=false;
         String response = "";
         if (a != null) {
 
             for (int i = 0; i < a.getSongList().size(); i++) {
+
                 if(a.getSongList().get(i).getArtists().size()>1){
+                    for (int j = 0; j < a.getSongList().get(i).getArtists().size(); j++){
+                        if(!a.getSongList().get(i).getArtists().get(j).getName().equalsIgnoreCase(a.getName())){
+                            otherArtists.add(a.getSongList().get(i).getArtists().get(j));
+                        }
+                    }
+                    other=true;
                     response = "This artist cannot be deleted because it has at least one song with another artist. You have to delete these songs to be able to delete this artist";
-                }else{
-                    artistRepository.delete(a);
-                response = "This artist was successfully deleted ";
                 }
             }
-            
-        } else {
-            response = "There is not an artist with such id";
+
+            if(!other){
+            for (Song s : a.getSongList()) {
+                songRepository.delete(s);
+            }
+           artistRepository.delete(a);
+           
+                response = "This artist was successfully deleted ";
+            }
+
+        } else{
+             response = "There is not an artist with such id";
         }
         return response;
     }

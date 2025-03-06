@@ -577,6 +577,8 @@ function deleteArtist() {
 
         .then(respuesta => {
             showActionBTN()
+            console.log(respuesta.status);
+            
             if (respuesta.status == 200) {
                 estado = 'Success'
             } else {
@@ -586,6 +588,9 @@ function deleteArtist() {
         })
 
         .then(text => {
+            if (text == "This artist cannot be deleted because it has at least one song with another artist. You have to delete these songs to be able to delete this artist") {
+                estado = "Error"
+            }
             showPopUp(estado, text)
             getAllArtists()
         })
