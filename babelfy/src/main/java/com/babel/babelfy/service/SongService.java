@@ -117,7 +117,6 @@ public class SongService {
 
     public String delete(long id) {
         Song s = songRepository.findById(id).orElse(null);
-        System.out.println(s);
         String response = "";
         if (s != null) {
             songRepository.delete(s);
