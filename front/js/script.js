@@ -10,7 +10,7 @@ if (document.getElementsByClassName("catDetails").length > 0) {
 if (document.getElementsByClassName("songDetails").length > 0) {
     document.addEventListener('DOMContentLoaded', function () {
         showSongDetails()
-            .then(data => {
+            .then(data => {                
                 if (data.categoryID == -1) {
 
                     categoryName = document.getElementById("categoryName")
@@ -1042,6 +1042,19 @@ function renderSongDetails(song) {
     title.innerHTML = song.name
     section = document.getElementById('sectionDetails');
 
+    let artists = "";
+
+        for (let i = 0; i < song.artistList.length; i++) {
+            const artist = song.artistList[i];
+            if (i == song.artistList.length-1) {
+                artists = artists + artist;
+            } else {
+                artists = artists + artist + ', ';
+            }
+        }
+        
+    
+
     section.innerHTML = `
     <div class="usualDataContainer">
         <div class="dataContainer">
@@ -1050,7 +1063,7 @@ function renderSongDetails(song) {
         </div>
         <div class="dataContainer">
             <h2>Artist</h2>
-            <p id="artistName" class="original-view">${song.artistName}</p>
+            <p id="artistName" class="original-view">${artists}</p>
         </div>
         <div class="dataContainer">
             <h2>Album</h2>
@@ -1127,44 +1140,46 @@ function updater(confirmed = false, reloading = false) {
 
                 for (let i = 0; i < ps.length; i++) {
                     const element = ps[i];
-                    element.style.display = "none"
-                    divContainer = element.closest("div")
-
-                    if (element.id == "categoryName") {
-                        input = document.createElement("select")
-                        input.name = "categoryId"
-                    } else {
-                        input = document.createElement("input")
-                        input.value = element.textContent
-                        input.name = element.id
-                    }
-
-                    input.classList.add("false-view")
-                    input.classList.add("dataAPI")
-
-
-                    if (element.id == "releaseDate") {
-                        input.type = "date"
-                    } else if (element.id == "duration") {
-                        input.type = "number"
-                    } else if (element.id == "categoryName") {
-                        getCategoryData()
-                            .then(data => {
-                                for (let i = 0; i < data.length; i++) {
-                                    const elementOption = data[i];
-                                    option = document.createElement("option")
-                                    option.value = elementOption.id
-                                    option.textContent = elementOption.name
-                                    input.appendChild(option)
-
-                                    if (element.textContent == elementOption.name) {
-                                        input.value = elementOption.id;
+                    if (element.id != 'artistName') {
+                        element.style.display = "none"
+                        divContainer = element.closest("div")
+    
+                        if (element.id == "categoryName") {
+                            input = document.createElement("select")
+                            input.name = "categoryId"
+                        } else {
+                            input = document.createElement("input")
+                            input.value = element.textContent
+                            input.name = element.id
+                        }
+                        
+                        input.classList.add("false-view")
+                        input.classList.add("dataAPI")
+    
+    
+                        if (element.id == "releaseDate") {
+                            input.type = "date"
+                        } else if (element.id == "duration") {
+                            input.type = "number"
+                        } else if (element.id == "categoryName") {
+                            getCategoryData()
+                                .then(data => {
+                                    for (let i = 0; i < data.length; i++) {
+                                        const elementOption = data[i];
+                                        option = document.createElement("option")
+                                        option.value = elementOption.id
+                                        option.textContent = elementOption.name
+                                        input.appendChild(option)
+    
+                                        if (element.textContent == elementOption.name) {
+                                            input.value = elementOption.id;
+                                        }
                                     }
-                                }
-                            })
+                                })
+                        }
+    
+                        divContainer.appendChild(input)   
                     }
-
-                    divContainer.appendChild(input)
                 }
             } else {
                 for (let i = 0; i < inputs.length; i++) {
@@ -1317,6 +1332,8 @@ async function showSongDetails() {
 
     return fetch(apiUrl)
         .then(function (response) {
+            console.log(response);
+            
             if (!response.ok) {
                 //This error is thrown so that (if an error occurs) gets to the .catch
                 throw new Error('Error en la respuesta de la API: ' + response.statusText);
