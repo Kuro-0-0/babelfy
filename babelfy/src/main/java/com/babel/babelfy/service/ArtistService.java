@@ -1,7 +1,6 @@
 package com.babel.babelfy.service;
 
 import com.babel.babelfy.dto.artist.*;
-import com.babel.babelfy.dto.category.CategoryDtoResponseGetIDName;
 import com.babel.babelfy.model.Artist;
 import com.babel.babelfy.repository.ArtistRepository;
 
@@ -105,6 +104,7 @@ public class ArtistService {
 
     }
 
+    @Transactional
     public String delete(long id) {
         Artist a = artistRepository.findById(id).orElse(null);
         String response = "";

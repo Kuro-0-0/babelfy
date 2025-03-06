@@ -1,8 +1,6 @@
 package com.babel.babelfy.controller;
 
 import com.babel.babelfy.dto.artist.*;
-import com.babel.babelfy.dto.category.CategoryDtoRequestUpdate;
-import com.babel.babelfy.dto.category.CategoryDtoResponseGetIDName;
 import com.babel.babelfy.service.ArtistService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

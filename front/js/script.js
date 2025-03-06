@@ -745,10 +745,8 @@ function renderArtistDetails(artist) {
         `
         
         artist.songs.forEach(function (song) {
-console.log(song)
             var row = document.createElement('tr');
             var artistsLink = document.createElement('td');
-            console.log(song.id)
             row.innerHTML = `
           
           <td><a class="pointer" onclick="openSongDetails(${song.id})">${song.name}</a></td>

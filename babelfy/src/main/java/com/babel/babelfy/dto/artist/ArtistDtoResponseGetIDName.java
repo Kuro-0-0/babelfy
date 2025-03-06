@@ -1,8 +1,6 @@
 package com.babel.babelfy.dto.artist;
 
-import com.babel.babelfy.dto.category.CategoryDtoResponseGetIDName;
 import com.babel.babelfy.model.Artist;
-import com.babel.babelfy.model.Category;
 import lombok.Builder;
 import lombok.Data;
 

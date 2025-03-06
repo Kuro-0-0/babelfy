@@ -1,11 +1,9 @@
 package com.babel.babelfy.dto.song;
 
-import com.babel.babelfy.model.Artist;
 import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Builder
 @Data
