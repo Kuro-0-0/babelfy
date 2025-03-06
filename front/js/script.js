@@ -310,8 +310,13 @@ function createSong() {
                     if (paramValue <= 0 || paramValue == null) {
                         paramValue = new Error('You need to add a valid duration')
                     }
+                    if (paramValue > 30) {
+                        paramValue = new Error('The duration of the song cant be more than 30 mins')
+                    }
                     break;
                 case "releaseDate":
+                    console.log(paramValue);
+                    
                     if (paramValue <= 0 || paramValue == null) {
                         paramValue = new Error('You need to add a release date')
                     }
@@ -469,7 +474,6 @@ function deleteSong(idSong = '') {
 
     if (idSong == '') {
         URL = URL + localStorage.getItem('idSong');
-        let options;
 
         fetch(URL, options)
             .then(response => {
@@ -579,14 +583,19 @@ function renderCategoryDetails(category) {
     }
     //This 'category.name' is from the .json that we got from before
     categoryName = category.name;
-    title.innerHTML = categoryName + "  ";
-    var pen = document.createElement('i');
-    pen.classList = 'bi bi-pencil-fill';
-    pen.id = 'clickForShowing';
-    pen.onclick = showChanger;
+    if (category.name != "None") {
+        title.innerHTML = categoryName + "  ";
+        var pen = document.createElement('i');
+        pen.classList = 'bi bi-pencil-fill';
+        pen.id = 'clickForShowing';
+        pen.onclick = showChanger;
+        title.appendChild(pen);
+    } else {
+        title.innerHTML = categoryName 
+    }
+
 
     //This links the objects, saying that, whats in (), is inside of the other one
-    title.appendChild(pen);
 
 }
 
@@ -619,6 +628,10 @@ function changeName() {
         const apiUrlChange = 'http://localhost:9000/categories';
         var nameValue = checkText(submitter.value);
 
+        if (nameValue == "None" || nameValue == "none" ) {
+            throw new Error("You cant rename a category to None, please change the name.");
+        }
+
         //This could be an error because the checkText function could return one
         if (nameValue instanceof Error) {
             throw new Error(nameValue.message)
@@ -632,7 +645,7 @@ function changeName() {
             },
             body: JSON.stringify({
                 'id': localStorage.getItem('idCategory'),
-                'name': submitter.value
+                'name': nameValue
             })
         }
         fetch(apiUrlChange, options)
@@ -797,7 +810,10 @@ function updater(confirmed = false, reloading = false) {
 
 
                     if (element.id == "releaseDate") {
-                        input.type = "date"
+                        input.type = "date";
+                        const today = new Date().toISOString().split('T')[0];
+                        input.max = today;
+                    
                     } else if (element.id == "duration") {
                         input.type = "number"
                     } else if (element.id == "categoryName") {
