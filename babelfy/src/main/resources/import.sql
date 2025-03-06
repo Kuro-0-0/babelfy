@@ -21,11 +21,11 @@ INSERT INTO artist (id, name, color) VALUES (6, 'Muddy W', '8B4513');
 INSERT INTO artist (id, name, color) VALUES (7, 'Bob Marley', 'FFD700');
 INSERT INTO artist (id, name, color) VALUES (8, 'Johnny C', '800000');
 INSERT INTO artist (id, name, color) VALUES (9, 'Daft Punk', 'A9A9A9');
-INSERT INTO artist (id, name, color) VALUES (10, 'Tupac', '1C1C1C');
+INSERT INTO artist (id, name, color) VALUES (10, 'Tupac', 'F07AB3');
 INSERT INTO artist (id, name, color) VALUES (11, 'Dr. Dre', '1C1C1C');
-INSERT INTO artist (id, name, color) VALUES (12, 'Snoop Dogg', '1C1C1C');
-INSERT INTO artist (id, name, color) VALUES (13, 'Eminem', '1C1C1C');
-INSERT INTO artist (id, name, color) VALUES (14, 'Jay-Z', '1C1C1C');
+INSERT INTO artist (id, name, color) VALUES (12, 'Snoop Dogg', '62A8C4');
+INSERT INTO artist (id, name, color) VALUES (13, 'Eminem', 'AB98FC');
+INSERT INTO artist (id, name, color) VALUES (14, 'Jay-Z', 'FB0506');
 
 INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (8, '1971-11-08', 1, 1, 'Led Zepp IV', 'A3B6C9', 'Stairway');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (1, 1);
@@ -177,97 +177,62 @@ INSERT INTO song_artists (artists_id, song_list_id) VALUES (9, 49);
 INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '2011-06-07', 10, 50, 'Deadmau5', 'A9A9A9', 'Ghosts N Stuff');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (9, 50);
 
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1992-02-16', 5, 51, '2Pacalypse Now', '1C1C1C', 'Brenda\'s Got A Baby');
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (10, 51);
-
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1996-03-12', 5, 52, 'All Eyez On Me', '1C1C1C', 'California Love');
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (10, 52);
-
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (4, '1995-02-21', 5, 53, 'Me Against The World', '1C1C1C', 'Dear Mama');
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (10, 53);
-
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1997-02-13', 5, 54, 'The Don Killuminati', '1C1C1C', 'Hail Mary');
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (10, 54);
-
-INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1996-02-13', 5, 55, 'All Eyez On Me', '1C1C1C', 'Ambitionz Az A Rida');
-INSERT INTO song_artists (artists_id, song_list_id) VALUES (10, 55);
-
--- Canción 1: Tupac + Dr. Dre
 INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1996-03-12', 11, 56, 'All Eyez On Me', 'FFD700', '2 of Amerikaz Most');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (10, 56), (11, 56);
 
--- Canción 2: Snoop Dogg + Dr. Dre + Tupac
 INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1992-02-16', 11, 57, 'Doggystyle', 'FFD700', 'Nuthin\' But A G Thang');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (12, 57), (11, 57), (10, 57);
 
--- Canción 3: Eminem + Dr. Dre
 INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '2002-12-08', 11, 58, 'The Eminem Show', 'FFD700', 'Forgot About Dre');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (13, 58), (11, 58);
 
--- Canción 4: Jay-Z + Eminem
 INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '2001-03-20', 11, 59, 'The Blueprint', 'FFD700', 'Renegade');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (14, 59), (13, 59);
 
--- Canción 5: Kendrick Lamar + Snoop Dogg
 INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '2015-03-03', 11, 60, 'To Pimp A Butterfly', 'FFD700', 'Institutionalized');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (5,60), (12, 60);
 
--- Canción 6: Tupac + Dr. Dre + Snoop Dogg
 INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1996-06-04', 11, 61, 'All Eyez On Me', 'FFD700', 'California Love (Remix)');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (10, 61), (11, 61), (12, 61);
 
--- Canción 7: Jay-Z + Kanye West
 INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '2011-11-21', 11, 62, 'Watch The Throne', 'FFD700', 'Ni**as In Paris');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (14, 62), (13, 62);
 
--- Canción 8: Kendrick Lamar + Jay-Z + Eminem
 INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (7, '2015-06-01', 11, 63, 'The Big Three', 'FFD700', 'Worldwide Cypher');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (5,63), (14, 63), (13, 63);
 
--- Canción 9: Snoop Dogg + Dr. Dre + Eminem
 INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1999-11-12', 11, 64, 'The Marshall Mathers LP', 'FFD700', 'Forgot About Dre (Remix)');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (12, 64), (11, 64), (13, 64);
 
--- Canción 10: Snoop Dogg + Tupac
 INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1995-10-31', 11, 65, 'All Eyez On Me', 'FFD700', '2 of Amerikaz Most');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (12, 65), (10, 65);
 
--- Canción 11: Jay-Z + Kanye West + Snoop Dogg
 INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '2011-11-21', 11, 66, 'Watch The Throne', 'FFD700', 'Otis');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (14, 66), (13, 66), (12, 66);
 
--- Canción 12: Dr. Dre + Kendrick Lamar + Snoop Dogg
 INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '2015-03-03', 11, 67, 'Compton', 'FFD700', 'Deep Water');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (11, 67), (5,67), (12, 67);
 
--- Canción 13: Eminem + Dr. Dre + Snoop Dogg + Kendrick Lamar
 INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (7, '2015-06-01', 11, 68, 'The Cypher', 'FFD700', 'Welcome To The Rap Game');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (13, 68), (11, 68), (12, 68), (5,68);
 
--- Canción 14: Snoop Dogg + Jay-Z
 INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (4, '2002-03-12', 11, 69, 'The Blueprint 2', 'FFD700', 'Blueprint (Remix)');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (12, 69), (14, 69);
 
--- Canción 15: Kendrick Lamar + Dr. Dre + Jay-Z
 INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '2015-09-21', 11, 70, 'To Pimp A Blueprint', 'FFD700', 'King\'s Story');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (5,70), (11, 70), (14, 70);
 
--- Canción 16: Tupac + Snoop Dogg + Jay-Z
 INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '1996-03-12', 11, 71, 'All Eyez On Me', 'FFD700', 'Thug Love');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (10, 71), (12, 71), (14, 71);
 
--- Canción 17: Eminem + Kendrick Lamar + Snoop Dogg
 INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (5, '2015-07-05', 11, 72, 'Legacy', 'FFD700', 'Bad Influence');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (13, 72), (5,72), (12, 72);
 
--- Canción 18: Dr. Dre + Jay-Z
 INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '2001-10-16', 11, 73, '2001', 'FFD700', 'Still D.R.E.');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (11, 73), (14, 73);
 
--- Canción 19: Tupac + Dr. Dre + Snoop Dogg + Jay-Z
 INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (6, '1997-02-13', 11, 74, 'The Final Round', 'FFD700', 'Rap Revolution');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (10, 74), (11, 74), (12, 74), (14, 74);
 
--- Canción 20: Kendrick Lamar + Dr. Dre + Eminem + Jay-Z
 INSERT INTO song (duration, release_date, category_id, id, album_name, color, name) VALUES (7, '2016-10-10', 11, 75, 'The Cypher II', 'FFD700', 'Rap Battle Royal');
 INSERT INTO song_artists (artists_id, song_list_id) VALUES (5,75), (11, 75), (13, 75), (14, 75);

@@ -10,7 +10,7 @@ if (document.getElementsByClassName("catDetails").length > 0) {
 if (document.getElementsByClassName("songDetails").length > 0) {
     document.addEventListener('DOMContentLoaded', function () {
         showSongDetails()
-            .then(data => {                
+            .then(data => {
                 if (data.categoryID == -1) {
 
                     categoryName = document.getElementById("categoryName")
@@ -145,7 +145,7 @@ function showPopUp(status = 'Error', text = 'Error on PopUp loading') {
     } else {
         popUpTitle.style.color = 'red'
     }
-
+    
     document.getElementById("textPopUp").textContent = text;
     actionBTN = document.getElementsByClassName('action-btn')
 
@@ -299,7 +299,7 @@ function checkBoxChange() {
             document.getElementById('optionSelected').textContent = 'Select an option'
         }
     }
-    
+
 }
 
 
@@ -386,7 +386,7 @@ function showActionBTNcr() {
             document.getElementById('inputName').value = ''
             element.style.display = "block";
             createBtn.disabled = true;
-            
+
             if (element.id == "createSong") {
                 showCategoryOptions()
                 showArtistOptions()
@@ -465,11 +465,11 @@ function createSong() {
             }
 
             params[paramName] = paramValue
-            
+
             if (element.id != 'inputArtist') {
                 element.value = ''
             }
-            
+
         }
 
         options = {
@@ -542,13 +542,13 @@ function showArtistOptions() {
                     var label = document.createElement('label')
                     var input = document.createElement('input')
 
-                    label.for = 'input-'+artist.id
-                    input.id = 'input-'+artist.id
-                    input.setAttribute('onclick',`checkBoxChange()`)
+                    label.for = 'input-' + artist.id
+                    input.id = 'input-' + artist.id
+                    input.setAttribute('onclick', `checkBoxChange()`)
                     input.classList.add("artistCheckbox")
                     input.type = 'checkbox'
                     input.value = artist.id
-                    
+
                     label.appendChild(input)
                     label.innerHTML = label.innerHTML + artist.name
                     listoptions.appendChild(label)
@@ -696,11 +696,31 @@ function deleteSong(idSong = '') {
                 console.error('There was a problem with the fetch operation:', error);
             });
     } else {
+
+        if (document.getElementsByClassName("artistDetails").length > 0) {
+            URL = URL + idSong;
+            hideActionBTN()
+            fetch(URL, options)
+                .then(response => {
+                    return response.text()
+                })
+                .then(text => {
+                    if (text != "There is not a song with such id") {
+                        estado = 'Success'
+                    } else {
+                        estado = 'Error'
+                    }
+                    showArtistDetails()
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });        
+        } else {
         URL = URL + "category/" + idSong;
         hideActionBTN()
         fetch(URL, options)
             .then(data => {
-                showCategoryDetails()
+                showCategoryDetails();
                 if (data.status == ok) {
                     estado = "Success"
                 } else {
@@ -714,6 +734,9 @@ function deleteSong(idSong = '') {
             .catch(error => {
                 console.log(error);
             })
+        }
+
+        
     }
 
 }
@@ -724,7 +747,6 @@ function openArtistDetails(id) {
 }
 
 function renderArtistDetails(artist) {
-    console.log(artist)
     var title = document.getElementById('name');
     artistName = artist.name;
     title.innerHTML = artistName + "  ";
@@ -735,10 +757,9 @@ function renderArtistDetails(artist) {
 
     //This links the objects, saying that, whats in (), is inside of the other one
     title.appendChild(pen);
-    
+
     var div = document.getElementById('songsTable');
-    console.log(artist.songs)
-    if (artist.songs.length<= 0) {
+    if (artist.songs.length <= 0) {
 
         div.innerHTML = ''
         div.innerHTML =
@@ -759,11 +780,11 @@ function renderArtistDetails(artist) {
                 <th>Release Date</th>
                 <th>Album</th>
                 <th>Other Artists</th>
-                <th></th>
+                <th>Operations</th>
               </tr>
             </thead>
         `
-        
+
         artist.songs.forEach(function (song) {
             var row = document.createElement('tr');
             var artistsLink = document.createElement('td');
@@ -774,43 +795,23 @@ function renderArtistDetails(artist) {
           <td>${song.duration}</td>
           <td>${song.releaseDate}</td>
           <td>${song.albumName}</td>`
-          if(song.artistList.length>1){
-            var names='';
-            var counter=0;
+            if (song.artistList.length > 1) {
+                var names = '';
+                var counter = 0;
 
-            for (let i = 0; i < song.artistList.length; i++) {
-                console.log(song.artistsID[i])
-                console.log(song.artistList[i])
-                if(song.artistList[i] != artist.name&&counter<1){
-                    artistsLink.innerHTML=`<a class="pointer" onclick="openArtistDetails(${song.artistsID[i]})">${song.artistList[i]}</a>`
-                    counter++;
-                }else{
-                    artistsLink.innerHTML= artistsLink.innerHTML +', '+ `<a class="pointer" onclick="openArtistDetails(${song.artistsID[i]})">${song.artistList[i]}</a>`
+                for (let i = 0; i < song.artistList.length; i++) {
+                    if (song.artistList[i] != artist.name && counter < 1) {
+                        artistsLink.innerHTML = `<a class="pointer" onclick="openArtistDetails(${song.artistsID[i]})">${song.artistList[i]}</a>`
+                        counter++;
+                    } else {
+                        artistsLink.innerHTML = artistsLink.innerHTML + ', ' + `<a class="pointer" onclick="openArtistDetails(${song.artistsID[i]})">${song.artistList[i]}</a>`
+                    }
                 }
-                
+                row.innerHTML = row.innerHTML + `<td id="otherArtists">${artistsLink.innerHTML}</td>`
+            } else {
+                row.innerHTML = row.innerHTML + `<td>No other artist</td>`
             }
-
-
-
-
-
-            /*song.artistList.forEach(function (otherArtist){
-                if(otherArtist.name != artist.name&&counter>1){
-                    artistsLink.innerHTML =`<a class="pointer" onclick="openCategoryDetails(${otherArtist.categoryID})">${song.categoryName}</a>`
-                    names=names + otherArtist.name
-                    counter++;
-                }else if (otherArtist.name != artist.name){
-                    names=names +', '+ otherArtist.name
-                }
-                
-            })*/
-            row.innerHTML = row.innerHTML + `<td id="otherArtists">${artistsLink.innerHTML}</td>
-            <td></td>
-            `
-          }else{
-            row.innerHTML = row.innerHTML + `<td>No other artist</td>
-            <td><a class="deleteSong" onclick="showActionBTN(${song.id})" title="Delete from category"><i class="bi pointer bi-x-square-fill"></i></a></td>`
-          }
+            row.innerHTML += `<td><a class="deleteSong" onclick="showActionBTN(${song.id})" title="Delete Song"><i class="bi pointer bi-x-square-fill"></i></a></td>`
             tbody.appendChild(row);
         })
         div.appendChild(table);
@@ -821,7 +822,6 @@ function renderArtistDetails(artist) {
 }
 
 function showArtistDetails() {
-    console.log("fuaeefuibe")
     //This is the endPoint, it uses the saved Id to show the category
     const apiUrl = 'http://localhost:9000/artists/' + localStorage.getItem('idArtist');
 
@@ -902,9 +902,8 @@ function renderCategoryDetails(category) {
 
             for (let i = 0; i < song.artistList.length; i++) {
                 const artist = song.artistList[i];
-                console.log(song);
-                
-                
+
+
                 let artistA = document.createElement('a')
                 artistA.innerHTML = artist;
                 artistA.setAttribute('onclick', `goToArtist('${song.artistsID[i]}')`)
@@ -912,22 +911,20 @@ function renderCategoryDetails(category) {
                 artistA.classList.add("pointer")
                 artistA.classList.add("Artist")
                 divArtistName.appendChild(artistA);
-                console.log(divArtistName);
-                
-    
-                if (i != song.artistList.length-1) {
+
+
+                if (i != song.artistList.length - 1) {
                     divArtistName.innerHTML += ', <br>';
                 }
             }
 
             var row = document.createElement('tr');
             row.innerHTML = `
-          
-          <td><a class="pointer" onclick="openSongDetails(${song.id})">${song.name}</a></td>
-          <td>${song.duration}</td>
-          <td>${divArtistName.innerHTML}</td>
-          <td>${song.albumName}</td>
-          <td>${song.releaseDate}</td>
+            <td><a class="pointer" onclick="openSongDetails(${song.id})">${song.name}</a></td>
+            <td>${song.duration}</td>
+            <td>${divArtistName.innerHTML}</td>
+            <td>${song.albumName}</td>
+            <td>${song.releaseDate}</td>
         `
 
             if (category.name != "None") {
@@ -956,7 +953,7 @@ function showChanger() {
     var newName;
     if (document.getElementById('updateSong') != null) {
         container = document.getElementById('updateSong')
-    } else if (document.getElementById('updateCategory') != null){
+    } else if (document.getElementById('updateCategory') != null) {
         container = document.getElementById('updateCategory')
         newName = categoryName
     } else {
@@ -1119,26 +1116,25 @@ function renderSongDetails(song) {
 
     let divArtistName = document.createElement('div')
 
-        for (let i = 0; i < song.artistList.length; i++) {
-            const artist = song.artistList[i];
-            
+    for (let i = 0; i < song.artistList.length; i++) {
+        const artist = song.artistList[i];
 
-            let artistA = document.createElement('a')
-            artistA.innerHTML = artist;
-            artistA.setAttribute('onclick', `goToArtist('${song.artistsID[i]}')`)
-            artistA.href = 'ArtistDetails.html'
-            artistA.classList.add("pointer")
-            artistA.classList.add("Artist")
-            divArtistName.appendChild(artistA);
-            console.log(divArtistName);
-            
 
-            if (i != song.artistList.length-1) {
-                divArtistName.innerHTML += ', <br>';
-            }
+        let artistA = document.createElement('a')
+        artistA.innerHTML = artist;
+        artistA.setAttribute('onclick', `goToArtist('${song.artistsID[i]}')`)
+        artistA.href = 'ArtistDetails.html'
+        artistA.classList.add("pointer")
+        artistA.classList.add("Artist")
+        divArtistName.appendChild(artistA);
+
+
+        if (i != song.artistList.length - 1) {
+            divArtistName.innerHTML += ', <br>';
         }
-        
-    
+    }
+
+
 
     section.innerHTML = `
     <div class="usualDataContainer">
@@ -1169,7 +1165,7 @@ function renderSongDetails(song) {
 }
 
 function goToArtist(artistID) {
-    localStorage.setItem('idArtist',artistID)
+    localStorage.setItem('idArtist', artistID)
 }
 
 function openCategoryDetails(id) {
@@ -1232,7 +1228,7 @@ function updater(confirmed = false, reloading = false) {
                     if (element.id != 'artistName') {
                         element.style.display = "none"
                         divContainer = element.closest("div")
-    
+
                         if (element.id == "categoryName") {
                             input = document.createElement("select")
                             input.name = "categoryId"
@@ -1241,11 +1237,11 @@ function updater(confirmed = false, reloading = false) {
                             input.value = element.textContent
                             input.name = element.id
                         }
-                        
+
                         input.classList.add("false-view")
                         input.classList.add("dataAPI")
-    
-    
+
+
                         if (element.id == "releaseDate") {
                             input.type = "date"
                         } else if (element.id == "duration") {
@@ -1265,7 +1261,7 @@ function updater(confirmed = false, reloading = false) {
                                     }
                                 })
                         }
-                        divContainer.appendChild(input)   
+                        divContainer.appendChild(input)
                     }
                 }
             } else {
@@ -1419,8 +1415,7 @@ async function showSongDetails() {
 
     return fetch(apiUrl)
         .then(function (response) {
-            console.log(response);
-            
+
             if (!response.ok) {
                 //This error is thrown so that (if an error occurs) gets to the .catch
                 throw new Error('Error en la respuesta de la API: ' + response.statusText);
@@ -1513,9 +1508,9 @@ async function getArtistIDName(artistName) {
     const apiUrl = 'http://localhost:9000/artists/limited'
     apiUrl += '?artistName=' + artistName;
     return fetch(apiUrl)
-    .then((response) => {
-        return response.json
-    })
+        .then((response) => {
+            return response.json
+        })
 }
 
 async function getAllArtists(searchValue = '') {

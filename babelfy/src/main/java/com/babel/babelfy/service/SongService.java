@@ -115,6 +115,7 @@ public class SongService {
         return response;
     }
 
+    @Transactional
     public String delete(long id) {
         Song s = songRepository.findById(id).orElse(null);
         String response = "";
