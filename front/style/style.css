@@ -193,6 +193,7 @@ main.catDetails,main.artistDetails {
 
 header>h1 {
     text-transform: uppercase;
+    width: fit-content;
 }
 
 main.catDetails>section>div>table>thead>tr>th,main.artistDetails>section>div>table>thead>tr>th {
