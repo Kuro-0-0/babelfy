@@ -1037,19 +1037,30 @@ function openSongDetails(id) {
 }
 
 function renderSongDetails(song) {
-
     title = document.getElementById('name')
     title.innerHTML = song.name
     section = document.getElementById('sectionDetails');
 
     let artists = "";
 
+    let divArtistName = document.createElement('div')
+
         for (let i = 0; i < song.artistList.length; i++) {
             const artist = song.artistList[i];
-            if (i == song.artistList.length-1) {
-                artists = artists + artist;
-            } else {
-                artists = artists + artist + ', ';
+            
+
+            let artistA = document.createElement('a')
+            artistA.innerHTML = artist;
+            artistA.setAttribute('onclick', `goToArtist('${song.artistIDlist[i]}')`)
+            artistA.href = 'ArtistDetails.html'
+            artistA.classList.add("pointer")
+            artistA.classList.add("Artist")
+            divArtistName.appendChild(artistA);
+            console.log(divArtistName);
+            
+
+            if (i != song.artistList.length-1) {
+                divArtistName.innerHTML += ', <br>';
             }
         }
         
@@ -1063,7 +1074,7 @@ function renderSongDetails(song) {
         </div>
         <div class="dataContainer">
             <h2>Artist</h2>
-            <p id="artistName" class="original-view">${artists}</p>
+            <p id="artistName" class="original-view">${divArtistName.innerHTML}</p>
         </div>
         <div class="dataContainer">
             <h2>Album</h2>
@@ -1081,6 +1092,10 @@ function renderSongDetails(song) {
     </div>
 `;
 
+}
+
+function goToArtist(artistID) {
+    localStorage.setItem('idArtist',artistID)
 }
 
 function openCategoryDetails(id) {
@@ -1170,14 +1185,12 @@ function updater(confirmed = false, reloading = false) {
                                         option.value = elementOption.id
                                         option.textContent = elementOption.name
                                         input.appendChild(option)
-    
                                         if (element.textContent == elementOption.name) {
                                             input.value = elementOption.id;
                                         }
                                     }
                                 })
                         }
-    
                         divContainer.appendChild(input)   
                     }
                 }
@@ -1420,6 +1433,15 @@ async function getAllCategories(searchValue = '') {
             document.getElementById('main').innerHTML = '<div><h1 class="error"> Error </h1>' +
                 '<p>Something went wrong with the server connection.</p></div>'
         });
+}
+
+async function getArtistIDName(artistName) {
+    const apiUrl = 'http://localhost:9000/artists/limited'
+    apiUrl += '?artistName=' + artistName;
+    return fetch(apiUrl)
+    .then((response) => {
+        return response.json
+    })
 }
 
 async function getAllArtists(searchValue = '') {

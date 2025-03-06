@@ -18,7 +18,7 @@ import jakarta.transaction.Transactional;
 
 import com.babel.babelfy.dto.category.CategoryDtoRequestCreate;
 import com.babel.babelfy.dto.category.CategoryDtoResponseDetails;
-import com.babel.babelfy.dto.category.CategoryDtoResponseGetIDName;
+import com.babel.babelfy.dto.category.CategoryDtoResponseGetValueSelector;
 import com.babel.babelfy.dto.category.CategoryDtoResponseList;
 import com.babel.babelfy.dto.category.CategoryDtoRequestUpdate;
 
@@ -148,18 +148,18 @@ public class CategoryService {
         return response;
     }
 
-    public ResponseEntity<List<CategoryDtoResponseGetIDName>> getIDName() {
-        ResponseEntity<List<CategoryDtoResponseGetIDName>> response;
-        List<CategoryDtoResponseGetIDName> categoryDtoResponseGetIDNameList = new ArrayList<CategoryDtoResponseGetIDName>();
+    public ResponseEntity<List<CategoryDtoResponseGetValueSelector>> getIDName() {
+        ResponseEntity<List<CategoryDtoResponseGetValueSelector>> response;
+        List<CategoryDtoResponseGetValueSelector> categoryDtoResponseGetValueSelectorList = new ArrayList<CategoryDtoResponseGetValueSelector>();
         List<Category> categoryList = new ArrayList<Category>();
         try {
 
             categoryList = categoryRepository.findAll();
             if (!categoryList.isEmpty()) {
                 for (Category c : categoryList) {
-                    categoryDtoResponseGetIDNameList.add(CategoryDtoResponseGetIDName.categoryToCategoryDto(c));
+                    categoryDtoResponseGetValueSelectorList.add(CategoryDtoResponseGetValueSelector.categoryToCategoryDto(c));
                 }
-                response = ResponseEntity.ok().body(categoryDtoResponseGetIDNameList);
+                response = ResponseEntity.ok().body(categoryDtoResponseGetValueSelectorList);
             } else {
                 response = ResponseEntity.badRequest().body(null);
             }
