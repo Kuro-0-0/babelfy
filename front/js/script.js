@@ -869,10 +869,10 @@ function renderCategoryDetails(category) {
               <tr>
                 <th>Name</th>
                 <th>Duration</th>
-                <th>Artist</th>
+                <th>Artist/s</th>
                 <th>Album</th>
                 <th>Release Date</th>
-                <th></th>
+                <th>Operations</th>
               </tr>
             </thead>
             `
@@ -893,12 +893,34 @@ function renderCategoryDetails(category) {
         table.appendChild(tbody);
         category.songs.forEach(function (song) {
 
+            let divArtistName = document.createElement('div')
+
+            for (let i = 0; i < song.artistList.length; i++) {
+                const artist = song.artistList[i];
+                console.log(song);
+                
+                
+                let artistA = document.createElement('a')
+                artistA.innerHTML = artist;
+                artistA.setAttribute('onclick', `goToArtist('${song.artistsID[i]}')`)
+                artistA.href = 'ArtistDetails.html'
+                artistA.classList.add("pointer")
+                artistA.classList.add("Artist")
+                divArtistName.appendChild(artistA);
+                console.log(divArtistName);
+                
+    
+                if (i != song.artistList.length-1) {
+                    divArtistName.innerHTML += ', <br>';
+                }
+            }
+
             var row = document.createElement('tr');
             row.innerHTML = `
           
           <td><a class="pointer" onclick="openSongDetails(${song.id})">${song.name}</a></td>
           <td>${song.duration}</td>
-          <td>${song.artistName}</td>
+          <td>${divArtistName.innerHTML}</td>
           <td>${song.albumName}</td>
           <td>${song.releaseDate}</td>
         `
