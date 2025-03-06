@@ -110,8 +110,8 @@ public class ArtistService {
         String response = "";
         if (a != null) {
 
-            for (int i = 0; i < a.getSongs.lenght; i++) {
-                if(a.getSongs[i].getArtists>1){
+            for (int i = 0; i < a.getSongList().size(); i++) {
+                if(a.getSongList().get(i).getArtists().size()>1){
                     response = "This artist cannot be deleted because it has at least one song with another artist. You have to delete these songs to be able to delete this artist";
                 }else{
                     artistRepository.delete(a);
