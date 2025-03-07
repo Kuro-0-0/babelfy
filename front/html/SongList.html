@@ -22,6 +22,9 @@
                 <a href="CategoryList.html">
                     <li>Categories</li>
                 </a>
+                <a href="ArtistList.html">
+                    <li>Artists</li>
+                </a>
             </ul>
         </nav>
 
@@ -36,14 +39,14 @@
 
         <div id="PopUpDelete" class="PopUpDelete">
             <h1 id="TitlePopUp">DELETE</h1>
-            <p id="textPopUp">Are you sure you want to delete this song?</p>
+            <p id="textPopUpDelete">Are you sure you want to delete this song?</p>
             <button id="noDelete" onclick="showActionBTN()">NO</button>
             <button id="yesDelete" onclick="deleteSong()">YES</button>
         </div>
 
         <section class="createSection">
 
-            <button id="createBtn" onclick="showActionBTNcr()" class="crCategory-btn">
+            <button id="createBtn" onclick="showActionBTNcr()" class="create-btn">
                 Create
             </button>
 
@@ -55,7 +58,7 @@
             <input type="text" placeholder="Search" name="Search" id="searchInput" class="dataAPI">
 
         </section>
-        <div id="createSong" class="form song">
+        <div id="createSong" class="form formCreate song">
             <i onclick="showActionBTNcr()" class="bi bi-x-circle-fill"></i>
 
             <div class="option">
@@ -68,18 +71,27 @@
                     <label class="input-name" for="selectCategory">Category</label>
                     <select class="dataAPI createSong" id="categoryList" name="selectCategory">
                     </select>
-
                 </div>
+
                 <div class="input-container">
                     <label class="input-name" for="inputDuration">Duration</label>
                     <input class="dataAPI createSong" id="inputDuration" name="duration" type="number" min="1"
                         placeholder="Insert the duration here">
                 </div>
-                <div class="input-container">
-                    <label class="input-name" for="inputArtist">Artist</label>
-                    <input class="dataAPI createSong" id="inputArtist" name="artistName" type="text"
-                        placeholder="Write the artist of this song">
+
+                <div class="input-container multiselect">
+                    <div class="selectBox" onclick="showCheckboxes()">
+                        <label class="input-name" for="inputArtist">Artist</label>
+                        <select class="dataAPI createSong" id="inputArtist" name="artistId" type="text"
+                            placeholder="Select the artists of this song">
+                            <option value="null" id="optionSelected">Select an option</option>
+                        </select>
+                        <div class="overSelect"></div>
+                    </div>
+                    <div id="checkboxes">
+                    </div>
                 </div>
+
                 <div class="input-container">
                     <label class="input-name" for="inputAlbumName">Album</label>
                     <input class="dataAPI createSong" id="inputAlbumName" name="albumName" type="text"

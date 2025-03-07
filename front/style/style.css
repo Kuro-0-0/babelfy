@@ -37,6 +37,11 @@ body {
 
 a {
     text-decoration: none;
+    color: var(--dark);
+}
+
+a:hover {
+    color: var(--medium);
 }
 
 #container {
@@ -182,7 +187,7 @@ button.options:hover {
 }
 
 /** Category Details*/
-main.catDetails {
+main.catDetails,main.artistDetails {
     text-align: center;
 }
 
@@ -191,19 +196,19 @@ header>h1 {
     width: fit-content;
 }
 
-main.catDetails>section>div>table>thead>tr>th {
+main.catDetails>section>div>table>thead>tr>th,main.artistDetails>section>div>table>thead>tr>th {
     text-transform: uppercase;
     padding: 15px;
     background-color: var(--dark);
     color: var(--light);
 }
 
-main.catDetails>section>div>table>tbody>tr:hover {
+main.catDetails>section>div>table>tbody>tr:hover, main.artistDetails>section>div>table>tbody>tr:hover {
     background-color: var(--light);
     filter: brightness(1.2);
 }
 
-main.catDetails>section>div>table>tbody>tr>td {
+main.catDetails>section>div>table>tbody>tr>td, main.artistDetails>section>div>table>tbody>tr>td {
     padding: 12px;
 }
 
@@ -218,11 +223,11 @@ h1>button {
     transform: scale(1.7);
 }
 
-main.catDetails>section {
+main.catDetails>section, main.artistDetails>section {
     width: 100%;
 }
 
-main.catDetails>section>div>table {
+main.catDetails>section>div>table, main.artistDetails>section>div>table {
     margin: 50px auto 0px;
     border: 1px solid var(--dark);
     border-collapse: collapse;
@@ -230,12 +235,15 @@ main.catDetails>section>div>table {
 }
 
 main.catDetails>section>div>table>thead>tr>th:first-child,
-main.catDetails>section>div>table>tbody>tr>td:first-child {
+main.catDetails>section>div>table>tbody>tr>td:first-child, 
+main.artistDetails>section>div>table>thead>tr>th:first-child,
+main.artistDetails>section>div>table>tbody>tr>td:first-child {
     padding-right: 80px;
     padding-left: 15px;
 }
 
-main.catDetails>section>div>table>tbody>tr>td:first-child {
+main.catDetails>section>div>table>tbody>tr>td:first-child, 
+main.artistDetails>section>div>table>tbody>tr>td:first-child {
     min-width: 100px;
 }
 
@@ -313,7 +321,7 @@ div.updater {
     }
 }
 
-main.catDetails {
+main.catDetails, main.artistDetails {
     display: flex;
     text-align: center;
     justify-content: center;
@@ -378,10 +386,6 @@ div.PopUp {
     transform: translate(-50%, -50%);
 }
 
-a.pointer:hover {
-    color: var(--dark);
-}
-
 /** Song details*/
 
 main.songDetails {
@@ -403,6 +407,12 @@ main.songDetails {
 
             .dataContainer {
                 margin: 0px 20px 10px;
+                a.Artist:hover {
+                    color: var(--medium);
+                }
+                a.Artist {
+                    color: var(--dark);
+                }
             }
         }
 
@@ -446,7 +456,7 @@ div.PopUp {
 }
 
 a.categoryHover:hover {
-    color: black;
+    color: var(--medium);
 }
 
 /** Modify Song*/
@@ -616,7 +626,7 @@ main.list {
         }
     }
 
-    button.crCategory-btn {
+    button.create-btn {
         margin: 30px 10px 5px;
         max-width: 100px;
         height: 5vh;
@@ -629,7 +639,7 @@ main.list {
         background-color: var(--dark);
     }
 
-    button.crCategory-btn:hover {
+    button.create-btn:hover {
         background-color: var(--medium);
         color: var(--dark);
         border: 4px double var(--dark);
@@ -639,7 +649,7 @@ main.list {
 
 main.list {
     section {
-        a.song {
+        a.song, a.artist {
             height: 100px;
 
             div {
@@ -668,7 +678,7 @@ main.list {
 }
 
 
-.form.category {
+.form, .form:not(.song)  {
     left: 15%;
 }
 
@@ -677,6 +687,54 @@ main.list {
     left: 50%;
     top: 40%;
     transform: translate(-50%, -50%);
+    .multiselect {
+        width: 200px;
+        position: relative;
+    }
+    
+    .selectBox {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .selectBox select {
+        width: 100%;
+        font-weight: bold;
+    }
+    
+    .overSelect {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+    
+    #checkboxes {
+        position: absolute;
+        top: 87%;
+        width: 100%;
+        max-height: 100px;
+        overflow-y: scroll;
+        display: none;
+        border: 1px #dadada solid;
+        background-color: var(--dark);
+        color: var(--light);
+        .artistCheckbox {
+            width: 20px;
+        }
+    }
+    
+    #checkboxes label {
+        display: block;
+        text-align: left;
+        margin: 5px;
+    }
+    
+    #checkboxes label:hover {
+        background-color: #1e90ff;
+    }
 }
 
 div.form {
@@ -729,6 +787,10 @@ div.form {
                 border-radius: 0.4vh;
                 padding: 0.5vh;
                 width: 20vh;
+                margin: 0 auto;
+                box-sizing: border-box;
+                font-size: small;
+                font-weight: lighter;
             }
 
             input::placeholder {
@@ -868,7 +930,9 @@ div.thumbnail {
 
                 #thumbColorSong {
                     background-color: #AAAEED;
-
+                }
+                #thumbColorArtists {
+                    background-color: #995ACF;
                 }
             }
         }
@@ -877,4 +941,16 @@ div.thumbnail {
             box-shadow: 1px 2px 32px 7px rgb(253, 255, 255);
         }
     }
+}
+
+p#artistName {
+    max-width: 180px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-color: var(--medium);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    cursor: pointer;
 }
