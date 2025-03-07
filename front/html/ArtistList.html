@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Category list</title>
+    <title>Artist list</title>
 
     <link rel="stylesheet" href="../style/style.css">
 
@@ -13,7 +13,7 @@
 
 <body>
     <header>
-        <h1 onclick="moveToThumbnail()">Category List</h1>
+        <h1 onclick="moveToThumbnail()">Artist List</h1>
         <nav>
             <ul>
                 <a href="SongList.html">
@@ -29,7 +29,7 @@
         </nav>
 
     </header>
-    <main class="list Category" id="main">
+    <main class="list Artist" id="main">
 
         <div id="PopUp" class="PopUp">
             <h1 id="TitlePopUp">SUCCESS</h1>
@@ -39,9 +39,9 @@
 
         <div id="PopUpDelete" class="PopUpDelete">
             <h1 id="TitlePopUp">DELETE</h1>
-            <p id="textPopUpDelete">Are you sure you want to delete this category?</p>
+            <p id="textPopUpDelete">Are you sure you want to delete this artist? The songs from this artist will be deleted as well if you delete them.</p>
             <button id="noDelete" onclick="showActionBTN()">NO</button>
-            <button id="yesDelete" onclick="deleteCategory()">YES</button>
+            <button id="yesDelete" onclick="deleteArtist()">YES</button>
         </div>
 
         <section class="createSection">
@@ -50,18 +50,18 @@
                 Create
             </button>
 
-            <div id="createCategories" class="form formCreate category">
+            <div id="createArtists" class="form formCreate artist">
                 <i onclick="showActionBTNcr()" class="bi bi-x-circle-fill"></i>
 
                 <div class="option">
 
                     <div class="input-container">
                         <label class="input-name" for="inputName">New name</label>
-                        <input class="dataAPI createCategory" id="inputName" name="name" type="text" placeholder="Write the name here">
+                        <input class="dataAPI createArtist" id="inputName" name="name" type="text" placeholder="Write the name here">
                     </div>
 
                     <div class="button-ctn">
-                        <button type="submit" class="options" onclick="createCategory()">
+                        <button type="submit" class="options" onclick="createArtist()">
                             Submit
                         </button>
                     </div>

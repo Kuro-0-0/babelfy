@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -18,7 +19,6 @@ public class Song {
 
     private String name;
     private int duration;
-    private String artistName;
     private String albumName;
     private LocalDate releaseDate;
     private String color;
@@ -26,10 +26,13 @@ public class Song {
     @ManyToOne
     private Category category;
 
-    public Song(String name, int duration, String artistName, String albumName, LocalDate releaseDate, Category category) {
+    @ManyToMany
+    private List<Artist> artists;
+
+    public Song(String name, int duration, List<Artist> artistList, String albumName, LocalDate releaseDate, Category category) {
         this.name = name;
         this.duration = duration;
-        this.artistName = artistName;
+        this.artists = artistList;
         this.albumName = albumName;
         this.releaseDate = releaseDate;
         this.category = category;

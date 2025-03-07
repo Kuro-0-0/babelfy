@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Category details</title>
+    <title>Artist details</title>
 
     <link rel="stylesheet" href="../style/style.css">
 
@@ -30,7 +30,14 @@
         </nav>
     </header>
 
-    <main class="catDetails" id="main">
+    <main class="artistDetails" id="main">
+
+        <div id="PopUpDelete" class="PopUpDelete">
+            <h1 id="TitlePopUp">DELETE</h1>
+            <p id="textPopUpDelete">Are you sure you want to delete this song? It will be permanently deleted</p>
+            <button id="noDelete" onclick="showActionBTN()">NO</button>
+            <button id="yesDelete" onclick="deleteSong()">YES</button>
+        </div>
 
         <div id="PopUp" class="PopUp">
             <h1 id="TitlePopUp">SUCCESS</h1>
@@ -38,26 +45,17 @@
             <button onclick="hidePopUp()">OK</button>
         </div>
 
-        <div id="PopUpDelete" class="PopUpDelete">
-            <h1 id="TitlePopUp">REMOVE</h1>
-            <p id="textPopUpDelete">Are you sure you want to delete this song from the category?</p>
-            <button id="noDelete" onclick="hideActionBTN()">NO</button>
-            <button id="yesDelete">YES</button>
-        </div>
-
 
         <section id="sectionDetails">
-
-            <div class="updater" id="updateCategory">
+            <div class="updater" id="updateArtist">
                 <i class="bi bi-x-circle-fill quit" onclick="showChanger()"></i>
                 <h3>Change Name</h3>
 
                 <form id="createForm">
                     <input type="text" placeholder="Write here" id="newName">
-                    <button onclick="changeName()">Update</button>
+                    <button onclick="modifyArtist()">Update</button>
                 </form>
             </div>
-
             <div id="songsTable">
             </div>
         </section>
