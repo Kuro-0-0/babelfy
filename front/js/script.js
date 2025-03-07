@@ -376,14 +376,25 @@ function showActionBTNcr() {
 
     const createForm = document.getElementsByClassName("formCreate")
     const createBtn = document.getElementById("createBtn");
+    let inputs = document.getElementsByClassName("dataAPI")
 
     for (let i = 0; i < createForm.length; i++) {
         const element = createForm[i];
         if (element.style.display === "block") {
+
+            for (let index = 0; index < inputs.length; index++) {
+                const input = inputs[index]
+
+                if (input.classList.contains("createSong") || input.classList.contains("createArtist") || input.classList.contains("createCategory")) {
+                    if (input.id != "inputArtist") {
+                        input.value = '';
+                    }
+                }
+            }
+
             element.style.display = "none";
             createBtn.disabled = false;
         } else {
-            document.getElementById('inputName').value = ''
             element.style.display = "block";
             createBtn.disabled = true;
 
@@ -397,6 +408,7 @@ function showActionBTNcr() {
 }
 
 function createSong() {
+    let inputs;
     try {
 
         inputs = document.getElementsByClassName("dataAPI createSong")
@@ -469,7 +481,7 @@ function createSong() {
 
             params[paramName] = paramValue
 
-            if (element.id != 'inputArtist') {
+            if (element.id != 'inputArtist' || element.id != "categoryList") {
                 element.value = ''
             }
 
@@ -509,6 +521,12 @@ function createSong() {
             });
 
     } catch (error) {
+        for (let index = 0; index < inputs.length; index++) {
+            const input = inputs[index]
+            if (input.id != "inputArtist" && input.id != "categoryList") {
+                input.value = '';
+            }
+        }
         showPopUp('Error', error.message)
     }
 
@@ -557,6 +575,7 @@ function showArtistOptions() {
                     listoptions.appendChild(label)
                 })
             }
+            checkBoxChange()
         })
 
 
@@ -580,8 +599,6 @@ function deleteArtist() {
 
         .then(respuesta => {
             showActionBTN()
-            console.log(respuesta.status);
-
             if (respuesta.status == 200) {
                 estado = 'Success'
             } else {
@@ -720,24 +737,24 @@ function deleteSong(idSong = '') {
                     console.error('There was a problem with the fetch operation:', error);
                 });
         } else {
-        URL = URL + "category/" + idSong;
-        hideActionBTN()
-        fetch(URL, options)
-            .then(data => {
-                showCategoryDetails();
-                if (data.status == ok) {
-                    estado = "Success"
-                } else {
-                    estado = "Error"
-                }
-                return data.text()
-            })
-            .then(text => {
-                showPopUp(estado, text)
-            })
-            .catch(error => {
-                console.log(error);
-            })
+            URL = URL + "category/" + idSong;
+            hideActionBTN()
+            fetch(URL, options)
+                .then(data => {
+                    showCategoryDetails();
+                    if (data.status == ok) {
+                        estado = "Success"
+                    } else {
+                        estado = "Error"
+                    }
+                    return data.text()
+                })
+                .then(text => {
+                    showPopUp(estado, text)
+                })
+                .catch(error => {
+                    console.log(error);
+                })
         }
 
 
@@ -804,11 +821,15 @@ function renderArtistDetails(artist) {
                 var counter = 0;
 
                 for (let i = 0; i < song.artistList.length; i++) {
-                    if (song.artistList[i] != artist.name && counter < 1) {
-                        artistsLink.innerHTML = `<a class="pointer" onclick="openArtistDetails(${song.artistsID[i]})">${song.artistList[i]}</a>`
-                        counter++;
-                    } else {
-                        artistsLink.innerHTML = artistsLink.innerHTML + ', ' + `<a class="pointer" onclick="openArtistDetails(${song.artistsID[i]})">${song.artistList[i]}</a>`
+
+
+                    if (song.artistList[i] != artist.name) {
+                        if (counter < 1) {
+                            artistsLink.innerHTML = `<a class="pointer" onclick="openArtistDetails(${song.artistsID[i]})">${song.artistList[i]}</a>`
+                            counter++;
+                        } else {
+                            artistsLink.innerHTML = artistsLink.innerHTML + ', ' + `<a class="pointer" onclick="openArtistDetails(${song.artistsID[i]})">${song.artistList[i]}</a>`
+                        }
                     }
                 }
                 row.innerHTML = row.innerHTML + `<td id="otherArtists">${artistsLink.innerHTML}</td>`
@@ -986,9 +1007,9 @@ function changeName() {
 
         var submitter = document.getElementById('newName');
         const apiUrlChange = 'http://localhost:9000/categories';
-        var nameValue = checkText(submitter.value,true);
+        var nameValue = checkText(submitter.value, true);
 
-        if (nameValue == "None" || nameValue == "none" ) {
+        if (nameValue == "None" || nameValue == "none") {
             throw new Error("You cant rename a category to None, please change the name.");
         }
 
@@ -1223,24 +1244,26 @@ function updater(confirmed = false, reloading = false) {
 
 
             updateBTN.textContent = "Cancel"
+
             if (inputs.length <= 0) {
 
                 seccion = document.getElementById("sectionDetails")
 
                 seccion.innerHTML = `
-            <div id="nameContainer">
-                <div class="dataContainer">
-                    <h2>Name</h2>
-                    <p id="name" class="original-view">${document.getElementById("name").textContent}</p>
+                <div id="nameContainer">
+                    <div class="dataContainer">
+                        <h2>Name</h2>
+                        <p id="name" class="original-view">${document.getElementById("name").textContent}</p>
+                    </div>
                 </div>
-            </div>
-            ` + seccion.innerHTML
+                ` + seccion.innerHTML
 
                 for (let i = 0; i < ps.length; i++) {
                     const element = ps[i];
                     if (element.id != 'artistName') {
                         element.style.display = "none"
                         divContainer = element.closest("div")
+
 
                         if (element.id == "categoryName") {
                             input = document.createElement("select")
@@ -1255,46 +1278,67 @@ function updater(confirmed = false, reloading = false) {
                         input.classList.add("dataAPI")
 
 
-                    if (element.id == "releaseDate") {
-                        input.type = "date";
-                        const today = new Date().toISOString().split('T')[0];
-                        input.max = today;
+                        if (element.id == "releaseDate") {
+                            input.type = "date";
+                            const today = new Date().toISOString().split('T')[0];
+                            input.max = today;
 
-                    } else if (element.id == "duration") {
-                        input.type = "number"
-                    } else if (element.id == "categoryName") {
-                        getCategoryData()
-                            .then(data => {
-                                for (let i = 0; i < data.length; i++) {
-                                    const elementOption = data[i];
-                                    option = document.createElement("option")
-                                    option.value = elementOption.id
-                                    option.textContent = elementOption.name
-                                    input.appendChild(option)
+                        } else if (element.id == "duration") {
+                            input.type = "number"
+                        } else if (element.id == "categoryName") {
+                            getCategoryData()
+                                .then(data => {
+                                    for (let i = 0; i < data.length; i++) {
+                                        const elementOption = data[i];
+                                        option = document.createElement("option")
+                                        option.value = elementOption.id
+                                        option.textContent = elementOption.name
+                                        input.appendChild(option)
 
-                                    if (element.textContent == elementOption.name) {
-                                        input.value = elementOption.id;
+                                        if (element.textContent == elementOption.name) {
+                                            input.value = elementOption.id;
+                                        }
                                     }
-                                }
-                            })
+                                })
+                        }
+                        divContainer.appendChild(input)
                     }
-
-                    divContainer.appendChild(input)
                 }
             } else {
-                for (let i = 0; i < inputs.length; i++) {
+                console.log(inputs);
+                console.log(ps);
+                i2 = 0
+                for (let i = 0; i < inputs.length; i++,i2++) {
                     const element = inputs[i];
+                    let p = ps[i2]
+                    if (p.id == "artistName") {
+                        i2++
+                        p = ps[i2]
+                    }
                     element.style.display = "block"
-                    element.value = ps[i].textContent
-                    ps[i].style.display = "none"
+                    if (p.id == 'categoryName') {
+                        getCategoryData()
+                        .then(data => {
+                            for (let index = 0; index < data.length; index++) {
+                                const cat = data[index];
+                                if (p.textContent == cat.name) {
+                                    element.value = cat.id
+                                }
+                            }
+                            console.log(data);
+                        })
+                    } else {
+                        element.value = p.textContent
+                    }
+                    p.style.display = "none"
                 }
+                document.getElementById("artistName").style.display = "block"
                 document.getElementById("nameContainer").style.display = "flex"
             }
         }
-
     }
-
 }
+
 
 function showConfirm() {
     confirmPopUp = document.getElementById('PopUpUpdate')
@@ -1339,10 +1383,14 @@ function sendUpdate() {
                     paramValue.message = paramValue.message + '. Refering to the album name.'
                     break;
                 case "duration":
-                    if (paramValue <= 0 || paramValue == null) {
-                        paramValue = new Error('You need to add a valid duration')
-                    }
-                    break;
+                        paramValue = Math.floor(paramValue)
+                        if (paramValue <= 0 || paramValue == null) {
+                            paramValue = new Error('You need to add a valid duration')
+                        }
+                        if (paramValue > 30) {
+                            paramValue = new Error('The duration of the song cant be more than 30 mins')
+                        }
+                        break;
                 case "releaseDate":
                     if (paramValue <= 0 || paramValue == null) {
                         paramValue = new Error('You need to add a release date')
