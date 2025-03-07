@@ -376,7 +376,7 @@ function showActionBTNcr() {
 
     const createForm = document.getElementsByClassName("formCreate")
     const createBtn = document.getElementById("createBtn");
-    let inputs = document.getElementsByClassName("dataAPI createSong")
+    let inputs = document.getElementsByClassName("dataAPI")
 
     for (let i = 0; i < createForm.length; i++) {
         const element = createForm[i];
@@ -384,8 +384,11 @@ function showActionBTNcr() {
             
             for (let index = 0; index < inputs.length; index++) {
                 const input = inputs[index]
-                if (input.id != "inputArtist") {
-                    input.value = '';
+
+                if (input.classList.contains("createSong") || input.classList.contains("createArtist") || input.classList.contains("createCategory")) {
+                    if (input.id != "inputArtist") {
+                        input.value = '';
+                    }   
                 }
             }
 
