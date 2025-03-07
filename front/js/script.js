@@ -804,11 +804,15 @@ function renderArtistDetails(artist) {
                 var counter = 0;
 
                 for (let i = 0; i < song.artistList.length; i++) {
-                    if (song.artistList[i] != artist.name && counter < 1) {
-                        artistsLink.innerHTML = `<a class="pointer" onclick="openArtistDetails(${song.artistsID[i]})">${song.artistList[i]}</a>`
-                        counter++;
-                    } else {
-                        artistsLink.innerHTML = artistsLink.innerHTML + ', ' + `<a class="pointer" onclick="openArtistDetails(${song.artistsID[i]})">${song.artistList[i]}</a>`
+
+
+                    if (song.artistList[i] != artist.name) {
+                        if (counter < 1) {
+                            artistsLink.innerHTML = `<a class="pointer" onclick="openArtistDetails(${song.artistsID[i]})">${song.artistList[i]}</a>`
+                            counter++;
+                        } else {
+                            artistsLink.innerHTML = artistsLink.innerHTML + ', ' + `<a class="pointer" onclick="openArtistDetails(${song.artistsID[i]})">${song.artistList[i]}</a>`
+                        }
                     }
                 }
                 row.innerHTML = row.innerHTML + `<td id="otherArtists">${artistsLink.innerHTML}</td>`
