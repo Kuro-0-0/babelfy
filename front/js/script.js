@@ -376,14 +376,22 @@ function showActionBTNcr() {
 
     const createForm = document.getElementsByClassName("formCreate")
     const createBtn = document.getElementById("createBtn");
+    let inputs = document.getElementsByClassName("dataAPI createSong")
 
     for (let i = 0; i < createForm.length; i++) {
         const element = createForm[i];
         if (element.style.display === "block") {
+            
+            for (let index = 0; index < inputs.length; index++) {
+                const input = inputs[index]
+                if (input.id != "inputArtist") {
+                    input.value = '';
+                }
+            }
+
             element.style.display = "none";
             createBtn.disabled = false;
         } else {
-            document.getElementById('inputName').value = ''
             element.style.display = "block";
             createBtn.disabled = true;
 
@@ -397,6 +405,7 @@ function showActionBTNcr() {
 }
 
 function createSong() {
+    let inputs;
     try {
 
         inputs = document.getElementsByClassName("dataAPI createSong")
@@ -469,7 +478,7 @@ function createSong() {
 
             params[paramName] = paramValue
 
-            if (element.id != 'inputArtist') {
+            if (element.id != 'inputArtist' || element.id != "categoryList") {                
                 element.value = ''
             }
 
@@ -509,6 +518,12 @@ function createSong() {
             });
 
     } catch (error) {
+        for (let index = 0; index < inputs.length; index++) {
+            const input = inputs[index]
+            if (input.id != "inputArtist" && input.id != "categoryList") {
+                input.value = '';
+            }
+        }
         showPopUp('Error', error.message)
     }
 
@@ -557,6 +572,7 @@ function showArtistOptions() {
                     listoptions.appendChild(label)
                 })
             }
+            checkBoxChange()
         })
 
 
@@ -580,8 +596,6 @@ function deleteArtist() {
 
         .then(respuesta => {
             showActionBTN()
-            console.log(respuesta.status);
-
             if (respuesta.status == 200) {
                 estado = 'Success'
             } else {
