@@ -720,24 +720,24 @@ function deleteSong(idSong = '') {
                     console.error('There was a problem with the fetch operation:', error);
                 });
         } else {
-        URL = URL + "category/" + idSong;
-        hideActionBTN()
-        fetch(URL, options)
-            .then(data => {
-                showCategoryDetails();
-                if (data.status == ok) {
-                    estado = "Success"
-                } else {
-                    estado = "Error"
-                }
-                return data.text()
-            })
-            .then(text => {
-                showPopUp(estado, text)
-            })
-            .catch(error => {
-                console.log(error);
-            })
+            URL = URL + "category/" + idSong;
+            hideActionBTN()
+            fetch(URL, options)
+                .then(data => {
+                    showCategoryDetails();
+                    if (data.status == ok) {
+                        estado = "Success"
+                    } else {
+                        estado = "Error"
+                    }
+                    return data.text()
+                })
+                .then(text => {
+                    showPopUp(estado, text)
+                })
+                .catch(error => {
+                    console.log(error);
+                })
         }
 
 
@@ -986,9 +986,9 @@ function changeName() {
 
         var submitter = document.getElementById('newName');
         const apiUrlChange = 'http://localhost:9000/categories';
-        var nameValue = checkText(submitter.value,true);
+        var nameValue = checkText(submitter.value, true);
 
-        if (nameValue == "None" || nameValue == "none" ) {
+        if (nameValue == "None" || nameValue == "none") {
             throw new Error("You cant rename a category to None, please change the name.");
         }
 
@@ -1255,45 +1255,44 @@ function updater(confirmed = false, reloading = false) {
                         input.classList.add("dataAPI")
 
 
-                    if (element.id == "releaseDate") {
-                        input.type = "date";
-                        const today = new Date().toISOString().split('T')[0];
-                        input.max = today;
+                        if (element.id == "releaseDate") {
+                            input.type = "date";
+                            const today = new Date().toISOString().split('T')[0];
+                            input.max = today;
 
-                    } else if (element.id == "duration") {
-                        input.type = "number"
-                    } else if (element.id == "categoryName") {
-                        getCategoryData()
-                            .then(data => {
-                                for (let i = 0; i < data.length; i++) {
-                                    const elementOption = data[i];
-                                    option = document.createElement("option")
-                                    option.value = elementOption.id
-                                    option.textContent = elementOption.name
-                                    input.appendChild(option)
+                        } else if (element.id == "duration") {
+                            input.type = "number"
+                        } else if (element.id == "categoryName") {
+                            getCategoryData()
+                                .then(data => {
+                                    for (let i = 0; i < data.length; i++) {
+                                        const elementOption = data[i];
+                                        option = document.createElement("option")
+                                        option.value = elementOption.id
+                                        option.textContent = elementOption.name
+                                        input.appendChild(option)
 
-                                    if (element.textContent == elementOption.name) {
-                                        input.value = elementOption.id;
+                                        if (element.textContent == elementOption.name) {
+                                            input.value = elementOption.id;
+                                        }
                                     }
-                                }
-                            })
-                    }
+                                })
+                        }
 
-                    divContainer.appendChild(input)
+                        divContainer.appendChild(input)
+                    } else {
+                        for (let i = 0; i < inputs.length; i++) {
+                            const element = inputs[i];
+                            element.style.display = "block"
+                            element.value = ps[i].textContent
+                            ps[i].style.display = "none"
+                        }
+                        document.getElementById("nameContainer").style.display = "flex"
+                    }
                 }
-            } else {
-                for (let i = 0; i < inputs.length; i++) {
-                    const element = inputs[i];
-                    element.style.display = "block"
-                    element.value = ps[i].textContent
-                    ps[i].style.display = "none"
-                }
-                document.getElementById("nameContainer").style.display = "flex"
             }
         }
-
     }
-
 }
 
 function showConfirm() {
